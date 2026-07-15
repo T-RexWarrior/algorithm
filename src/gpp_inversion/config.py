@@ -180,6 +180,9 @@ class ModelConfig:
     mixer_top_k: int = 3
     satellite_mask_index: int = 0
     no_observation_age_hours: float = 240.0
+    use_endpoint_observation_age: bool = True
+    use_observation_count: bool = True
+    use_token_recency: bool = False
     daily_context_features: int = 5
     daily_context_hidden: int = 32
     nonnegative_output: bool = False
@@ -323,6 +326,32 @@ class SplitProtocolConfig:
 
 
 @dataclass(frozen=True)
+class DomainConfig:
+    forcing_mode: str = "tower"
+    forcing_manifest: str | None = None
+    mixed_probability: float = 0.5
+    land_cover_mode: str = "tower"
+    land_cover_manifest: str | None = None
+    seed: int = 42
+
+    def __post_init__(self) -> None:
+        if self.forcing_mode not in {"tower", "era_stress", "mixed"}:
+            raise ValueError("forcing_mode must be tower, era_stress, or mixed")
+        if self.land_cover_mode not in {"tower", "modis"}:
+            raise ValueError("land_cover_mode must be tower or modis")
+        if not 0.0 <= self.mixed_probability <= 1.0:
+            raise ValueError("mixed_probability must be within [0, 1]")
+        if self.forcing_mode != "tower" and not self.forcing_manifest:
+            raise ValueError("ERA stress modes require forcing_manifest")
+        if self.land_cover_mode == "modis" and not self.land_cover_manifest:
+            raise ValueError("MODIS land cover mode requires land_cover_manifest")
+
+    @classmethod
+    def from_dict(cls, value: dict[str, Any]) -> "DomainConfig":
+        return cls(**value)
+
+
+@dataclass(frozen=True)
 class ExperimentConfig:
     data_dir: Path
     output_dir: Path
@@ -342,6 +371,7 @@ class ExperimentConfig:
         default_factory=CrossValidationConfig
     )
     split_protocol: SplitProtocolConfig = field(default_factory=SplitProtocolConfig)
+    domain: DomainConfig = field(default_factory=DomainConfig)
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "ExperimentConfig":
@@ -366,6 +396,7 @@ class ExperimentConfig:
             split_protocol=SplitProtocolConfig.from_dict(
                 value.get("split_protocol", {})
             ),
+            domain=DomainConfig.from_dict(value.get("domain", {})),
         )
 
     @classmethod

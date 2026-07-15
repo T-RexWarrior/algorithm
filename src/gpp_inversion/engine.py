@@ -256,6 +256,8 @@ def train_model(
         if max_steps is not None else epochs
     )
     for epoch in range(start_epoch, effective_epochs):
+        if hasattr(train_loader, "set_epoch"):
+            train_loader.set_epoch(epoch)
         remaining = None if max_steps is None else max_steps - global_step
         if remaining is not None and remaining <= 0:
             break

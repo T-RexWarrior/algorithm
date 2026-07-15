@@ -21,13 +21,13 @@ def main() -> None:
     config = ExperimentConfig.from_json(args.config)
     files = split_files_by_sites(
         sorted(config.data_dir.glob("*.csv")),
-        (*config.train_sites, *config.val_sites), (), config.test_sites,
+        config.train_sites, (), (*config.val_sites, *config.test_sites),
         strict=True,
     )
     dataset = MultiStationWindowDataset(
         files.train, config.features, config.window,
         scaling=config.scaling, scale_target=config.scale_target,
-        split_name="pretraining_nonblind",
+        split_name="pretraining_train_only",
     )
     loader = BatchedWindowLoader(
         dataset, batch_size=config.training.batch_size,

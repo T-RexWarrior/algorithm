@@ -31,3 +31,5 @@
 - `production_smoke.example.json`：两个真实站点、两步优化的工程烟雾配置，只验证数据—模型—GPU—评估链路，结果不得用于模型比较。
 
 可选生产模型为 `tcn_observation_aware`、`tcn_multiscale` 和 `hybrid_lue_tcn`。长期记忆模型要求 `window.context_days=30`；LUE 混合头要求 `scale_target=false`。固定预算漏斗由 `scripts/run_production_suite.py` 执行，详细协议见 `docs/PRODUCTION_WORKFLOW.md`。
+
+正式长实验使用 `scripts/run_formal_experiments.py`。`model.use_endpoint_observation_age`、`model.use_observation_count` 和 `model.use_token_recency` 可独立控制年龄消融；`domain` 段控制塔基/ERA扰动气象和塔基/MODIS地类。未配置 `domain` 的旧配置仍保持原塔基输入行为。

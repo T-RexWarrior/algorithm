@@ -43,6 +43,9 @@ class ObservationAwareTCNGPP(nn.Module):
         tcn_layers: int = 6,
         satellite_mask_index: int = 0,
         no_observation_age_hours: float = 240.0,
+        use_endpoint_observation_age: bool = True,
+        use_observation_count: bool = True,
+        use_token_recency: bool = False,
         nonnegative_output: bool = False,
     ) -> None:
         super().__init__()
@@ -51,6 +54,9 @@ class ObservationAwareTCNGPP(nn.Module):
         self.satellite_mask_index = satellite_mask_index
         self.seq_len = int(seq_len)
         self.no_observation_age_hours = float(no_observation_age_hours)
+        self.use_endpoint_observation_age = bool(use_endpoint_observation_age)
+        self.use_observation_count = bool(use_observation_count)
+        self.use_token_recency = bool(use_token_recency)
         self.nonnegative_output = nonnegative_output
         self.tcn = TemporalConvNet(
             num_forcing_features, [d_model] * tcn_layers, kernel_size=3, dropout=dropout
@@ -60,11 +66,13 @@ class ObservationAwareTCNGPP(nn.Module):
             if num_lc_classes is not None else None
         )
         static_dim = num_static + (lc_embed_dim if self.lc_embedding is not None else 0)
-        self.state_projector = nn.Linear(num_state_features + time_feature_dim, d_model)
+        state_input_features = num_state_features + time_feature_dim + int(self.use_token_recency)
+        self.state_projector = nn.Linear(state_input_features, d_model)
         self.static_projector = nn.Sequential(
             nn.Linear(static_dim, d_model), nn.GELU(), nn.Linear(d_model, d_model)
         )
-        self.age_projector = nn.Linear(2, d_model)
+        summary_features = int(self.use_endpoint_observation_age) + int(self.use_observation_count)
+        self.age_projector = nn.Linear(summary_features, d_model) if summary_features else None
         layer = nn.TransformerEncoderLayer(
             d_model=d_model,
             nhead=nhead,
@@ -94,12 +102,24 @@ class ObservationAwareTCNGPP(nn.Module):
             parts.append(self.lc_embedding(x_lc[:, -1]))
         return self.static_projector(torch.cat(parts, dim=-1))
 
+    def project_state_inputs(self, x_state, time_x):
+        """Project state tokens with the same causal metadata used in inference."""
+        state_inputs = [x_state, time_x]
+        if self.use_token_recency:
+            steps = x_state.size(1)
+            recency = torch.arange(
+                steps - 1, -1, -1, device=x_state.device, dtype=x_state.dtype
+            ).view(1, steps, 1)
+            recency = torch.log1p(recency) / math.log1p(max(1, steps - 1))
+            state_inputs.append(recency.expand(x_state.size(0), -1, -1))
+        return self.state_projector(torch.cat(state_inputs, dim=-1))
+
     def encode(self, x_forcing, x_state, time_x, x_static, x_lc):
         forcing_memory = self.tcn(x_forcing.transpose(1, 2)).transpose(1, 2)
         valid, age, counts = _causal_observation_metadata(
             x_state[:, :, self.satellite_mask_index], self.no_observation_age_hours
         )
-        state_memory = self.state_projector(torch.cat([x_state, time_x], dim=-1))
+        state_memory = self.project_state_inputs(x_state, time_x)
         all_missing = ~valid.any(dim=1)
         if all_missing.any():
             state_memory = state_memory.clone()
@@ -110,15 +130,17 @@ class ObservationAwareTCNGPP(nn.Module):
             state_memory, src_key_padding_mask=~valid
         )
         static_context = self._static_context(x_static, x_lc)
-        endpoint_age = age[:, -1:].clamp_max(self.no_observation_age_hours)
-        age_features = torch.cat(
-            [
-                torch.log1p(endpoint_age) / math.log1p(self.no_observation_age_hours),
-                counts / x_state.size(1),
-            ],
-            dim=1,
-        )
-        query = static_context + self.age_projector(age_features)
+        query = static_context
+        summary_values = []
+        if self.use_endpoint_observation_age:
+            endpoint_age = age[:, -1:].clamp_max(self.no_observation_age_hours)
+            summary_values.append(
+                torch.log1p(endpoint_age) / math.log1p(self.no_observation_age_hours)
+            )
+        if self.use_observation_count:
+            summary_values.append(counts / x_state.size(1))
+        if self.age_projector is not None:
+            query = query + self.age_projector(torch.cat(summary_values, dim=1))
         query_token = query[:, None, :]
         state_summary, _ = self.state_attention(
             query_token,

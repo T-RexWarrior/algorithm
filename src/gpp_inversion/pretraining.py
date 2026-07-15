@@ -36,9 +36,7 @@ class KnowledgeGuidedPretrainer(nn.Module):
         forcing_input = forcing.masked_fill(forcing_mask, 0.0)
         state_input = state.masked_fill(state_mask, 0.0)
         forcing_latent = self.model.tcn(forcing_input.transpose(1, 2)).transpose(1, 2)
-        state_latent = self.model.state_projector(
-            torch.cat([state_input, time_features], dim=-1)
-        )
+        state_latent = self.model.project_state_inputs(state_input, time_features)
         state_latent = self.model.state_encoder(state_latent)
         forcing_reconstruction = self.forcing_head(forcing_latent)
         state_reconstruction = self.state_head(state_latent)

@@ -133,6 +133,11 @@ def export_model_package(
         "daily_context_columns": list(config.window.daily_context_columns),
         "daily_context_features": config.model.daily_context_features,
         "input_arity": input_arity,
+        "observation_features": {
+            "endpoint_age": config.model.use_endpoint_observation_age,
+            "observation_count": config.model.use_observation_count,
+            "token_recency": config.model.use_token_recency,
+        },
         "schema_hash": contract.schema_hash,
         "split_hash": split_hash,
         "code_commit": commit,

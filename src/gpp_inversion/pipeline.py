@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import random
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -103,21 +104,27 @@ def _run_training_split(
             scaling=config.scaling,
             scale_target=config.scale_target,
             split_name="train",
+            domain=config.domain,
+        )
+        evaluation_window = replace(
+            config.window, endpoint_stride=1, endpoint_phase=0
         )
         val_dataset = MultiStationWindowDataset(
             files.val,
             config.features,
-            config.window,
+            evaluation_window,
             scaler=train_dataset.scaler,
             split_name="val",
+            domain=config.domain,
         )
         test_dataset = (
             MultiStationWindowDataset(
                 files.test,
                 config.features,
-                config.window,
+                evaluation_window,
                 scaler=train_dataset.scaler,
                 split_name="test",
+                domain=config.domain,
             )
             if evaluate_test and files.test else None
         )

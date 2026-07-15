@@ -28,6 +28,8 @@
 
 当前锁定方案是原 TCN 的 seed=42、7、2026 三次独立训练与逐行等权平均。正式测试集摘要：微观 RMSE 3.28001、微观 MAE 1.52565、宏观 RMSE 3.02756、宏观 MAE 1.52351。第三轮没有候选晋级，因此没有产生新的正式测试读取或替代 checkpoint。
 
+正式长实验 v2 位于 `D:\全局反演\gpp_production_experiments_v2`。其中 `exact_era_validation` 是 34 个开发验证站、4,862 个站点小时的真实六天 ERA/MODIS 回放子集；它不含盲测站。塔基—ERA 配对、MODIS映射和ERA扰动清单位于全球项目的 `outputs/domain_manifests_v2`。长实验目录按阶段保存解析配置、checkpoint、scaler、逐站预测及恢复状态。
+
 ## 保存与迁移要求
 
 迁移或备份外部产物时，至少保留每次正式运行的：

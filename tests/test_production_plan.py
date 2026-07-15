@@ -9,9 +9,11 @@ import pandas as pd
 import torch
 
 from gpp_inversion.blind import StationDescriptor, _previous_sites, select_blind_stations
-from gpp_inversion.config import FeatureColumns, ModelConfig, ModelKind, WindowConfig
+from gpp_inversion.config import DomainConfig, FeatureColumns, ModelConfig, ModelKind, WindowConfig
 from gpp_inversion.contracts import ModelBatch, observation_metadata, spherical_xyz
 from gpp_inversion.data import MultiStationWindowDataset
+from gpp_inversion.domain import EraStressTransform, fit_era_stress_manifest
+from gpp_inversion.domain_evaluation import compare_on_common_rows
 from gpp_inversion.ensemble import fit_nonnegative_oof_weights
 from gpp_inversion.experiments import build_model
 from gpp_inversion.losses import TailAwareLoss
@@ -80,6 +82,29 @@ def test_observation_aware_variants_handle_all_missing_state():
         assert torch.isfinite(output).all()
 
 
+def test_observation_age_ablation_variants_are_executable():
+    inputs = (
+        torch.randn(2, 96, 5), torch.randn(2, 96, 2),
+        torch.randn(2, 96, 4), torch.randn(2, 96, 2),
+        torch.ones(2, 96, dtype=torch.long),
+    )
+    inputs[1][:, :, 0] = -0.5
+    inputs[1][:, 30::20, 0] = 1.0
+    variants = ((False, False, False), (True, False, False), (True, True, False), (True, True, True))
+    for endpoint_age, count, recency in variants:
+        config = ModelConfig(
+            kind=ModelKind.TCN_OBSERVATION_AWARE, d_model=8, nhead=2,
+            num_layers=1, dim_feedforward=16, tcn_layers=2,
+            num_land_cover_classes=3, land_cover_embedding_dim=2, dropout=0.0,
+            use_endpoint_observation_age=endpoint_age,
+            use_observation_count=count,
+            use_token_recency=recency,
+        )
+        output = build_model(config, FEATURES, seq_len=96, time_feature_dim=4)(*inputs)
+        assert output.shape == (2,)
+        assert torch.isfinite(output).all()
+
+
 def test_tail_loss_penalizes_high_underprediction_more():
     loss = TailAwareLoss(p50=1.0, p80=2.0, p95=3.0)
     low = loss(torch.tensor([0.0]), torch.tensor([1.0]))
@@ -137,6 +162,74 @@ def test_dataset_derives_spherical_static_coordinates_from_lat_lon():
             + dataset.scaler.static_offset
         )
         np.testing.assert_allclose(raw_xyz, [0.0, 1.0, 0.0], atol=1e-6)
+
+
+def test_endpoint_phases_are_disjoint_and_cover_all_hourly_endpoints():
+    rows = 110
+    frame = pd.DataFrame({
+        "date": pd.date_range("2020-01-01", periods=rows, freq="h"),
+        "SW_IN_F": 100.0, "TA_F": 10.0, "VPD_F": 5.0,
+        "P_F": 0.0, "SWC_F_MDS_1": 30.0,
+        "EPIC_Available_Mask": 0.0, "Band680nm_Ref": 0.0,
+        "Lat": 1.0, "Long": 2.0, "Veg_ID": 1,
+        "GPP_DT_VUT_REF": 2.0,
+    })
+    with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory:
+        path = Path(directory) / "SITE_GRA_Merged.csv"
+        frame.to_csv(path, index=False)
+        dataset = MultiStationWindowDataset(
+            [path], FEATURES,
+            WindowConfig(seq_len=96, max_span_hours=95, endpoint_stride=3),
+        )
+        phases = []
+        for phase in range(3):
+            dataset.set_endpoint_phase(phase)
+            phases.append(set((dataset.window_starts[0] + 95).tolist()))
+        assert not (phases[0] & phases[1] or phases[0] & phases[2] or phases[1] & phases[2])
+        assert set.union(*phases) == set(range(95, rows))
+
+
+def test_era_stress_transform_is_target_blind_and_deterministic():
+    with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory:
+        pair_path = Path(directory) / "pairs.csv"
+        rows = []
+        for feature in FEATURES.forcing:
+            for index in range(80):
+                tower = float(index + 1)
+                rows.append({
+                    "station": "TRAIN", "split": "train", "feature": feature,
+                    "tower": tower, "era": tower * 1.1 + 0.5,
+                })
+        pd.DataFrame(rows).to_csv(pair_path, index=False)
+        manifest_path = fit_era_stress_manifest(pair_path, Path(directory) / "stress.json")
+        transform = EraStressTransform.load(manifest_path)
+        values = np.full((20, len(FEATURES.forcing)), 5.0, dtype=np.float32)
+        first = transform.apply(values, FEATURES.forcing, station="SITE", seed=42)
+        second = transform.apply(values, FEATURES.forcing, station="SITE", seed=42)
+        np.testing.assert_array_equal(first, second)
+        assert np.isfinite(first).all()
+
+
+def test_modis_land_cover_override_uses_manifest():
+    rows = 100
+    frame = pd.DataFrame({
+        "date": pd.date_range("2020-01-01", periods=rows, freq="h"),
+        "SW_IN_F": 100.0, "TA_F": 10.0, "VPD_F": 5.0,
+        "P_F": 0.0, "SWC_F_MDS_1": 30.0,
+        "EPIC_Available_Mask": 0.0, "Band680nm_Ref": 0.0,
+        "Lat": 1.0, "Long": 2.0, "Veg_ID": 1,
+        "GPP_DT_VUT_REF": 2.0,
+    })
+    with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory:
+        path = Path(directory) / "SITE_GRA_Merged.csv"
+        mapping = Path(directory) / "modis.json"
+        frame.to_csv(path, index=False)
+        mapping.write_text('{"sites":{"SITE_GRA":{"modis_veg_id":2}}}', encoding="utf-8")
+        dataset = MultiStationWindowDataset(
+            [path], FEATURES, WindowConfig(seq_len=96, max_span_hours=95),
+            domain=DomainConfig(land_cover_mode="modis", land_cover_manifest=str(mapping)),
+        )
+        assert np.unique(dataset.station_land_cover[0]).tolist() == [2]
 
 
 def test_blind_selection_is_balanced_and_excludes_previous():
@@ -234,3 +327,28 @@ def test_promotion_gate_uses_strict_paired_station_comparison():
         )
         assert report["passed"]
         assert report["station_win_fraction"] == 1.0
+
+
+def test_domain_comparison_uses_only_common_station_hours():
+    baseline = pd.DataFrame(
+        {
+            "station": ["A", "A", "B"],
+            "date": pd.to_datetime(
+                ["2022-01-01 00:00", "2022-01-01 01:00", "2022-01-01 00:00"]
+            ),
+            "land_cover_id": [1, 1, 2],
+            "target": [1.0, 2.0, 3.0],
+            "prediction": [1.0, 2.0, 3.0],
+        }
+    )
+    shorter = baseline.iloc[[0, 2]].copy()
+    shorter["prediction"] += 1.0
+    with tempfile.TemporaryDirectory() as directory:
+        report = compare_on_common_rows(
+            {"baseline": baseline, "shorter": shorter},
+            Path(directory) / "comparison.json",
+        )
+    assert report["common_rows"] == 2
+    assert report["common_stations"] == 2
+    assert report["domains"]["baseline"]["micro"]["rmse"] == 0.0
+    assert report["domains"]["shorter"]["micro"]["rmse"] == 1.0

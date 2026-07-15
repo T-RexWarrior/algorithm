@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+import hashlib
+import json
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Iterable
 
@@ -11,8 +13,9 @@ import pandas as pd
 import torch
 from torch.utils.data import Dataset, Sampler
 
-from .config import FeatureColumns, ScalingMethod, TimeFeatureMode, WindowConfig
+from .config import DomainConfig, FeatureColumns, ScalingMethod, TimeFeatureMode, WindowConfig
 from .contracts import spherical_xyz
+from .domain import EraStressTransform
 
 
 @dataclass
@@ -99,10 +102,32 @@ class MultiStationWindowDataset(Dataset):
         scaling: ScalingMethod | str = ScalingMethod.ZSCORE,
         scale_target: bool = True,
         split_name: str = "train",
+        domain: DomainConfig | None = None,
     ) -> None:
         self.features = features
         self.window = window or WindowConfig()
         self.split_name = split_name
+        self.domain = domain or DomainConfig()
+        self.domain_transform = (
+            EraStressTransform.load(self.domain.forcing_manifest)
+            if self.domain.forcing_mode != "tower" else None
+        )
+        self.modis_site_map: dict[str, int] = {}
+        if self.domain.land_cover_mode == "modis":
+            payload = json.loads(
+                Path(self.domain.land_cover_manifest).read_text(encoding="utf-8")
+            )
+            raw_sites = payload.get("sites", {})
+            if isinstance(raw_sites, list):
+                self.modis_site_map = {
+                    str(row["site"]): int(row.get("modis_veg_id", -1))
+                    for row in raw_sites
+                }
+            else:
+                self.modis_site_map = {
+                    str(site): int(row.get("modis_veg_id", row))
+                    for site, row in raw_sites.items()
+                }
         self.window_starts: list[np.ndarray] = []
         self.cumulative_window_counts = np.empty(0, dtype=np.int64)
         self.total_windows = 0
@@ -136,6 +161,7 @@ class MultiStationWindowDataset(Dataset):
         return self.window.time_feature_dim
 
     def _load_station(self, path: Path) -> None:
+        site = path.stem[:-7] if path.stem.endswith("_Merged") else path.stem
         derived_static = {"Coord_X", "Coord_Y", "Coord_Z"}
         required_columns = [
             column for column in self.features.required
@@ -215,12 +241,33 @@ class MultiStationWindowDataset(Dataset):
             if self.features.land_cover
             else np.zeros(rows, dtype=np.int64)
         )
+        if self.domain.land_cover_mode == "modis":
+            modis_id = self.modis_site_map.get(site, -1)
+            if modis_id < 0:
+                self.skipped_files.append((path, "MODIS vegetation class is unmapped"))
+                return
+            land_cover = np.full(rows, modis_id, dtype=np.int64)
         if land_cover.size and land_cover.min() < 0:
             raise ValueError(f"Negative land-cover ID in {path.name}")
 
-        self.station_forcing.append(
-            frame[list(self.features.forcing)].to_numpy(dtype=np.float32)
-        )
+        forcing = frame[list(self.features.forcing)].to_numpy(dtype=np.float32)
+        if self.domain_transform is not None:
+            stress = self.domain_transform.apply(
+                forcing, self.features.forcing, station=site, seed=self.domain.seed
+            )
+            if self.domain.forcing_mode == "era_stress":
+                forcing = stress
+            else:
+                digest = hashlib.sha256(
+                    f"{self.domain.seed}|{site}|mixed".encode()
+                ).digest()
+                rng = np.random.default_rng(int.from_bytes(digest[:8], "little"))
+                block_source = rng.random((rows + self.window.seq_len - 1) // self.window.seq_len)
+                use_stress = np.repeat(
+                    block_source < self.domain.mixed_probability, self.window.seq_len
+                )[:rows]
+                forcing = np.where(use_stress[:, None], stress, forcing).astype(np.float32)
+        self.station_forcing.append(forcing)
         self.station_state.append(
             self._state_values(frame)
         )
@@ -321,6 +368,7 @@ class MultiStationWindowDataset(Dataset):
         length = max(self.window.seq_len, self.window.context_days * 24)
         if length < 1:
             raise ValueError("seq_len must be positive")
+        self.window_starts = []
         counts: list[int] = []
         for dates in self.station_dates:
             date_ns = dates.astype("datetime64[ns]").astype(np.int64)
@@ -377,6 +425,18 @@ class MultiStationWindowDataset(Dataset):
 
     def __len__(self) -> int:
         return self.total_windows
+
+    def set_endpoint_phase(self, phase: int) -> None:
+        """Rebuild valid endpoints for the requested stride phase."""
+        if self.window.endpoint_stride == 1:
+            return
+        phase = int(phase) % self.window.endpoint_stride
+        if phase == self.window.endpoint_phase:
+            return
+        self.window = replace(self.window, endpoint_phase=phase)
+        self._build_windows()
+        if self.total_windows == 0:
+            raise ValueError(f"Endpoint phase {phase} produced no valid windows")
 
     @property
     def station_window_counts(self) -> np.ndarray:
@@ -476,17 +536,27 @@ class StationBalancedSampler(Sampler[int]):
         num_samples: int | None = None,
         seed: int = 42,
     ) -> None:
-        counts = dataset.station_window_counts
+        self.dataset = dataset
+        self.num_samples = int(num_samples or len(dataset))
+        self.seed = int(seed)
+        self.generator = torch.Generator().manual_seed(seed)
+        self._refresh()
+
+    def _refresh(self) -> None:
+        counts = self.dataset.station_window_counts
         active = np.flatnonzero(counts > 0)
         if not active.size:
             raise ValueError("StationBalancedSampler requires valid windows")
         offsets = np.concatenate(
-            [np.zeros(1, dtype=np.int64), dataset.cumulative_window_counts[:-1]]
+            [np.zeros(1, dtype=np.int64), self.dataset.cumulative_window_counts[:-1]]
         )
         self.counts = torch.as_tensor(counts[active], dtype=torch.long)
         self.offsets = torch.as_tensor(offsets[active], dtype=torch.long)
-        self.num_samples = int(num_samples or len(dataset))
-        self.generator = torch.Generator().manual_seed(seed)
+
+    def set_epoch(self, epoch: int) -> None:
+        self.dataset.set_endpoint_phase(epoch)
+        self.generator.manual_seed(self.seed + int(epoch))
+        self._refresh()
 
     def __len__(self) -> int:
         return self.num_samples
@@ -517,10 +587,19 @@ class StationTargetBalancedSampler(Sampler[int]):
         quantiles: tuple[float, float, float] = (0.5, 0.8, 0.95),
         seed: int = 42,
     ) -> None:
+        self.dataset = dataset
+        self.quantiles = tuple(quantiles)
+        self.num_samples = int(num_samples)
+        self.seed = int(seed)
+        self.rng = np.random.default_rng(seed)
+        self._refresh()
+
+    def _refresh(self) -> None:
+        dataset = self.dataset
         raw = dataset.raw_window_targets()
         if not raw.size:
             raise ValueError("Target-balanced sampling requires window targets")
-        thresholds_raw = np.quantile(raw, quantiles)
+        thresholds_raw = np.quantile(raw, self.quantiles)
         thresholds = (
             (thresholds_raw - dataset.scaler.target_offset) / dataset.scaler.target_scale
             if dataset.scaler.scale_target else thresholds_raw
@@ -545,8 +624,11 @@ class StationTargetBalancedSampler(Sampler[int]):
             self.active_stations.append(station)
         if not self.groups:
             raise ValueError("No active stations for target-balanced sampling")
-        self.num_samples = int(num_samples)
-        self.rng = np.random.default_rng(seed)
+
+    def set_epoch(self, epoch: int) -> None:
+        self.dataset.set_endpoint_phase(epoch)
+        self.rng = np.random.default_rng(self.seed + int(epoch))
+        self._refresh()
 
     def __len__(self) -> int:
         return self.num_samples
@@ -591,7 +673,15 @@ class BatchedWindowLoader:
         self.sampler = sampler
         self.pin_memory = pin_memory
         self.metadata = metadata
+        self.seed = int(seed)
         self.generator = torch.Generator().manual_seed(seed)
+
+    def set_epoch(self, epoch: int) -> None:
+        if self.sampler is not None and hasattr(self.sampler, "set_epoch"):
+            self.sampler.set_epoch(epoch)
+        else:
+            self.dataset.set_endpoint_phase(epoch)
+        self.generator.manual_seed(self.seed + int(epoch))
 
     def __len__(self) -> int:
         sample_count = len(self.sampler) if self.sampler is not None else len(self.dataset)

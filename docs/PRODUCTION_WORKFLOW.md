@@ -25,6 +25,22 @@ conda run -n dl_env python scripts/run_production_suite.py configs/production_ob
 
 默认漏斗先以 seed 42 运行 3,000 步的同预算基线、观测感知、尾部损失、30 天记忆和 LUE 混合头。相对基线差超过 2% 的候选淘汰；加 `--full` 后，幸存者运行 12,000 步和 seed 42/7/2026。正式五折 × 三种子只对最多两个候选运行，不能用烟雾配置替代。
 
+## 正式长实验 v2
+
+正式 v2 输出固定写入 `D:/全局反演/gpp_production_experiments_v2`。训练端点按 epoch 循环相位 0/1/2，训练保持三小时间隔而验证逐小时进行。`scripts/run_formal_experiments.py` 是可恢复的分阶段入口，阶段依次为 `age_proxy`、`age_full`、`architecture_proxy`、`architecture_full`、`pretraining_proxy`、`pretraining_full`、`domain_proxy`、`domain_full` 和 `final_cv`。
+
+年龄消融分别测试 mask-only、末端观测年龄、年龄加96小时次数、以及每个有效 token 到目标时刻的相对时间。ERA 压力测试的扰动参数只能由训练站的塔基—ERA 配对拟合，不读取 GPP。MODIS 地类替换和 ERA 扰动都由 `DomainConfig` 显式记录到配置哈希中。
+
+真实六天部署回放使用以下工具生成与评价：
+
+```powershell
+python scripts/fit_era_stress_manifest.py tower_era_pairs.csv era_stress_manifest.json
+python scripts/materialize_exact_era_validation.py configs/production_observation_aware.json --pairs tower_era_pairs.csv --modis-manifest modis_site_mapping.json --output D:/全局反演/gpp_production_experiments_v2/exact_era_validation
+python scripts/evaluate_deployment_domains.py resolved_config.json --checkpoint checkpoint_best.pth --scaler scaler.npz --stress-manifest era_stress_manifest.json --modis-manifest modis_site_mapping.json --exact-era-dir D:/全局反演/gpp_production_experiments_v2/exact_era_validation --output domain_evaluation
+```
+
+最后一条命令对同一 checkpoint 同时评价塔基气象/塔基地类、塔基气象/MODIS、ERA扰动/MODIS、真实ERA/MODIS，并只在四者共有的站点小时上生成公平比较结果。六天回放只用于筛选，不代表多年 ERA 结论，也不会打开60站最终盲测。
+
 其他入口：
 
 ```powershell

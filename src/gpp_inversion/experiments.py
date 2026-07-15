@@ -67,6 +67,9 @@ def build_model(
             "tcn_layers": config.tcn_layers,
             "satellite_mask_index": config.satellite_mask_index,
             "no_observation_age_hours": config.no_observation_age_hours,
+            "use_endpoint_observation_age": config.use_endpoint_observation_age,
+            "use_observation_count": config.use_observation_count,
+            "use_token_recency": config.use_token_recency,
             "nonnegative_output": config.nonnegative_output,
         }
         if config.kind is ModelKind.TCN_OBSERVATION_AWARE:
