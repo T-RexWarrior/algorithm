@@ -42,6 +42,49 @@ class WeightedHuberLoss(nn.Module):
         return torch.mean(weights * per_element)
 
 
+class TailAwareLoss(nn.Module):
+    """Capped target-bin weighting plus a high-target underprediction penalty."""
+
+    def __init__(
+        self,
+        p50: float,
+        p80: float,
+        p95: float,
+        weights: tuple[float, float, float, float] | list[float] = (1.0, 1.0, 1.5, 2.5),
+        underprediction_weight: float = 0.25,
+        base: str = "mse",
+        delta: float = 1.0,
+    ) -> None:
+        super().__init__()
+        if not p50 <= p80 <= p95:
+            raise ValueError("Tail thresholds must satisfy p50 <= p80 <= p95")
+        if len(weights) != 4 or min(weights) <= 0:
+            raise ValueError("weights must contain four positive values")
+        if underprediction_weight < 0:
+            raise ValueError("underprediction_weight cannot be negative")
+        if base not in {"mse", "huber"}:
+            raise ValueError("base must be mse or huber")
+        self.register_buffer("thresholds", torch.tensor([p50, p80, p95], dtype=torch.float32))
+        self.register_buffer("bin_weights", torch.tensor(weights, dtype=torch.float32))
+        self.underprediction_weight = float(underprediction_weight)
+        self.base = base
+        self.delta = float(delta)
+
+    def forward(self, y_pred: torch.Tensor, y_true: torch.Tensor) -> torch.Tensor:
+        if self.base == "huber":
+            per_element = F.huber_loss(
+                y_pred, y_true, delta=self.delta, reduction="none"
+            )
+        else:
+            per_element = (y_pred - y_true).square()
+        bin_index = torch.bucketize(y_true.detach(), self.thresholds)
+        weighted = self.bin_weights[bin_index] * per_element
+        high = y_true >= self.thresholds[1]
+        under = torch.relu(y_true - y_pred).square()
+        penalty = self.underprediction_weight * high.to(under.dtype) * under
+        return torch.mean(weighted + penalty)
+
+
 def build_loss(kind: LossKind | str, **options) -> nn.Module:
     kind = LossKind(kind)
     if kind is LossKind.MSE:
@@ -50,4 +93,6 @@ def build_loss(kind: LossKind | str, **options) -> nn.Module:
         return nn.L1Loss(**options)
     if kind is LossKind.HUBER:
         return nn.HuberLoss(**options)
+    if kind is LossKind.TAIL_AWARE:
+        return TailAwareLoss(**options)
     return WeightedHuberLoss(**options)

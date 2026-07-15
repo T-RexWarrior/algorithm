@@ -1,0 +1,83 @@
+{
+  "data_dir": "D:/实验五/全波段全变量DT",
+  "output_dir": "D:/全局反演/gpp_production_experiments",
+  "train_sites": ["DEVELOPMENT_TRAIN_SITE"],
+  "val_sites": ["DEVELOPMENT_VALIDATION_SITE"],
+  "test_sites": ["LOCKED_BLIND_SITE"],
+  "features": {
+    "forcing": ["SW_IN_F", "SW_IN_POT", "CO2_F_MDS", "P_F", "VPD_F", "TA_F", "TS_F_MDS_1", "SWC_F_MDS_1", "WS_F"],
+    "state": ["EPIC_Available_Mask", "Band317nm_Ref", "Band325nm_Ref", "Band340nm_Ref", "Band388nm_Ref", "Band443nm_Ref", "Band551nm_Ref", "Band680nm_Ref", "Band688nm_Ref", "Band764nm_Ref", "Band780nm_Ref", "Mean_SZA", "Mean_VZA", "Mean_RAA"],
+    "static": ["Coord_X", "Coord_Y", "Coord_Z"],
+    "target": "GPP_DT_VUT_REF",
+    "time": "date",
+    "land_cover": "Veg_ID"
+  },
+  "window": {
+    "seq_len": 96,
+    "time_features": "cyclic",
+    "require_regular": true,
+    "max_gap_hours": 1,
+    "max_span_hours": 95,
+    "endpoint_stride": 3,
+    "endpoint_phase": 0,
+    "context_days": 0,
+    "daily_context_columns": ["SW_IN_F", "TA_F", "VPD_F", "P_F", "SWC_F_MDS_1"]
+  },
+  "scaling": "zscore",
+  "scale_target": true,
+  "model": {
+    "kind": "tcn_observation_aware",
+    "d_model": 64,
+    "nhead": 4,
+    "dropout": 0.1,
+    "dim_feedforward": 128,
+    "num_layers": 2,
+    "num_land_cover_classes": 13,
+    "land_cover_embedding_dim": 8,
+    "tcn_layers": 6,
+    "satellite_mask_index": 0,
+    "no_observation_age_hours": 240,
+    "daily_context_features": 5,
+    "daily_context_hidden": 32,
+    "nonnegative_output": false
+  },
+  "loss": "tail_aware",
+  "loss_options": {
+    "weights": [1.0, 1.0, 1.5, 2.5],
+    "underprediction_weight": 0.25
+  },
+  "training": {
+    "batch_size": 1024,
+    "epochs": 100,
+    "learning_rate": 0.001,
+    "patience": 3,
+    "num_workers": 0,
+    "seed": 42,
+    "resume": true,
+    "selection_metric": "macro_rmse",
+    "station_balanced": false,
+    "target_balanced": true,
+    "samples_per_epoch": 1024000,
+    "max_steps": 12000,
+    "warmup_steps": 500,
+    "eval_interval_steps": 1000,
+    "amp": true,
+    "weight_decay": 0.0001,
+    "deterministic": true,
+    "optimizer": "adamw"
+  },
+  "evaluation": {
+    "save_predictions": true,
+    "save_plots": true,
+    "moving_average_window": 12,
+    "zoom_days": 30,
+    "minimum_target": 0,
+    "evaluate_test": false
+  },
+  "cross_validation": {
+    "enabled": false,
+    "n_splits": 5,
+    "seed": 42,
+    "evaluate_test_each_fold": false
+  }
+}

@@ -11,13 +11,15 @@ from .config import (
     ScalingMethod,
     TimeFeatureMode,
     TrainingConfig,
+    SplitProtocolConfig,
     WindowConfig,
 )
 from .data import MultiStationWindowDataset, ScalingStats
 from .explain import perform_shap_analysis
 from .ensemble import ensemble_prediction_files
 from .tree_baseline import TreeBaselineConfig, run_tree_baseline
-from .losses import WeightedHuberLoss, build_loss
+from .contracts import FeatureContract, FeatureSpec, ModelBatch, spherical_xyz
+from .losses import TailAwareLoss, WeightedHuberLoss, build_loss
 from .models import (
     LayerNormLSTMGPP,
     TCNTransformerCrossAttention,
@@ -48,7 +50,13 @@ __all__ = [
     "TimeFeatureMode",
     "TCN_Transformer_CrossAttention",
     "TrainingConfig",
+    "SplitProtocolConfig",
     "WeightedHuberLoss",
+    "TailAwareLoss",
+    "FeatureContract",
+    "FeatureSpec",
+    "ModelBatch",
+    "spherical_xyz",
     "WindowConfig",
     "build_loss",
     "ensemble_prediction_files",

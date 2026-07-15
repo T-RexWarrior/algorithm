@@ -9,6 +9,11 @@ from .models_irregular import (
     NeuralCDECrossAttentionGPP,
     TimeAwareMambaTransformerCrossAttention,
 )
+from .models_production import (
+    HybridLUETCNGPP,
+    MultiscaleTCNGPP,
+    ObservationAwareTCNGPP,
+)
 
 
 def build_model(
@@ -47,6 +52,33 @@ def build_model(
             cross_direction=config.cross_direction,
             temporal_pooling=config.temporal_pooling,
         )
+    if config.kind in {
+        ModelKind.TCN_OBSERVATION_AWARE,
+        ModelKind.TCN_MULTISCALE,
+        ModelKind.HYBRID_LUE_TCN,
+    }:
+        production_common = {
+            **common,
+            "num_lc_classes": (
+                config.num_land_cover_classes if features.land_cover else None
+            ),
+            "lc_embed_dim": config.land_cover_embedding_dim,
+            "num_layers": config.num_layers,
+            "tcn_layers": config.tcn_layers,
+            "satellite_mask_index": config.satellite_mask_index,
+            "no_observation_age_hours": config.no_observation_age_hours,
+            "nonnegative_output": config.nonnegative_output,
+        }
+        if config.kind is ModelKind.TCN_OBSERVATION_AWARE:
+            return ObservationAwareTCNGPP(**production_common)
+        if config.kind is ModelKind.TCN_MULTISCALE:
+            return MultiscaleTCNGPP(
+                **production_common,
+                daily_context_features=config.daily_context_features,
+                daily_context_hidden=config.daily_context_hidden,
+            )
+        production_common.pop("nonnegative_output")
+        return HybridLUETCNGPP(**production_common)
     if config.kind is ModelKind.LSTM:
         return LayerNormLSTMGPP(
             num_forcing_features=len(features.forcing),

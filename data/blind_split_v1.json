@@ -1,0 +1,3688 @@
+{
+  "protocol_version": 2,
+  "selection_program": "gpp_inversion.blind.build_blind_lock/v2",
+  "selection_uses_target_magnitude": false,
+  "previous_sites_excluded": 149,
+  "previous_config": "D:\\全局反演\\gpp_ablation_results\\screening_deterministic_seed42_e3_b1024\\baseline\\experiment_manifest.json",
+  "previous_config_sha256": "911240a22d4e74ad0fc25e3758bc7b6babf271fdf5f94eae392b4ba4aac56a66",
+  "eligibility_minimum_valid_targets": 96,
+  "eligibility_minimum_valid_model_rows": 96,
+  "representative_count": 30,
+  "ood_count": 30,
+  "eligible_stations": [
+    {
+      "file": "AT-Mmg_ENF_Merged.csv",
+      "site": "AT-Mmg_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 31913,
+      "valid_model_rows": 12721
+    },
+    {
+      "file": "AU-ASM_SAV_Merged.csv",
+      "site": "AU-ASM_SAV",
+      "veg_id": 4,
+      "valid_target_rows": 67976,
+      "valid_model_rows": 67976
+    },
+    {
+      "file": "AU-Boy_EBF_Merged.csv",
+      "site": "AU-Boy_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 71870,
+      "valid_model_rows": 70625
+    },
+    {
+      "file": "AU-Cow_EBF_Merged.csv",
+      "site": "AU-Cow_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 83078,
+      "valid_model_rows": 83030
+    },
+    {
+      "file": "AU-Cpr_WSA_Merged.csv",
+      "site": "AU-Cpr_WSA",
+      "veg_id": 5,
+      "valid_target_rows": 87169,
+      "valid_model_rows": 87169
+    },
+    {
+      "file": "AU-Ctr_EBF_Merged.csv",
+      "site": "AU-Ctr_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 24775,
+      "valid_model_rows": 24727
+    },
+    {
+      "file": "AU-Cum_EBF_Merged.csv",
+      "site": "AU-Cum_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 87663,
+      "valid_model_rows": 87663
+    },
+    {
+      "file": "AU-DaS_WSA_Merged.csv",
+      "site": "AU-DaS_WSA",
+      "veg_id": 5,
+      "valid_target_rows": 87329,
+      "valid_model_rows": 87329
+    },
+    {
+      "file": "AU-Dry_WSA_Merged.csv",
+      "site": "AU-Dry_WSA",
+      "veg_id": 5,
+      "valid_target_rows": 77476,
+      "valid_model_rows": 76669
+    },
+    {
+      "file": "AU-Fle_WSA_Merged.csv",
+      "site": "AU-Fle_WSA",
+      "veg_id": 5,
+      "valid_target_rows": 33907,
+      "valid_model_rows": 33350
+    },
+    {
+      "file": "AU-Gin_EBF_Merged.csv",
+      "site": "AU-Gin_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 83578,
+      "valid_model_rows": 83536
+    },
+    {
+      "file": "AU-GWW_EBF_Merged.csv",
+      "site": "AU-GWW_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 81527,
+      "valid_model_rows": 81486
+    },
+    {
+      "file": "AU-How_WSA_Merged.csv",
+      "site": "AU-How_WSA",
+      "veg_id": 5,
+      "valid_target_rows": 85328,
+      "valid_model_rows": 85279
+    },
+    {
+      "file": "AU-Lit_WSA_Merged.csv",
+      "site": "AU-Lit_WSA",
+      "veg_id": 5,
+      "valid_target_rows": 80517,
+      "valid_model_rows": 80494
+    },
+    {
+      "file": "AU-Lon_GRA_Merged.csv",
+      "site": "AU-Lon_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 46081,
+      "valid_model_rows": 46034
+    },
+    {
+      "file": "AU-MvA_CRO_Merged.csv",
+      "site": "AU-MvA_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 9974,
+      "valid_model_rows": 9927
+    },
+    {
+      "file": "AU-MvB_CRO_Merged.csv",
+      "site": "AU-MvB_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 8775,
+      "valid_model_rows": 8540
+    },
+    {
+      "file": "AU-Rgf_CVM_Merged.csv",
+      "site": "AU-Rgf_CVM",
+      "veg_id": 6,
+      "valid_target_rows": 83470,
+      "valid_model_rows": 83427
+    },
+    {
+      "file": "AU-Rig_GRA_Merged.csv",
+      "site": "AU-Rig_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 13808,
+      "valid_model_rows": 13760
+    },
+    {
+      "file": "AU-Rob_EBF_Merged.csv",
+      "site": "AU-Rob_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 87247,
+      "valid_model_rows": 87199
+    },
+    {
+      "file": "AU-Sam_GRA_Merged.csv",
+      "site": "AU-Sam_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 17535,
+      "valid_model_rows": 17535
+    },
+    {
+      "file": "AU-Sil_GRA_Merged.csv",
+      "site": "AU-Sil_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 44894,
+      "valid_model_rows": 44720
+    },
+    {
+      "file": "AU-Sno_EBF_Merged.csv",
+      "site": "AU-Sno_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 13609,
+      "valid_model_rows": 13609
+    },
+    {
+      "file": "AU-Stp_GRA_Merged.csv",
+      "site": "AU-Stp_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 84913,
+      "valid_model_rows": 78151
+    },
+    {
+      "file": "AU-Wel_GRA_Merged.csv",
+      "site": "AU-Wel_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 17535,
+      "valid_model_rows": 17535
+    },
+    {
+      "file": "AU-Wgt_GRA_Merged.csv",
+      "site": "AU-Wgt_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 10118,
+      "valid_model_rows": 10091
+    },
+    {
+      "file": "AU-Whr_EBF_Merged.csv",
+      "site": "AU-Whr_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 56072,
+      "valid_model_rows": 56072
+    },
+    {
+      "file": "AU-Wom_EBF_Merged.csv",
+      "site": "AU-Wom_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 57640,
+      "valid_model_rows": 57640
+    },
+    {
+      "file": "AU-Wrr_EBF_Merged.csv",
+      "site": "AU-Wrr_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 46090,
+      "valid_model_rows": 40913
+    },
+    {
+      "file": "AU-Ya1_GRA_Merged.csv",
+      "site": "AU-Ya1_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 22118,
+      "valid_model_rows": 22071
+    },
+    {
+      "file": "AU-Ya2_GRA_Merged.csv",
+      "site": "AU-Ya2_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 22119,
+      "valid_model_rows": 22070
+    },
+    {
+      "file": "AU-Ync_GRA_Merged.csv",
+      "site": "AU-Ync_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 75070,
+      "valid_model_rows": 75022
+    },
+    {
+      "file": "BE-Bra_ENF_Merged.csv",
+      "site": "BE-Bra_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78536
+    },
+    {
+      "file": "BE-Dor_GRA_Merged.csv",
+      "site": "BE-Dor_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "BE-Lon_CRO_Merged.csv",
+      "site": "BE-Lon_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 76839,
+      "valid_model_rows": 76839
+    },
+    {
+      "file": "BE-Maa_CSH_Merged.csv",
+      "site": "BE-Maa_CSH",
+      "veg_id": 1,
+      "valid_target_rows": 78061,
+      "valid_model_rows": 52508
+    },
+    {
+      "file": "BE-Vie_MF_Merged.csv",
+      "site": "BE-Vie_MF",
+      "veg_id": 9,
+      "valid_target_rows": 78378,
+      "valid_model_rows": 78378
+    },
+    {
+      "file": "BJ-Bfg_DBF_Merged.csv",
+      "site": "BJ-Bfg_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 14525,
+      "valid_model_rows": 14134
+    },
+    {
+      "file": "BJ-Db1_CRO_Merged.csv",
+      "site": "BJ-Db1_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 24089,
+      "valid_model_rows": 24057
+    },
+    {
+      "file": "BJ-Nhu_SAV_Merged.csv",
+      "site": "BJ-Nhu_SAV",
+      "veg_id": 4,
+      "valid_target_rows": 17544,
+      "valid_model_rows": 17196
+    },
+    {
+      "file": "CA-ARB_WET_Merged.csv",
+      "site": "CA-ARB_WET",
+      "veg_id": 7,
+      "valid_target_rows": 60676,
+      "valid_model_rows": 39480
+    },
+    {
+      "file": "CA-ARF_WET_Merged.csv",
+      "site": "CA-ARF_WET",
+      "veg_id": 7,
+      "valid_target_rows": 71765,
+      "valid_model_rows": 55466
+    },
+    {
+      "file": "CA-Cbo_DBF_Merged.csv",
+      "site": "CA-Cbo_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 78913,
+      "valid_model_rows": 42824
+    },
+    {
+      "file": "CA-CF3_WET_Merged.csv",
+      "site": "CA-CF3_WET",
+      "veg_id": 7,
+      "valid_target_rows": 29375,
+      "valid_model_rows": 29047
+    },
+    {
+      "file": "CA-KLP_WET_Merged.csv",
+      "site": "CA-KLP_WET",
+      "veg_id": 7,
+      "valid_target_rows": 40693,
+      "valid_model_rows": 40088
+    },
+    {
+      "file": "CA-Mer_WET_Merged.csv",
+      "site": "CA-Mer_WET",
+      "veg_id": 7,
+      "valid_target_rows": 43849,
+      "valid_model_rows": 43849
+    },
+    {
+      "file": "CA-Mtk_GRA_Merged.csv",
+      "site": "CA-Mtk_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 3877,
+      "valid_model_rows": 3784
+    },
+    {
+      "file": "CA-PB2_WET_Merged.csv",
+      "site": "CA-PB2_WET",
+      "veg_id": 7,
+      "valid_target_rows": 45565,
+      "valid_model_rows": 44999
+    },
+    {
+      "file": "CA-TP3_ENF_Merged.csv",
+      "site": "CA-TP3_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 70129,
+      "valid_model_rows": 70129
+    },
+    {
+      "file": "CA-TP4_ENF_Merged.csv",
+      "site": "CA-TP4_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 70129,
+      "valid_model_rows": 70129
+    },
+    {
+      "file": "CA-TPD_DBF_Merged.csv",
+      "site": "CA-TPD_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 61374,
+      "valid_model_rows": 61374
+    },
+    {
+      "file": "CD-Ygb_MF_Merged.csv",
+      "site": "CD-Ygb_MF",
+      "veg_id": 9,
+      "valid_target_rows": 34293,
+      "valid_model_rows": 33971
+    },
+    {
+      "file": "CH-Crs_GRA_Merged.csv",
+      "site": "CH-Crs_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 8784,
+      "valid_model_rows": 8784
+    },
+    {
+      "file": "CH-Dav_ENF_Merged.csv",
+      "site": "CH-Dav_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 51372
+    },
+    {
+      "file": "CH-For_CRO_Merged.csv",
+      "site": "CH-For_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 7595,
+      "valid_model_rows": 7380
+    },
+    {
+      "file": "CH-Fru_GRA_Merged.csv",
+      "site": "CH-Fru_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "CH-Lae_MF_Merged.csv",
+      "site": "CH-Lae_MF",
+      "veg_id": 9,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "CH-Oe2_CRO_Merged.csv",
+      "site": "CH-Oe2_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "CH-Tnk_CRO_Merged.csv",
+      "site": "CH-Tnk_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 8784,
+      "valid_model_rows": 8784
+    },
+    {
+      "file": "CL-SDF_EBF_Merged.csv",
+      "site": "CL-SDF_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 49785,
+      "valid_model_rows": 44770
+    },
+    {
+      "file": "CL-SDP_WET_Merged.csv",
+      "site": "CL-SDP_WET",
+      "veg_id": 7,
+      "valid_target_rows": 52609,
+      "valid_model_rows": 52609
+    },
+    {
+      "file": "CN-Aro_GRA_Merged.csv",
+      "site": "CN-Aro_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 78905,
+      "valid_model_rows": 78905
+    },
+    {
+      "file": "CN-Ash_EBF_Merged.csv",
+      "site": "CN-Ash_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 35057,
+      "valid_model_rows": 34998
+    },
+    {
+      "file": "CN-BeO_MF_Merged.csv",
+      "site": "CN-BeO_MF",
+      "veg_id": 9,
+      "valid_target_rows": 43841,
+      "valid_model_rows": 43841
+    },
+    {
+      "file": "CN-Dmn_CRO_Merged.csv",
+      "site": "CN-Dmn_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 78905,
+      "valid_model_rows": 78905
+    },
+    {
+      "file": "CN-Dsh_GRA_Merged.csv",
+      "site": "CN-Dsh_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 74967,
+      "valid_model_rows": 74967
+    },
+    {
+      "file": "CN-Du2_GRA_Merged.csv",
+      "site": "CN-Du2_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 26297,
+      "valid_model_rows": 26297
+    },
+    {
+      "file": "CN-Dzo_EBF_Merged.csv",
+      "site": "CN-Dzo_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 35081,
+      "valid_model_rows": 26657
+    },
+    {
+      "file": "CN-Erg_GRA_Merged.csv",
+      "site": "CN-Erg_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 25948,
+      "valid_model_rows": 25948
+    },
+    {
+      "file": "CN-Ha2_OSH_Merged.csv",
+      "site": "CN-Ha2_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 33843,
+      "valid_model_rows": 33843
+    },
+    {
+      "file": "CN-HeM_DBF_Merged.csv",
+      "site": "CN-HeM_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 76759,
+      "valid_model_rows": 76759
+    },
+    {
+      "file": "CN-Jng_GRA_Merged.csv",
+      "site": "CN-Jng_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 55570,
+      "valid_model_rows": 55524
+    },
+    {
+      "file": "CN-Jzh_CRO_Merged.csv",
+      "site": "CN-Jzh_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 8777,
+      "valid_model_rows": 8777
+    },
+    {
+      "file": "CN-Lch_CRO_Merged.csv",
+      "site": "CN-Lch_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 35081,
+      "valid_model_rows": 26627
+    },
+    {
+      "file": "CN-Mxn_MF_Merged.csv",
+      "site": "CN-Mxn_MF",
+      "veg_id": 9,
+      "valid_target_rows": 15798,
+      "valid_model_rows": 15460
+    },
+    {
+      "file": "CN-Nmn_CRO_Merged.csv",
+      "site": "CN-Nmn_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 35057,
+      "valid_model_rows": 35057
+    },
+    {
+      "file": "CN-Sb1_DNF_Merged.csv",
+      "site": "CN-Sb1_DNF",
+      "veg_id": 3,
+      "valid_target_rows": 39131,
+      "valid_model_rows": 39096
+    },
+    {
+      "file": "CN-Sb2_ENF_Merged.csv",
+      "site": "CN-Sb2_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 39134,
+      "valid_model_rows": 39096
+    },
+    {
+      "file": "CN-Sdq_OSH_Merged.csv",
+      "site": "CN-Sdq_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 78207,
+      "valid_model_rows": 78207
+    },
+    {
+      "file": "CN-Yan_OSH_Merged.csv",
+      "site": "CN-Yan_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 23844,
+      "valid_model_rows": 23602
+    },
+    {
+      "file": "CN-YaS_OSH_Merged.csv",
+      "site": "CN-YaS_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 43841,
+      "valid_model_rows": 43841
+    },
+    {
+      "file": "CN-You_GRA_Merged.csv",
+      "site": "CN-You_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 70659,
+      "valid_model_rows": 70659
+    },
+    {
+      "file": "CN-Yuc_CRO_Merged.csv",
+      "site": "CN-Yuc_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 33613,
+      "valid_model_rows": 33613
+    },
+    {
+      "file": "CR-AqC_EBF_Merged.csv",
+      "site": "CR-AqC_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 8785,
+      "valid_model_rows": 8785
+    },
+    {
+      "file": "CR-Fsc_CRO_Merged.csv",
+      "site": "CR-Fsc_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 26305,
+      "valid_model_rows": 26305
+    },
+    {
+      "file": "CZ-BK1_ENF_Merged.csv",
+      "site": "CZ-BK1_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 61728
+    },
+    {
+      "file": "CZ-KrP_CRO_Merged.csv",
+      "site": "CZ-KrP_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 70128,
+      "valid_model_rows": 68281
+    },
+    {
+      "file": "CZ-LnG_GRA_Merged.csv",
+      "site": "CZ-LnG_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 50170,
+      "valid_model_rows": 49537
+    },
+    {
+      "file": "CZ-Lnz_DBF_Merged.csv",
+      "site": "CZ-Lnz_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 76431,
+      "valid_model_rows": 76431
+    },
+    {
+      "file": "CZ-RAJ_ENF_Merged.csv",
+      "site": "CZ-RAJ_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 77785
+    },
+    {
+      "file": "CZ-Stn_DBF_Merged.csv",
+      "site": "CZ-Stn_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 76897
+    },
+    {
+      "file": "CZ-wet_WET_Merged.csv",
+      "site": "CZ-wet_WET",
+      "veg_id": 7,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 61728
+    },
+    {
+      "file": "DE-Amv_WET_Merged.csv",
+      "site": "DE-Amv_WET",
+      "veg_id": 7,
+      "valid_target_rows": 17544,
+      "valid_model_rows": 17544
+    },
+    {
+      "file": "DE-Fen_GRA_Merged.csv",
+      "site": "DE-Fen_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 12113,
+      "valid_model_rows": 12066
+    },
+    {
+      "file": "DE-Geb_CRO_Merged.csv",
+      "site": "DE-Geb_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 36200,
+      "valid_model_rows": 36164
+    },
+    {
+      "file": "DE-Gri_GRA_Merged.csv",
+      "site": "DE-Gri_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 78226,
+      "valid_model_rows": 78226
+    },
+    {
+      "file": "DE-GsB_GRA_Merged.csv",
+      "site": "DE-GsB_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 78237,
+      "valid_model_rows": 77853
+    },
+    {
+      "file": "DE-Hai_DBF_Merged.csv",
+      "site": "DE-Hai_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 75768,
+      "valid_model_rows": 75768
+    },
+    {
+      "file": "DE-Har_ENF_Merged.csv",
+      "site": "DE-Har_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 43847,
+      "valid_model_rows": 43847
+    },
+    {
+      "file": "DE-HoH_DBF_Merged.csv",
+      "site": "DE-HoH_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 48976
+    },
+    {
+      "file": "DE-Kli_CRO_Merged.csv",
+      "site": "DE-Kli_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 61368,
+      "valid_model_rows": 34514
+    },
+    {
+      "file": "DE-Msr_ENF_Merged.csv",
+      "site": "DE-Msr_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 35748,
+      "valid_model_rows": 35390
+    },
+    {
+      "file": "DE-Obe_ENF_Merged.csv",
+      "site": "DE-Obe_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "DE-Rns_CRO_Merged.csv",
+      "site": "DE-Rns_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 32859,
+      "valid_model_rows": 28695
+    },
+    {
+      "file": "DE-RuC_OSH_Merged.csv",
+      "site": "DE-RuC_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "DE-RuM_CRO_Merged.csv",
+      "site": "DE-RuM_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 34390,
+      "valid_model_rows": 34362
+    },
+    {
+      "file": "DE-RuR_GRA_Merged.csv",
+      "site": "DE-RuR_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "DE-RuS_CRO_Merged.csv",
+      "site": "DE-RuS_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "DE-SbM_WET_Merged.csv",
+      "site": "DE-SbM_WET",
+      "veg_id": 7,
+      "valid_target_rows": 15738,
+      "valid_model_rows": 14430
+    },
+    {
+      "file": "DE-Tha_ENF_Merged.csv",
+      "site": "DE-Tha_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 52968
+    },
+    {
+      "file": "DK-Sor_DBF_Merged.csv",
+      "site": "DK-Sor_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "EE-Pts_WET_Merged.csv",
+      "site": "EE-Pts_WET",
+      "veg_id": 7,
+      "valid_target_rows": 20555,
+      "valid_model_rows": 15747
+    },
+    {
+      "file": "EE-Rng_WET_Merged.csv",
+      "site": "EE-Rng_WET",
+      "veg_id": 7,
+      "valid_target_rows": 10786,
+      "valid_model_rows": 5060
+    },
+    {
+      "file": "EE-Stg_ENF_Merged.csv",
+      "site": "EE-Stg_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 78708,
+      "valid_model_rows": 78274
+    },
+    {
+      "file": "ES-Abr_SAV_Merged.csv",
+      "site": "ES-Abr_SAV",
+      "veg_id": 4,
+      "valid_target_rows": 43848,
+      "valid_model_rows": 43848
+    },
+    {
+      "file": "ES-Cnd_WSA_Merged.csv",
+      "site": "ES-Cnd_WSA",
+      "veg_id": 5,
+      "valid_target_rows": 50501,
+      "valid_model_rows": 50464
+    },
+    {
+      "file": "ES-Crg_CSH_Merged.csv",
+      "site": "ES-Crg_CSH",
+      "veg_id": 1,
+      "valid_target_rows": 28448,
+      "valid_model_rows": 28213
+    },
+    {
+      "file": "ES-HdD_SAV_Merged.csv",
+      "site": "ES-HdD_SAV",
+      "veg_id": 4,
+      "valid_target_rows": 8029,
+      "valid_model_rows": 7982
+    },
+    {
+      "file": "ES-HeB_ENF_Merged.csv",
+      "site": "ES-HeB_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 52608,
+      "valid_model_rows": 52046
+    },
+    {
+      "file": "ES-Hen_ENF_Merged.csv",
+      "site": "ES-Hen_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 52608,
+      "valid_model_rows": 52608
+    },
+    {
+      "file": "ES-LJu_OSH_Merged.csv",
+      "site": "ES-LJu_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 72268,
+      "valid_model_rows": 72268
+    },
+    {
+      "file": "ES-LM1_SAV_Merged.csv",
+      "site": "ES-LM1_SAV",
+      "veg_id": 4,
+      "valid_target_rows": 78304,
+      "valid_model_rows": 78304
+    },
+    {
+      "file": "ES-LM2_SAV_Merged.csv",
+      "site": "ES-LM2_SAV",
+      "veg_id": 4,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "ES-LMa_SAV_Merged.csv",
+      "site": "ES-LMa_SAV",
+      "veg_id": 4,
+      "valid_target_rows": 43848,
+      "valid_model_rows": 43848
+    },
+    {
+      "file": "ES-Mcd_EBF_Merged.csv",
+      "site": "ES-Mcd_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 57324,
+      "valid_model_rows": 57277
+    },
+    {
+      "file": "ES-Pzb_GRA_Merged.csv",
+      "site": "ES-Pzb_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 37718,
+      "valid_model_rows": 37671
+    },
+    {
+      "file": "ES-TzM_DBF_Merged.csv",
+      "site": "ES-TzM_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 33441,
+      "valid_model_rows": 33307
+    },
+    {
+      "file": "ES-VDA_GRA_Merged.csv",
+      "site": "ES-VDA_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 21566,
+      "valid_model_rows": 21491
+    },
+    {
+      "file": "ES-Yst_ENF_Merged.csv",
+      "site": "ES-Yst_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 46982,
+      "valid_model_rows": 46934
+    },
+    {
+      "file": "FI-Hyy_ENF_Merged.csv",
+      "site": "FI-Hyy_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 77856,
+      "valid_model_rows": 77856
+    },
+    {
+      "file": "FI-Ken_ENF_Merged.csv",
+      "site": "FI-Ken_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 61367,
+      "valid_model_rows": 61367
+    },
+    {
+      "file": "FI-Sii_WET_Merged.csv",
+      "site": "FI-Sii_WET",
+      "veg_id": 7,
+      "valid_target_rows": 59726,
+      "valid_model_rows": 59088
+    },
+    {
+      "file": "FI-Sod_ENF_Merged.csv",
+      "site": "FI-Sod_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 15302,
+      "valid_model_rows": 14448
+    },
+    {
+      "file": "FI-Var_ENF_Merged.csv",
+      "site": "FI-Var_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 78911,
+      "valid_model_rows": 78911
+    },
+    {
+      "file": "FR-Aur_CRO_Merged.csv",
+      "site": "FR-Aur_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 78909,
+      "valid_model_rows": 78909
+    },
+    {
+      "file": "FR-Bil_ENF_Merged.csv",
+      "site": "FR-Bil_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 44208
+    },
+    {
+      "file": "FR-CLt_GRA_Merged.csv",
+      "site": "FR-CLt_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 49633,
+      "valid_model_rows": 49009
+    },
+    {
+      "file": "FR-EM2_CRO_Merged.csv",
+      "site": "FR-EM2_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 70128,
+      "valid_model_rows": 52968
+    },
+    {
+      "file": "FR-Fon_DBF_Merged.csv",
+      "site": "FR-Fon_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 45816,
+      "valid_model_rows": 45768
+    },
+    {
+      "file": "FR-Gri_CRO_Merged.csv",
+      "site": "FR-Gri_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 74053,
+      "valid_model_rows": 74053
+    },
+    {
+      "file": "FR-Lam_CRO_Merged.csv",
+      "site": "FR-Lam_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 32543,
+      "valid_model_rows": 32496
+    },
+    {
+      "file": "FR-Lqu_GRA_Merged.csv",
+      "site": "FR-Lqu_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 18872,
+      "valid_model_rows": 18840
+    },
+    {
+      "file": "FR-Lus_GRA_Merged.csv",
+      "site": "FR-Lus_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 18883,
+      "valid_model_rows": 18688
+    },
+    {
+      "file": "FR-Mej_GRA_Merged.csv",
+      "site": "FR-Mej_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 52608,
+      "valid_model_rows": 52116
+    },
+    {
+      "file": "FR-Nzn_GRA_Merged.csv",
+      "site": "FR-Nzn_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 78358,
+      "valid_model_rows": 76905
+    },
+    {
+      "file": "FR-Pue_EBF_Merged.csv",
+      "site": "FR-Pue_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 26664
+    },
+    {
+      "file": "FR-Tou_GRA_Merged.csv",
+      "site": "FR-Tou_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 61368,
+      "valid_model_rows": 61368
+    },
+    {
+      "file": "GF-Guy_EBF_Merged.csv",
+      "site": "GF-Guy_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 70125,
+      "valid_model_rows": 69984
+    },
+    {
+      "file": "GL-Dsk_OSH_Merged.csv",
+      "site": "GL-Dsk_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 43845,
+      "valid_model_rows": 20485
+    },
+    {
+      "file": "GL-ZaF_WET_Merged.csv",
+      "site": "GL-ZaF_WET",
+      "veg_id": 7,
+      "valid_target_rows": 13039,
+      "valid_model_rows": 12657
+    },
+    {
+      "file": "IE-Gwr_CRO_Merged.csv",
+      "site": "IE-Gwr_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 4176,
+      "valid_model_rows": 3713
+    },
+    {
+      "file": "IL-Yat_ENF_Merged.csv",
+      "site": "IL-Yat_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 78910,
+      "valid_model_rows": 78910
+    },
+    {
+      "file": "IT-Arz_OSH_Merged.csv",
+      "site": "IT-Arz_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 71727,
+      "valid_model_rows": 9695
+    },
+    {
+      "file": "IT-BCi_CRO_Merged.csv",
+      "site": "IT-BCi_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 59048,
+      "valid_model_rows": 59048
+    },
+    {
+      "file": "IT-BFt_DBF_Merged.csv",
+      "site": "IT-BFt_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 43848,
+      "valid_model_rows": 43848
+    },
+    {
+      "file": "IT-BsB_DBF_Merged.csv",
+      "site": "IT-BsB_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 33399,
+      "valid_model_rows": 33366
+    },
+    {
+      "file": "IT-Cp2_MF_Merged.csv",
+      "site": "IT-Cp2_MF",
+      "veg_id": 9,
+      "valid_target_rows": 63725,
+      "valid_model_rows": 27006
+    },
+    {
+      "file": "IT-Lav_ENF_Merged.csv",
+      "site": "IT-Lav_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 43848,
+      "valid_model_rows": 43848
+    },
+    {
+      "file": "IT-Lsn_OSH_Merged.csv",
+      "site": "IT-Lsn_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 77486,
+      "valid_model_rows": 59469
+    },
+    {
+      "file": "IT-MBo_GRA_Merged.csv",
+      "site": "IT-MBo_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 61978,
+      "valid_model_rows": 26083
+    },
+    {
+      "file": "IT-NiG_GRA_Merged.csv",
+      "site": "IT-NiG_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 43220,
+      "valid_model_rows": 39627
+    },
+    {
+      "file": "IT-Niv_GRA_Merged.csv",
+      "site": "IT-Niv_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 20693,
+      "valid_model_rows": 8037
+    },
+    {
+      "file": "IT-Noe_CSH_Merged.csv",
+      "site": "IT-Noe_CSH",
+      "veg_id": 1,
+      "valid_target_rows": 21009,
+      "valid_model_rows": 17905
+    },
+    {
+      "file": "IT-Ren_ENF_Merged.csv",
+      "site": "IT-Ren_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 70152,
+      "valid_model_rows": 70152
+    },
+    {
+      "file": "IT-SR2_ENF_Merged.csv",
+      "site": "IT-SR2_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 77376,
+      "valid_model_rows": 76765
+    },
+    {
+      "file": "IT-Tor_GRA_Merged.csv",
+      "site": "IT-Tor_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 78683,
+      "valid_model_rows": 78635
+    },
+    {
+      "file": "IT-TrF_DNF_Merged.csv",
+      "site": "IT-TrF_DNF",
+      "veg_id": 3,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 76872
+    },
+    {
+      "file": "JP-BBY_WET_Merged.csv",
+      "site": "JP-BBY_WET",
+      "veg_id": 7,
+      "valid_target_rows": 43535,
+      "valid_model_rows": 43535
+    },
+    {
+      "file": "JP-Fhk_DNF_Merged.csv",
+      "site": "JP-Fhk_DNF",
+      "veg_id": 3,
+      "valid_target_rows": 70120,
+      "valid_model_rows": 70120
+    },
+    {
+      "file": "JP-Fjy_ENF_Merged.csv",
+      "site": "JP-Fjy_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 47883,
+      "valid_model_rows": 47175
+    },
+    {
+      "file": "JP-Spp_DBF_Merged.csv",
+      "site": "JP-Spp_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 23967,
+      "valid_model_rows": 23826
+    },
+    {
+      "file": "JP-Tef_DNF_Merged.csv",
+      "site": "JP-Tef_DNF",
+      "veg_id": 3,
+      "valid_target_rows": 70120,
+      "valid_model_rows": 70120
+    },
+    {
+      "file": "JP-Ynf_EBF_Merged.csv",
+      "site": "JP-Ynf_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 51162,
+      "valid_model_rows": 51162
+    },
+    {
+      "file": "KE-Aq2_CRO_Merged.csv",
+      "site": "KE-Aq2_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 15108,
+      "valid_model_rows": 13084
+    },
+    {
+      "file": "KE-Chk_WSA_Merged.csv",
+      "site": "KE-Chk_WSA",
+      "veg_id": 5,
+      "valid_target_rows": 16445,
+      "valid_model_rows": 16350
+    },
+    {
+      "file": "KE-Kpt_GRA_Merged.csv",
+      "site": "KE-Kpt_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 39418,
+      "valid_model_rows": 7760
+    },
+    {
+      "file": "KE-Mkt_CRO_Merged.csv",
+      "site": "KE-Mkt_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 38538,
+      "valid_model_rows": 38489
+    },
+    {
+      "file": "KR-AdC_ENF_Merged.csv",
+      "site": "KR-AdC_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 25909,
+      "valid_model_rows": 25909
+    },
+    {
+      "file": "KR-CmF_CRO_Merged.csv",
+      "site": "KR-CmF_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 22321,
+      "valid_model_rows": 22321
+    },
+    {
+      "file": "KR-CRK_CRO_Merged.csv",
+      "site": "KR-CRK_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 52600,
+      "valid_model_rows": 52600
+    },
+    {
+      "file": "KR-HcM_MF_Merged.csv",
+      "site": "KR-HcM_MF",
+      "veg_id": 9,
+      "valid_target_rows": 26296,
+      "valid_model_rows": 26296
+    },
+    {
+      "file": "KR-Hnm_CRO_Merged.csv",
+      "site": "KR-Hnm_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 34774,
+      "valid_model_rows": 34729
+    },
+    {
+      "file": "KR-HPK_CRO_Merged.csv",
+      "site": "KR-HPK_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 21454,
+      "valid_model_rows": 21359
+    },
+    {
+      "file": "KR-JjM_MF_Merged.csv",
+      "site": "KR-JjM_MF",
+      "veg_id": 9,
+      "valid_target_rows": 26296,
+      "valid_model_rows": 26296
+    },
+    {
+      "file": "KR-Kw1_ENF_Merged.csv",
+      "site": "KR-Kw1_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 43840,
+      "valid_model_rows": 43840
+    },
+    {
+      "file": "KR-Kw2_DBF_Merged.csv",
+      "site": "KR-Kw2_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 38393,
+      "valid_model_rows": 38352
+    },
+    {
+      "file": "KR-PcD_DBF_Merged.csv",
+      "site": "KR-PcD_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 26296,
+      "valid_model_rows": 26296
+    },
+    {
+      "file": "KR-ScC_ENF_Merged.csv",
+      "site": "KR-ScC_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 26296,
+      "valid_model_rows": 26296
+    },
+    {
+      "file": "KR-SmM_MF_Merged.csv",
+      "site": "KR-SmM_MF",
+      "veg_id": 9,
+      "valid_target_rows": 47282,
+      "valid_model_rows": 47282
+    },
+    {
+      "file": "KR-TwB_DBF_Merged.csv",
+      "site": "KR-TwB_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 7344,
+      "valid_model_rows": 7296
+    },
+    {
+      "file": "KR-WdE_EBF_Merged.csv",
+      "site": "KR-WdE_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 25822,
+      "valid_model_rows": 25822
+    },
+    {
+      "file": "MN-Hst_GRA_Merged.csv",
+      "site": "MN-Hst_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 42336,
+      "valid_model_rows": 37349
+    },
+    {
+      "file": "MN-Nkh_GRA_Merged.csv",
+      "site": "MN-Nkh_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 42731,
+      "valid_model_rows": 42064
+    },
+    {
+      "file": "NL-Loo_ENF_Merged.csv",
+      "site": "NL-Loo_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "NL-Vkp_GRA_Merged.csv",
+      "site": "NL-Vkp_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "NZ-ADd_GRA_Merged.csv",
+      "site": "NZ-ADd_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 41186,
+      "valid_model_rows": 41040
+    },
+    {
+      "file": "NZ-ADw_GRA_Merged.csv",
+      "site": "NZ-ADw_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 58758,
+      "valid_model_rows": 58717
+    },
+    {
+      "file": "NZ-Cla_GRA_Merged.csv",
+      "site": "NZ-Cla_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 22473,
+      "valid_model_rows": 22369
+    },
+    {
+      "file": "NZ-Lau_GRA_Merged.csv",
+      "site": "NZ-Lau_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 55942,
+      "valid_model_rows": 55896
+    },
+    {
+      "file": "PR-xGU_EBF_Merged.csv",
+      "site": "PR-xGU_EBF",
+      "veg_id": 12,
+      "valid_target_rows": 43460,
+      "valid_model_rows": 43460
+    },
+    {
+      "file": "PR-xLA_GRA_Merged.csv",
+      "site": "PR-xLA_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 40967,
+      "valid_model_rows": 25538
+    },
+    {
+      "file": "RU-Ch2_WET_Merged.csv",
+      "site": "RU-Ch2_WET",
+      "veg_id": 7,
+      "valid_target_rows": 42636,
+      "valid_model_rows": 42411
+    },
+    {
+      "file": "RU-Ege_DNF_Merged.csv",
+      "site": "RU-Ege_DNF",
+      "veg_id": 3,
+      "valid_target_rows": 16789,
+      "valid_model_rows": 10670
+    },
+    {
+      "file": "RU-Fy2_ENF_Merged.csv",
+      "site": "RU-Fy2_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 78309,
+      "valid_model_rows": 78309
+    },
+    {
+      "file": "RU-Fy3_OSH_Merged.csv",
+      "site": "RU-Fy3_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 18122,
+      "valid_model_rows": 17020
+    },
+    {
+      "file": "RU-Fyo_ENF_Merged.csv",
+      "site": "RU-Fyo_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 78910,
+      "valid_model_rows": 78910
+    },
+    {
+      "file": "SE-Deg_WET_Merged.csv",
+      "site": "SE-Deg_WET",
+      "veg_id": 7,
+      "valid_target_rows": 45816,
+      "valid_model_rows": 45582
+    },
+    {
+      "file": "SE-Htm_ENF_Merged.csv",
+      "site": "SE-Htm_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 59171,
+      "valid_model_rows": 57600
+    },
+    {
+      "file": "SE-Nor_ENF_Merged.csv",
+      "site": "SE-Nor_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 54350,
+      "valid_model_rows": 54312
+    },
+    {
+      "file": "SE-Ros_ENF_Merged.csv",
+      "site": "SE-Ros_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 43848,
+      "valid_model_rows": 43848
+    },
+    {
+      "file": "SE-Sto_WET_Merged.csv",
+      "site": "SE-Sto_WET",
+      "veg_id": 7,
+      "valid_target_rows": 23422,
+      "valid_model_rows": 23376
+    },
+    {
+      "file": "SE-Svb_ENF_Merged.csv",
+      "site": "SE-Svb_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 76104,
+      "valid_model_rows": 46902
+    },
+    {
+      "file": "SN-Dhr_GRA_Merged.csv",
+      "site": "SN-Dhr_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 46417,
+      "valid_model_rows": 46417
+    },
+    {
+      "file": "SN-Nkr_CRO_Merged.csv",
+      "site": "SN-Nkr_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 60464,
+      "valid_model_rows": 57003
+    },
+    {
+      "file": "UK-AMo_WET_Merged.csv",
+      "site": "UK-AMo_WET",
+      "veg_id": 7,
+      "valid_target_rows": 77905,
+      "valid_model_rows": 35425
+    },
+    {
+      "file": "US-A32_GRA_Merged.csv",
+      "site": "US-A32_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 13148,
+      "valid_model_rows": 13099
+    },
+    {
+      "file": "US-A37_CVM_Merged.csv",
+      "site": "US-A37_CVM",
+      "veg_id": 6,
+      "valid_target_rows": 8778,
+      "valid_model_rows": 8778
+    },
+    {
+      "file": "US-A39_CRO_Merged.csv",
+      "site": "US-A39_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 8778,
+      "valid_model_rows": 8778
+    },
+    {
+      "file": "US-A74_CRO_Merged.csv",
+      "site": "US-A74_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 14915,
+      "valid_model_rows": 14833
+    },
+    {
+      "file": "US-Bar_DBF_Merged.csv",
+      "site": "US-Bar_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 62599,
+      "valid_model_rows": 62599
+    },
+    {
+      "file": "US-Bi1_CRO_Merged.csv",
+      "site": "US-Bi1_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 73899,
+      "valid_model_rows": 73864
+    },
+    {
+      "file": "US-Bi2_CRO_Merged.csv",
+      "site": "US-Bi2_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 71026,
+      "valid_model_rows": 70944
+    },
+    {
+      "file": "US-BZB_WET_Merged.csv",
+      "site": "US-BZB_WET",
+      "veg_id": 7,
+      "valid_target_rows": 85162,
+      "valid_model_rows": 76167
+    },
+    {
+      "file": "US-BZF_WET_Merged.csv",
+      "site": "US-BZF_WET",
+      "veg_id": 7,
+      "valid_target_rows": 85162,
+      "valid_model_rows": 76680
+    },
+    {
+      "file": "US-BZo_WET_Merged.csv",
+      "site": "US-BZo_WET",
+      "veg_id": 7,
+      "valid_target_rows": 65670,
+      "valid_model_rows": 64233
+    },
+    {
+      "file": "US-CAK_GRA_Merged.csv",
+      "site": "US-CAK_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 9148,
+      "valid_model_rows": 9031
+    },
+    {
+      "file": "US-CdM_WSA_Merged.csv",
+      "site": "US-CdM_WSA",
+      "veg_id": 5,
+      "valid_target_rows": 49042,
+      "valid_model_rows": 49002
+    },
+    {
+      "file": "US-CGG_GRA_Merged.csv",
+      "site": "US-CGG_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 45332,
+      "valid_model_rows": 43990
+    },
+    {
+      "file": "US-ChR_DBF_Merged.csv",
+      "site": "US-ChR_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 29877,
+      "valid_model_rows": 29317
+    },
+    {
+      "file": "US-CMW_DBF_Merged.csv",
+      "site": "US-CMW_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 52607,
+      "valid_model_rows": 52607
+    },
+    {
+      "file": "US-CRK_ENF_Merged.csv",
+      "site": "US-CRK_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 30135,
+      "valid_model_rows": 29521
+    },
+    {
+      "file": "US-Cst_ENF_Merged.csv",
+      "site": "US-Cst_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 17545,
+      "valid_model_rows": 14753
+    },
+    {
+      "file": "US-DFC_CRO_Merged.csv",
+      "site": "US-DFC_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 53779,
+      "valid_model_rows": 53719
+    },
+    {
+      "file": "US-DS3_CRO_Merged.csv",
+      "site": "US-DS3_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 33426,
+      "valid_model_rows": 33326
+    },
+    {
+      "file": "US-EML_OSH_Merged.csv",
+      "site": "US-EML_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 60452,
+      "valid_model_rows": 60403
+    },
+    {
+      "file": "US-Fo2_WET_Merged.csv",
+      "site": "US-Fo2_WET",
+      "veg_id": 7,
+      "valid_target_rows": 7670,
+      "valid_model_rows": 7037
+    },
+    {
+      "file": "US-GLE_ENF_Merged.csv",
+      "site": "US-GLE_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 42049,
+      "valid_model_rows": 42008
+    },
+    {
+      "file": "US-Ha1_DBF_Merged.csv",
+      "site": "US-Ha1_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 86501,
+      "valid_model_rows": 25439
+    },
+    {
+      "file": "US-HB2_ENF_Merged.csv",
+      "site": "US-HB2_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 56113,
+      "valid_model_rows": 46596
+    },
+    {
+      "file": "US-HB3_ENF_Merged.csv",
+      "site": "US-HB3_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 52603,
+      "valid_model_rows": 11406
+    },
+    {
+      "file": "US-HRA_CRO_Merged.csv",
+      "site": "US-HRA_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 63437,
+      "valid_model_rows": 52923
+    },
+    {
+      "file": "US-HRC_CRO_Merged.csv",
+      "site": "US-HRC_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 64050,
+      "valid_model_rows": 63899
+    },
+    {
+      "file": "US-Hsm_WET_Merged.csv",
+      "site": "US-Hsm_WET",
+      "veg_id": 7,
+      "valid_target_rows": 42515,
+      "valid_model_rows": 3853
+    },
+    {
+      "file": "US-HWB_CVM_Merged.csv",
+      "site": "US-HWB_CVM",
+      "veg_id": 6,
+      "valid_target_rows": 23590,
+      "valid_model_rows": 23559
+    },
+    {
+      "file": "US-IAB_CRO_Merged.csv",
+      "site": "US-IAB_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 47936,
+      "valid_model_rows": 25969
+    },
+    {
+      "file": "US-IAC_CRO_Merged.csv",
+      "site": "US-IAC_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 48029,
+      "valid_model_rows": 21026
+    },
+    {
+      "file": "US-IAM_CRO_Merged.csv",
+      "site": "US-IAM_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 46235,
+      "valid_model_rows": 46153
+    },
+    {
+      "file": "US-ICh_OSH_Merged.csv",
+      "site": "US-ICh_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 87673,
+      "valid_model_rows": 87673
+    },
+    {
+      "file": "US-ICs_WET_Merged.csv",
+      "site": "US-ICs_WET",
+      "veg_id": 7,
+      "valid_target_rows": 87673,
+      "valid_model_rows": 86801
+    },
+    {
+      "file": "US-Jo1_OSH_Merged.csv",
+      "site": "US-Jo1_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 56233,
+      "valid_model_rows": 44019
+    },
+    {
+      "file": "US-KFS_GRA_Merged.csv",
+      "site": "US-KFS_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 26311,
+      "valid_model_rows": 26311
+    },
+    {
+      "file": "US-Kon_GRA_Merged.csv",
+      "site": "US-Kon_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 26311,
+      "valid_model_rows": 25601
+    },
+    {
+      "file": "US-Me6_ENF_Merged.csv",
+      "site": "US-Me6_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 87181,
+      "valid_model_rows": 87181
+    },
+    {
+      "file": "US-MEF_ENF_Merged.csv",
+      "site": "US-MEF_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 17537,
+      "valid_model_rows": 17537
+    },
+    {
+      "file": "US-MMS_DBF_Merged.csv",
+      "site": "US-MMS_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 70128,
+      "valid_model_rows": 70128
+    },
+    {
+      "file": "US-MN1_CRO_Merged.csv",
+      "site": "US-MN1_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 66705,
+      "valid_model_rows": 66083
+    },
+    {
+      "file": "US-MN2_CRO_Merged.csv",
+      "site": "US-MN2_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 66701,
+      "valid_model_rows": 66083
+    },
+    {
+      "file": "US-MN3_CRO_Merged.csv",
+      "site": "US-MN3_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 41413,
+      "valid_model_rows": 41189
+    },
+    {
+      "file": "US-Mo1_CRO_Merged.csv",
+      "site": "US-Mo1_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 78564,
+      "valid_model_rows": 78564
+    },
+    {
+      "file": "US-Mo2_GRA_Merged.csv",
+      "site": "US-Mo2_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 61176,
+      "valid_model_rows": 44855
+    },
+    {
+      "file": "US-Mo3_CRO_Merged.csv",
+      "site": "US-Mo3_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 66875,
+      "valid_model_rows": 66834
+    },
+    {
+      "file": "US-MOz_DBF_Merged.csv",
+      "site": "US-MOz_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 52609,
+      "valid_model_rows": 52609
+    },
+    {
+      "file": "US-NC2_ENF_Merged.csv",
+      "site": "US-NC2_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 78409,
+      "valid_model_rows": 78409
+    },
+    {
+      "file": "US-NC3_ENF_Merged.csv",
+      "site": "US-NC3_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 40827,
+      "valid_model_rows": 40827
+    },
+    {
+      "file": "US-Ne1_CRO_Merged.csv",
+      "site": "US-Ne1_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "US-Ne2_CRO_Merged.csv",
+      "site": "US-Ne2_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "US-Ne3_CRO_Merged.csv",
+      "site": "US-Ne3_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 78912,
+      "valid_model_rows": 78912
+    },
+    {
+      "file": "US-NSa_CRO_Merged.csv",
+      "site": "US-NSa_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 14984,
+      "valid_model_rows": 14889
+    },
+    {
+      "file": "US-NSb_CRO_Merged.csv",
+      "site": "US-NSb_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 13704,
+      "valid_model_rows": 13613
+    },
+    {
+      "file": "US-ONA_GRA_Merged.csv",
+      "site": "US-ONA_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 59100,
+      "valid_model_rows": 58769
+    },
+    {
+      "file": "US-Prr_ENF_Merged.csv",
+      "site": "US-Prr_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 57148,
+      "valid_model_rows": 57148
+    },
+    {
+      "file": "US-RGA_CRO_Merged.csv",
+      "site": "US-RGA_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 32724,
+      "valid_model_rows": 24644
+    },
+    {
+      "file": "US-RGB_CRO_Merged.csv",
+      "site": "US-RGB_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 30153,
+      "valid_model_rows": 27720
+    },
+    {
+      "file": "US-RGF_CRO_Merged.csv",
+      "site": "US-RGF_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 16354,
+      "valid_model_rows": 16312
+    },
+    {
+      "file": "US-RGo_CRO_Merged.csv",
+      "site": "US-RGo_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 31360,
+      "valid_model_rows": 31312
+    },
+    {
+      "file": "US-RGW_CRO_Merged.csv",
+      "site": "US-RGW_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 24254,
+      "valid_model_rows": 24206
+    },
+    {
+      "file": "US-Rls_CSH_Merged.csv",
+      "site": "US-Rls_CSH",
+      "veg_id": 1,
+      "valid_target_rows": 68304,
+      "valid_model_rows": 68272
+    },
+    {
+      "file": "US-Rms_CSH_Merged.csv",
+      "site": "US-Rms_CSH",
+      "veg_id": 1,
+      "valid_target_rows": 68305,
+      "valid_model_rows": 68283
+    },
+    {
+      "file": "US-Ro1_CRO_Merged.csv",
+      "site": "US-Ro1_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 8785,
+      "valid_model_rows": 8785
+    },
+    {
+      "file": "US-Ro4_GRA_Merged.csv",
+      "site": "US-Ro4_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 87673,
+      "valid_model_rows": 80294
+    },
+    {
+      "file": "US-Ro5_CRO_Merged.csv",
+      "site": "US-Ro5_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 70122,
+      "valid_model_rows": 66655
+    },
+    {
+      "file": "US-Ro6_CRO_Merged.csv",
+      "site": "US-Ro6_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 70122,
+      "valid_model_rows": 66248
+    },
+    {
+      "file": "US-Rpf_DBF_Merged.csv",
+      "site": "US-Rpf_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 77662,
+      "valid_model_rows": 77662
+    },
+    {
+      "file": "US-RRC_WET_Merged.csv",
+      "site": "US-RRC_WET",
+      "veg_id": 7,
+      "valid_target_rows": 21977,
+      "valid_model_rows": 21604
+    },
+    {
+      "file": "US-Rws_OSH_Merged.csv",
+      "site": "US-Rws_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 68319,
+      "valid_model_rows": 68286
+    },
+    {
+      "file": "US-SD1_CRO_Merged.csv",
+      "site": "US-SD1_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 18327,
+      "valid_model_rows": 18266
+    },
+    {
+      "file": "US-SD2_CRO_Merged.csv",
+      "site": "US-SD2_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 16493,
+      "valid_model_rows": 16407
+    },
+    {
+      "file": "US-Slt_DBF_Merged.csv",
+      "site": "US-Slt_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 57142,
+      "valid_model_rows": 56598
+    },
+    {
+      "file": "US-SP1_ENF_Merged.csv",
+      "site": "US-SP1_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 42847,
+      "valid_model_rows": 42847
+    },
+    {
+      "file": "US-SRG_GRA_Merged.csv",
+      "site": "US-SRG_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 87673,
+      "valid_model_rows": 79280
+    },
+    {
+      "file": "US-SRM_WSA_Merged.csv",
+      "site": "US-SRM_WSA",
+      "veg_id": 5,
+      "valid_target_rows": 87673,
+      "valid_model_rows": 87673
+    },
+    {
+      "file": "US-SRS_WSA_Merged.csv",
+      "site": "US-SRS_WSA",
+      "veg_id": 5,
+      "valid_target_rows": 26305,
+      "valid_model_rows": 25735
+    },
+    {
+      "file": "US-SSH_DBF_Merged.csv",
+      "site": "US-SSH_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 42411,
+      "valid_model_rows": 31132
+    },
+    {
+      "file": "US-StJ_WET_Merged.csv",
+      "site": "US-StJ_WET",
+      "veg_id": 7,
+      "valid_target_rows": 42913,
+      "valid_model_rows": 8213
+    },
+    {
+      "file": "US-TKs_CSH_Merged.csv",
+      "site": "US-TKs_CSH",
+      "veg_id": 1,
+      "valid_target_rows": 66244,
+      "valid_model_rows": 66012
+    },
+    {
+      "file": "US-TLR_MF_Merged.csv",
+      "site": "US-TLR_MF",
+      "veg_id": 9,
+      "valid_target_rows": 8191,
+      "valid_model_rows": 8144
+    },
+    {
+      "file": "US-Ton_WSA_Merged.csv",
+      "site": "US-Ton_WSA",
+      "veg_id": 5,
+      "valid_target_rows": 87673,
+      "valid_model_rows": 87673
+    },
+    {
+      "file": "US-Tw3_CRO_Merged.csv",
+      "site": "US-Tw3_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 21681,
+      "valid_model_rows": 21632
+    },
+    {
+      "file": "US-UC1_CVM_Merged.csv",
+      "site": "US-UC1_CVM",
+      "veg_id": 6,
+      "valid_target_rows": 49757,
+      "valid_model_rows": 49710
+    },
+    {
+      "file": "US-UC2_CVM_Merged.csv",
+      "site": "US-UC2_CVM",
+      "veg_id": 6,
+      "valid_target_rows": 49566,
+      "valid_model_rows": 49518
+    },
+    {
+      "file": "US-UiE_CRO_Merged.csv",
+      "site": "US-UiE_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 57459,
+      "valid_model_rows": 57411
+    },
+    {
+      "file": "US-UMd_DBF_Merged.csv",
+      "site": "US-UMd_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 86190,
+      "valid_model_rows": 86142
+    },
+    {
+      "file": "US-UTD_CRO_Merged.csv",
+      "site": "US-UTD_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 10411,
+      "valid_model_rows": 10315
+    },
+    {
+      "file": "US-UTE_CRO_Merged.csv",
+      "site": "US-UTE_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 12132,
+      "valid_model_rows": 12045
+    },
+    {
+      "file": "US-UTJ_CRO_Merged.csv",
+      "site": "US-UTJ_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 12595,
+      "valid_model_rows": 12499
+    },
+    {
+      "file": "US-UTL_CRO_Merged.csv",
+      "site": "US-UTL_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 8966,
+      "valid_model_rows": 8870
+    },
+    {
+      "file": "US-UTM_WET_Merged.csv",
+      "site": "US-UTM_WET",
+      "veg_id": 7,
+      "valid_target_rows": 16895,
+      "valid_model_rows": 15574
+    },
+    {
+      "file": "US-UTP_WET_Merged.csv",
+      "site": "US-UTP_WET",
+      "veg_id": 7,
+      "valid_target_rows": 4774,
+      "valid_model_rows": 1788
+    },
+    {
+      "file": "US-UTV_CRO_Merged.csv",
+      "site": "US-UTV_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 18743,
+      "valid_model_rows": 18661
+    },
+    {
+      "file": "US-UTW_CRO_Merged.csv",
+      "site": "US-UTW_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 32044,
+      "valid_model_rows": 31949
+    },
+    {
+      "file": "US-Var_GRA_Merged.csv",
+      "site": "US-Var_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 87672,
+      "valid_model_rows": 87672
+    },
+    {
+      "file": "US-VT1_CRO_Merged.csv",
+      "site": "US-VT1_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 16822,
+      "valid_model_rows": 16735
+    },
+    {
+      "file": "US-VT2_CRO_Merged.csv",
+      "site": "US-VT2_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 16307,
+      "valid_model_rows": 16231
+    },
+    {
+      "file": "US-Wkg_GRA_Merged.csv",
+      "site": "US-Wkg_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 87672,
+      "valid_model_rows": 87672
+    },
+    {
+      "file": "US-xAE_GRA_Merged.csv",
+      "site": "US-xAE_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 52602,
+      "valid_model_rows": 52602
+    },
+    {
+      "file": "US-xBA_WET_Merged.csv",
+      "site": "US-xBA_WET",
+      "veg_id": 7,
+      "valid_target_rows": 50509,
+      "valid_model_rows": 8631
+    },
+    {
+      "file": "US-xBL_DBF_Merged.csv",
+      "site": "US-xBL_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 45365,
+      "valid_model_rows": 44831
+    },
+    {
+      "file": "US-xBN_ENF_Merged.csv",
+      "site": "US-xBN_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 51628,
+      "valid_model_rows": 715
+    },
+    {
+      "file": "US-xBR_DBF_Merged.csv",
+      "site": "US-xBR_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 52114,
+      "valid_model_rows": 51538
+    },
+    {
+      "file": "US-xCL_GRA_Merged.csv",
+      "site": "US-xCL_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 52369,
+      "valid_model_rows": 51796
+    },
+    {
+      "file": "US-xCP_GRA_Merged.csv",
+      "site": "US-xCP_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 48420,
+      "valid_model_rows": 48420
+    },
+    {
+      "file": "US-xDC_GRA_Merged.csv",
+      "site": "US-xDC_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 52602,
+      "valid_model_rows": 52602
+    },
+    {
+      "file": "US-xDJ_ENF_Merged.csv",
+      "site": "US-xDJ_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 52341,
+      "valid_model_rows": 51597
+    },
+    {
+      "file": "US-xDL_MF_Merged.csv",
+      "site": "US-xDL_MF",
+      "veg_id": 9,
+      "valid_target_rows": 43894,
+      "valid_model_rows": 38860
+    },
+    {
+      "file": "US-xDS_CVM_Merged.csv",
+      "site": "US-xDS_CVM",
+      "veg_id": 6,
+      "valid_target_rows": 50083,
+      "valid_model_rows": 49609
+    },
+    {
+      "file": "US-xGR_DBF_Merged.csv",
+      "site": "US-xGR_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 48583,
+      "valid_model_rows": 47941
+    },
+    {
+      "file": "US-xJE_ENF_Merged.csv",
+      "site": "US-xJE_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 47374,
+      "valid_model_rows": 46704
+    },
+    {
+      "file": "US-xJR_OSH_Merged.csv",
+      "site": "US-xJR_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 52600,
+      "valid_model_rows": 47720
+    },
+    {
+      "file": "US-xKZ_GRA_Merged.csv",
+      "site": "US-xKZ_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 52602,
+      "valid_model_rows": 52602
+    },
+    {
+      "file": "US-xMB_OSH_Merged.csv",
+      "site": "US-xMB_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 45738,
+      "valid_model_rows": 45343
+    },
+    {
+      "file": "US-xML_DBF_Merged.csv",
+      "site": "US-xML_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 43288,
+      "valid_model_rows": 42780
+    },
+    {
+      "file": "US-xNG_GRA_Merged.csv",
+      "site": "US-xNG_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 46646,
+      "valid_model_rows": 46403
+    },
+    {
+      "file": "US-xNQ_OSH_Merged.csv",
+      "site": "US-xNQ_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 43350,
+      "valid_model_rows": 42781
+    },
+    {
+      "file": "US-xNW_ENF_Merged.csv",
+      "site": "US-xNW_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 42017,
+      "valid_model_rows": 41091
+    },
+    {
+      "file": "US-xRM_ENF_Merged.csv",
+      "site": "US-xRM_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 50402,
+      "valid_model_rows": 49173
+    },
+    {
+      "file": "US-xSB_ENF_Merged.csv",
+      "site": "US-xSB_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 47903,
+      "valid_model_rows": 46842
+    },
+    {
+      "file": "US-xSC_DBF_Merged.csv",
+      "site": "US-xSC_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 43497,
+      "valid_model_rows": 43497
+    },
+    {
+      "file": "US-xSE_DBF_Merged.csv",
+      "site": "US-xSE_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 49709,
+      "valid_model_rows": 49344
+    },
+    {
+      "file": "US-xSJ_SAV_Merged.csv",
+      "site": "US-xSJ_SAV",
+      "veg_id": 4,
+      "valid_target_rows": 50737,
+      "valid_model_rows": 48069
+    },
+    {
+      "file": "US-xSL_CRO_Merged.csv",
+      "site": "US-xSL_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 52037,
+      "valid_model_rows": 52002
+    },
+    {
+      "file": "US-xSP_ENF_Merged.csv",
+      "site": "US-xSP_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 52598,
+      "valid_model_rows": 52209
+    },
+    {
+      "file": "US-xSR_OSH_Merged.csv",
+      "site": "US-xSR_OSH",
+      "veg_id": 0,
+      "valid_target_rows": 50665,
+      "valid_model_rows": 44873
+    },
+    {
+      "file": "US-xST_DBF_Merged.csv",
+      "site": "US-xST_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 49860,
+      "valid_model_rows": 49860
+    },
+    {
+      "file": "US-xTE_ENF_Merged.csv",
+      "site": "US-xTE_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 49300,
+      "valid_model_rows": 47650
+    },
+    {
+      "file": "US-xTL_WET_Merged.csv",
+      "site": "US-xTL_WET",
+      "veg_id": 7,
+      "valid_target_rows": 40494,
+      "valid_model_rows": 39410
+    },
+    {
+      "file": "US-xTR_DBF_Merged.csv",
+      "site": "US-xTR_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 51921,
+      "valid_model_rows": 51466
+    },
+    {
+      "file": "US-xUK_DBF_Merged.csv",
+      "site": "US-xUK_DBF",
+      "veg_id": 10,
+      "valid_target_rows": 43842,
+      "valid_model_rows": 43842
+    },
+    {
+      "file": "US-xUN_MF_Merged.csv",
+      "site": "US-xUN_MF",
+      "veg_id": 9,
+      "valid_target_rows": 52602,
+      "valid_model_rows": 52602
+    },
+    {
+      "file": "US-xWD_GRA_Merged.csv",
+      "site": "US-xWD_GRA",
+      "veg_id": 2,
+      "valid_target_rows": 49800,
+      "valid_model_rows": 49026
+    },
+    {
+      "file": "US-xWR_ENF_Merged.csv",
+      "site": "US-xWR_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 52600,
+      "valid_model_rows": 52600
+    },
+    {
+      "file": "US-xYE_ENF_Merged.csv",
+      "site": "US-xYE_ENF",
+      "veg_id": 8,
+      "valid_target_rows": 44337,
+      "valid_model_rows": 44337
+    },
+    {
+      "file": "US-YK2_WET_Merged.csv",
+      "site": "US-YK2_WET",
+      "veg_id": 7,
+      "valid_target_rows": 46872,
+      "valid_model_rows": 40606
+    },
+    {
+      "file": "US-ZF2_CRO_Merged.csv",
+      "site": "US-ZF2_CRO",
+      "veg_id": 11,
+      "valid_target_rows": 9776,
+      "valid_model_rows": 2986
+    }
+  ],
+  "stations": [
+    {
+      "file": "IT-Lsn_OSH_Merged.csv",
+      "site": "IT-Lsn_OSH",
+      "rows": 78912,
+      "valid_target_rows": 77486,
+      "lat": 45.740482,
+      "lon": 12.750297,
+      "veg_id": 0,
+      "epic_fraction": 0.28069241686942414,
+      "forcing_means": [
+        163.18751422470604,
+        14.281180656934305,
+        5.289672457927818,
+        0.12076599249797243,
+        41.67087868765207
+      ],
+      "valid_model_rows": 59469,
+      "group": "representative",
+      "sha256": "2618d1ec5acade746c5abc6f00e2db737aada433c4b9414286a0b519a44554f5"
+    },
+    {
+      "file": "BE-Maa_CSH_Merged.csv",
+      "site": "BE-Maa_CSH",
+      "rows": 78912,
+      "valid_target_rows": 78061,
+      "lat": 50.97987,
+      "lon": 5.631851,
+      "veg_id": 1,
+      "epic_fraction": 0.2859134225466342,
+      "forcing_means": [
+        127.1387336526764,
+        11.014137266828872,
+        3.975050480281833,
+        0.08570563412408759,
+        12.087848305570597
+      ],
+      "valid_model_rows": 52508,
+      "group": "representative",
+      "sha256": "e0e493eb7294d7aaff0d9ba305d2b6e765803cf76e469f92cab32f02ec1682d6"
+    },
+    {
+      "file": "US-Mo2_GRA_Merged.csv",
+      "site": "US-Mo2_GRA",
+      "rows": 61362,
+      "valid_target_rows": 61176,
+      "lat": 38.9488,
+      "lon": -91.9945,
+      "veg_id": 2,
+      "epic_fraction": 0.26853753137120695,
+      "forcing_means": [
+        181.79459049574655,
+        13.275005638668883,
+        5.420985275903654,
+        0.08752622143997914,
+        35.44334302753317
+      ],
+      "valid_model_rows": 44855,
+      "group": "representative",
+      "sha256": "8e6f235d0f5368136e27d4c00b2d74d04e65f1150fc2e39ae808b4b879358258"
+    },
+    {
+      "file": "IT-TrF_DNF_Merged.csv",
+      "site": "IT-TrF_DNF",
+      "rows": 78912,
+      "valid_target_rows": 78912,
+      "lat": 45.82376,
+      "lon": 7.56089,
+      "veg_id": 3,
+      "epic_fraction": 0.28128801703163014,
+      "forcing_means": [
+        168.84278816909975,
+        4.673864710056772,
+        3.6166173459042987,
+        0.1033107638888889,
+        16.532106748881258
+      ],
+      "valid_model_rows": 76872,
+      "group": "representative",
+      "sha256": "68c23bd1a97f7377e27d298db6b5747d725da20f017b70a7f0db481ef1870bd3"
+    },
+    {
+      "file": "ES-HdD_SAV_Merged.csv",
+      "site": "ES-HdD_SAV",
+      "rows": 8784,
+      "valid_target_rows": 8029,
+      "lat": 38.49679,
+      "lon": -5.111296,
+      "veg_id": 4,
+      "epic_fraction": 0.30601092896174864,
+      "forcing_means": [
+        201.8439987477231,
+        15.985864127959925,
+        10.69672199453552,
+        0.04683276411657559,
+        9.756957165917214
+      ],
+      "valid_model_rows": 7982,
+      "group": "representative",
+      "sha256": "13477cb73a67915ddd9ba561c50753eb6fe8ab7b1fee5b2070c56ce82dedd79b"
+    },
+    {
+      "file": "ES-Cnd_WSA_Merged.csv",
+      "site": "ES-Cnd_WSA",
+      "rows": 52608,
+      "valid_target_rows": 50501,
+      "lat": 37.914997,
+      "lon": -3.227659,
+      "veg_id": 5,
+      "epic_fraction": 0.2695217457420925,
+      "forcing_means": [
+        201.57261198867093,
+        16.851451594814474,
+        11.994969671913017,
+        0.25404972627737227,
+        25.335554063528544
+      ],
+      "valid_model_rows": 50464,
+      "group": "representative",
+      "sha256": "eb4f274fb28a4343a7436fe0144c918fe2505410b4c1ffcc637da567d868cfdb"
+    },
+    {
+      "file": "US-HWB_CVM_Merged.csv",
+      "site": "US-HWB_CVM",
+      "rows": 26305,
+      "valid_target_rows": 23590,
+      "lat": 40.8608,
+      "lon": -77.8488,
+      "veg_id": 6,
+      "epic_fraction": 0.2846607108914655,
+      "forcing_means": [
+        151.62529321421783,
+        11.130009655958945,
+        4.469229500095039,
+        0.13104257745675726,
+        30.618540960991552
+      ],
+      "valid_model_rows": 23559,
+      "group": "representative",
+      "sha256": "b51d82a2b4546d5001c98a9da94f36b3f12b7913eb176876a137b9bebb712137"
+    },
+    {
+      "file": "US-Hsm_WET_Merged.csv",
+      "site": "US-Hsm_WET",
+      "rows": 43816,
+      "valid_target_rows": 42515,
+      "lat": 38.2368,
+      "lon": -122.0212,
+      "veg_id": 7,
+      "epic_fraction": 0.26622694905970423,
+      "forcing_means": [
+        215.59557760863612,
+        15.226438447142593,
+        7.044774249132736,
+        0.0571936735439109,
+        34.281993771087464
+      ],
+      "valid_model_rows": 3853,
+      "group": "representative",
+      "sha256": "29dff77589cf75b8fe3c2781e6ef3621fe4e2ffe01902174012e30b01d126b9a"
+    },
+    {
+      "file": "US-xRM_ENF_Merged.csv",
+      "site": "US-xRM_ENF",
+      "rows": 52601,
+      "valid_target_rows": 50402,
+      "lat": 40.2759,
+      "lon": -105.5459,
+      "veg_id": 8,
+      "epic_fraction": 0.2633219900762343,
+      "forcing_means": [
+        186.67359260280224,
+        5.074000370715385,
+        6.199131603961901,
+        0.04612450333643847,
+        14.986486899478313
+      ],
+      "valid_model_rows": 49173,
+      "group": "representative",
+      "sha256": "85c28f3f4de6f2a7345b6f871d8246a6f45419b776f4544423eb210f63e681aa"
+    },
+    {
+      "file": "KR-SmM_MF_Merged.csv",
+      "site": "KR-SmM_MF",
+      "rows": 52600,
+      "valid_target_rows": 47282,
+      "lat": 37.93894,
+      "lon": 126.95471,
+      "veg_id": 9,
+      "epic_fraction": 0.2644106463878327,
+      "forcing_means": [
+        147.6319175570342,
+        11.244021834600762,
+        5.249479648288973,
+        0.0985138403041825,
+        10.544206948669201
+      ],
+      "valid_model_rows": 47282,
+      "group": "representative",
+      "sha256": "1181cce649bc584d6428710fb648029ae6a398da2d0b27074bf5eae110dcf9b7"
+    },
+    {
+      "file": "CA-TPD_DBF_Merged.csv",
+      "site": "CA-TPD_DBF",
+      "rows": 70129,
+      "valid_target_rows": 61374,
+      "lat": 42.6353,
+      "lon": -80.5577,
+      "veg_id": 10,
+      "epic_fraction": 0.2704159477534258,
+      "forcing_means": [
+        165.1516548146986,
+        10.306318840993026,
+        3.6865230289894337,
+        0.10564756377532833,
+        11.200245019891915
+      ],
+      "valid_model_rows": 61374,
+      "group": "representative",
+      "sha256": "d1e9d02d0a8c76946f2b9e3506627936fe0568cb4b2947425601b47c47156b39"
+    },
+    {
+      "file": "US-UiE_CRO_Merged.csv",
+      "site": "US-UiE_CRO",
+      "rows": 61362,
+      "valid_target_rows": 57459,
+      "lat": 40.0629,
+      "lon": -88.2033,
+      "veg_id": 11,
+      "epic_fraction": 0.26873309214171637,
+      "forcing_means": [
+        173.8600412877677,
+        12.039451761676606,
+        4.719150573644927,
+        0.11902519474593398,
+        20.91840201355141
+      ],
+      "valid_model_rows": 57411,
+      "group": "representative",
+      "sha256": "83eac6a24ed914128e97ef872bd17652c02e6240bf888e49be8410a242cd8e50"
+    },
+    {
+      "file": "FR-Pue_EBF_Merged.csv",
+      "site": "FR-Pue_EBF",
+      "rows": 78912,
+      "valid_target_rows": 78912,
+      "lat": 43.7413,
+      "lon": 3.5957,
+      "veg_id": 12,
+      "epic_fraction": 0.2796152676399027,
+      "forcing_means": [
+        178.44858110933697,
+        14.80958302286091,
+        7.354491522201947,
+        0.09887524077453366,
+        12.983014363936395
+      ],
+      "valid_model_rows": 26664,
+      "group": "representative",
+      "sha256": "e0beef18e1cc8637e9c4fd494a7729df74045f87ff6046d553e7491bfc0d986c"
+    },
+    {
+      "file": "ES-LJu_OSH_Merged.csv",
+      "site": "ES-LJu_OSH",
+      "rows": 78912,
+      "valid_target_rows": 72268,
+      "lat": 36.926594,
+      "lon": -2.752115,
+      "veg_id": 0,
+      "epic_fraction": 0.28583738848337387,
+      "forcing_means": [
+        180.68409233703366,
+        12.173123504663424,
+        8.83440102265815,
+        0.05557167477696675,
+        19.4572850643755
+      ],
+      "valid_model_rows": 72268,
+      "group": "representative",
+      "sha256": "9d29b8632d44274b3c38fc1f636787eed5123151f600e02b94a695547ed8bf1f"
+    },
+    {
+      "file": "ES-Crg_CSH_Merged.csv",
+      "site": "ES-Crg_CSH",
+      "rows": 35064,
+      "valid_target_rows": 28448,
+      "lat": 39.11926,
+      "lon": -0.95852,
+      "veg_id": 1,
+      "epic_fraction": 0.3018765685603468,
+      "forcing_means": [
+        186.99474613563768,
+        13.515322738421172,
+        6.979014202600958,
+        0.06468491900524753,
+        16.783766295679296
+      ],
+      "valid_model_rows": 28213,
+      "group": "representative",
+      "sha256": "c9dfda2745cd528be77426dd4a7e97d1ab16dfcd185d9fbdc26eb071c5429d7c"
+    },
+    {
+      "file": "US-Ro4_GRA_Merged.csv",
+      "site": "US-Ro4_GRA",
+      "rows": 87673,
+      "valid_target_rows": 87673,
+      "lat": 44.6781,
+      "lon": -93.0723,
+      "veg_id": 2,
+      "epic_fraction": 0.260422250864006,
+      "forcing_means": [
+        156.02308123367513,
+        7.698849252335383,
+        4.110848989996921,
+        0.09630961641554413,
+        24.599741375445237
+      ],
+      "valid_model_rows": 80294,
+      "group": "representative",
+      "sha256": "6c870b1c23dea90e68aaa23312db94d74209b042c333a248b3a6e4685e0ae450"
+    },
+    {
+      "file": "CN-Sb1_DNF_Merged.csv",
+      "site": "CN-Sb1_DNF",
+      "rows": 43841,
+      "valid_target_rows": 39131,
+      "lat": 42.40907,
+      "lon": 117.31461,
+      "veg_id": 3,
+      "epic_fraction": 0.2921238110444561,
+      "forcing_means": [
+        190.86694453821764,
+        1.1686568052736022,
+        4.00041385917292,
+        0.22502077963550102,
+        16.237164633210558
+      ],
+      "valid_model_rows": 39096,
+      "group": "representative",
+      "sha256": "fb8552e3fdba717ce08225f533e59f48abb69f92b9a21b3a5b6ad822ed105a12"
+    },
+    {
+      "file": "BJ-Nhu_SAV_Merged.csv",
+      "site": "BJ-Nhu_SAV",
+      "rows": 17544,
+      "valid_target_rows": 17544,
+      "lat": 9.74,
+      "lon": 1.6,
+      "veg_id": 4,
+      "epic_fraction": 0.28984268125854995,
+      "forcing_means": [
+        218.7918104480164,
+        25.685901219790242,
+        16.377558367533062,
+        0.15781463748290012,
+        7.744564437984496
+      ],
+      "valid_model_rows": 17196,
+      "group": "representative",
+      "sha256": "bdaefbc7286eb9a7ebb96591662b41474ea37acaa749a7e8d9f612883d2fe44c"
+    },
+    {
+      "file": "KE-Chk_WSA_Merged.csv",
+      "site": "KE-Chk_WSA",
+      "rows": 26302,
+      "valid_target_rows": 16445,
+      "lat": -3.6663,
+      "lon": 38.350185,
+      "veg_id": 5,
+      "epic_fraction": 0.2949585582845411,
+      "forcing_means": [
+        248.24968924416393,
+        23.205969089803055,
+        8.801726959927002,
+        0.04466812409702685,
+        11.471623793935219
+      ],
+      "valid_model_rows": 16350,
+      "group": "representative",
+      "sha256": "dd6e7f92099d7bf588fe7bc4d5d268134d96a7ae109335c5030b46d06763ff61"
+    },
+    {
+      "file": "US-StJ_WET_Merged.csv",
+      "site": "US-StJ_WET",
+      "rows": 43849,
+      "valid_target_rows": 42913,
+      "lat": 39.0882,
+      "lon": -75.4372,
+      "veg_id": 7,
+      "epic_fraction": 0.2555816552258888,
+      "forcing_means": [
+        158.10784174097472,
+        14.829098508517864,
+        4.727974149923602,
+        0.07544240461584073,
+        46.73576645820537
+      ],
+      "valid_model_rows": 8213,
+      "group": "representative",
+      "sha256": "70faa78c575562686e6a1b4918d06b4c014fc38ce2abc49b359957a66419cd6f"
+    },
+    {
+      "file": "US-NC3_ENF_Merged.csv",
+      "site": "US-NC3_ENF",
+      "rows": 52609,
+      "valid_target_rows": 40827,
+      "lat": 35.799,
+      "lon": -76.656,
+      "veg_id": 8,
+      "epic_fraction": 0.2659811058944287,
+      "forcing_means": [
+        182.14890818110968,
+        16.287140669847364,
+        4.108794835484423,
+        0.13853770267444732,
+        28.314604262314216
+      ],
+      "valid_model_rows": 40827,
+      "group": "representative",
+      "sha256": "6c5cb6b8cbc7cd6f11891602d46bbecfdbf24e57350323e4661bb82e46e2d4e7"
+    },
+    {
+      "file": "IT-Cp2_MF_Merged.csv",
+      "site": "IT-Cp2_MF",
+      "rows": 78912,
+      "valid_target_rows": 63725,
+      "lat": 41.704266,
+      "lon": 12.357293,
+      "veg_id": 9,
+      "epic_fraction": 0.28028690186536903,
+      "forcing_means": [
+        174.46608737581101,
+        17.313783930200735,
+        5.24629344079481,
+        0.08017235654906732,
+        10.505278674627744
+      ],
+      "valid_model_rows": 27006,
+      "group": "representative",
+      "sha256": "df6303363d8c202b96f6725802ba4832ac41c9c6db6ac55e41efc85fcdbd40f3"
+    },
+    {
+      "file": "US-SSH_DBF_Merged.csv",
+      "site": "US-SSH_DBF",
+      "rows": 52603,
+      "valid_target_rows": 42411,
+      "lat": 40.6658,
+      "lon": -77.9041,
+      "veg_id": 10,
+      "epic_fraction": 0.26154401840199226,
+      "forcing_means": [
+        150.53849362203675,
+        11.176310647681692,
+        4.774024285687128,
+        0.11366967663441249,
+        23.070864420880103
+      ],
+      "valid_model_rows": 31132,
+      "group": "representative",
+      "sha256": "211af6ae977ee45d4811481f60400772890d838419d02fc039c0628daff22303"
+    },
+    {
+      "file": "US-Ro6_CRO_Merged.csv",
+      "site": "US-Ro6_CRO",
+      "rows": 70122,
+      "valid_target_rows": 70122,
+      "lat": 44.6946,
+      "lon": -93.0578,
+      "veg_id": 11,
+      "epic_fraction": 0.27028607284447104,
+      "forcing_means": [
+        160.29078205841247,
+        7.692089586720288,
+        4.5794378868258185,
+        0.09491999657739368,
+        18.461191024634704
+      ],
+      "valid_model_rows": 66248,
+      "group": "representative",
+      "sha256": "a7075d89318a65b5377a4cc6d268593e203ea5c5430abb3a63d633f36a302090"
+    },
+    {
+      "file": "ES-Mcd_EBF_Merged.csv",
+      "site": "ES-Mcd_EBF",
+      "rows": 61368,
+      "valid_target_rows": 57324,
+      "lat": 39.58819,
+      "lon": -0.39969,
+      "veg_id": 12,
+      "epic_fraction": 0.26666992569417286,
+      "forcing_means": [
+        181.52193679116152,
+        18.178552217768218,
+        8.345718908877592,
+        0.050196274931560425,
+        12.989263632872502
+      ],
+      "valid_model_rows": 57277,
+      "group": "representative",
+      "sha256": "41dca94363d0d93ff6b5bfed2cede8e93dfcb57909b1129c58744914be6074e5"
+    },
+    {
+      "file": "CN-Yan_OSH_Merged.csv",
+      "site": "CN-Yan_OSH",
+      "rows": 26297,
+      "valid_target_rows": 23844,
+      "lat": 37.82861,
+      "lon": 107.49278,
+      "veg_id": 0,
+      "epic_fraction": 0.2944442331824923,
+      "forcing_means": [
+        191.94507092063733,
+        9.849883104536639,
+        7.941650321329429,
+        0.037221964482640604,
+        8.730829360967183
+      ],
+      "valid_model_rows": 23602,
+      "group": "representative",
+      "sha256": "0d4eae3891d46d9c23461dc116b8d973b915929c2fe56ccb1fdd083f902e5c20"
+    },
+    {
+      "file": "IT-Noe_CSH_Merged.csv",
+      "site": "IT-Noe_CSH",
+      "rows": 26304,
+      "valid_target_rows": 21009,
+      "lat": 40.606174,
+      "lon": 8.151694,
+      "veg_id": 1,
+      "epic_fraction": 0.30523874695863745,
+      "forcing_means": [
+        196.05849002052918,
+        17.68365052843674,
+        6.043731485705597,
+        0.06147787408759125,
+        16.021778665177322
+      ],
+      "valid_model_rows": 17905,
+      "group": "representative",
+      "sha256": "1caa8876307e035673c0a3f3f2229eac7bab8395113a663a5943b46fc15ce653"
+    },
+    {
+      "file": "US-xNG_GRA_Merged.csv",
+      "site": "US-xNG_GRA",
+      "rows": 52602,
+      "valid_target_rows": 46646,
+      "lat": 46.7697,
+      "lon": -100.9154,
+      "veg_id": 2,
+      "epic_fraction": 0.2637352191931866,
+      "forcing_means": [
+        165.9232106668948,
+        6.3537735067107715,
+        5.25425954336337,
+        0.034045834759134634,
+        10.999769858095076
+      ],
+      "valid_model_rows": 46403,
+      "group": "representative",
+      "sha256": "3b337e2b6c2b939b4715987fa5fe5a2b469f6fe9b50cbb447ba39883d66a2216"
+    },
+    {
+      "file": "RU-Ege_DNF_Merged.csv",
+      "site": "RU-Ege_DNF",
+      "rows": 26296,
+      "valid_target_rows": 16789,
+      "lat": 60.015514,
+      "lon": 133.824,
+      "veg_id": 3,
+      "epic_fraction": 0.2841877091572863,
+      "forcing_means": [
+        121.2392364618193,
+        -6.32390610739276,
+        4.315650688317615,
+        0.16300654091877093,
+        26.475758979815566
+      ],
+      "valid_model_rows": 10670,
+      "group": "representative",
+      "sha256": "9128d4398e299118fbed362b9c957e0e196d2648cc24908df571518de821f90f"
+    },
+    {
+      "file": "AU-ASM_SAV_Merged.csv",
+      "site": "AU-ASM_SAV",
+      "rows": 87664,
+      "valid_target_rows": 67976,
+      "lat": -22.283,
+      "lon": 133.249,
+      "veg_id": 4,
+      "epic_fraction": 0.2537073371053112,
+      "forcing_means": [
+        253.62853686233802,
+        23.145659255794854,
+        22.041819863341853,
+        0.03628820268297135,
+        6.735662301514875
+      ],
+      "valid_model_rows": 67976,
+      "group": "representative",
+      "sha256": "29ad142703e50b88b5ba2b4cd681d020863be2cc12f764c2a9c74528e6fe6754"
+    },
+    {
+      "file": "IT-Arz_OSH_Merged.csv",
+      "site": "IT-Arz_OSH",
+      "rows": 78912,
+      "valid_target_rows": 71727,
+      "lat": 45.61902,
+      "lon": 10.00228,
+      "veg_id": 0,
+      "epic_fraction": 0.27991940389294406,
+      "forcing_means": [
+        161.15264677108678,
+        14.516503928426602,
+        7.182196712793998,
+        0.474003396188159,
+        19.90598096692112
+      ],
+      "valid_model_rows": 9695,
+      "group": "ood",
+      "sha256": "fb9e85343f1cff4e30a03d54db4f7c49b105f0ef6dd84ee9125a0f8d8902346a"
+    },
+    {
+      "file": "IT-MBo_GRA_Merged.csv",
+      "site": "IT-MBo_GRA",
+      "rows": 78912,
+      "valid_target_rows": 61978,
+      "lat": 46.01468,
+      "lon": 11.045831,
+      "veg_id": 2,
+      "epic_fraction": 0.27997009326845096,
+      "forcing_means": [
+        163.23616577326644,
+        5.8619562297242505,
+        2.0969291806062444,
+        0.8364731473033252,
+        35.662657182044306
+      ],
+      "valid_model_rows": 26083,
+      "group": "ood",
+      "sha256": "df71429cf05a3535166d9f6d55e99a574a315f844f1a4ee76b1c0a29254c7b34"
+    },
+    {
+      "file": "AU-Dry_WSA_Merged.csv",
+      "site": "AU-Dry_WSA",
+      "rows": 87664,
+      "valid_target_rows": 77476,
+      "lat": -15.2588,
+      "lon": 132.3706,
+      "veg_id": 5,
+      "epic_fraction": 0.2567758715093995,
+      "forcing_means": [
+        256.34948759467966,
+        27.490790672339845,
+        19.528099676035772,
+        0.08354924484394961,
+        6.461856981520782
+      ],
+      "valid_model_rows": 76669,
+      "group": "ood",
+      "sha256": "26304bfdcba294da2891a387116ae1b7098a3d90447aa135ffa5a418b098ca37"
+    },
+    {
+      "file": "DE-SbM_WET_Merged.csv",
+      "site": "DE-SbM_WET",
+      "rows": 17544,
+      "valid_target_rows": 15738,
+      "lat": 51.764927,
+      "lon": 10.51799,
+      "veg_id": 7,
+      "epic_fraction": 0.3085955312357501,
+      "forcing_means": [
+        116.01465295827634,
+        7.605705540355677,
+        2.4435347127222977,
+        0.44770337437300495,
+        73.55927491337492
+      ],
+      "valid_model_rows": 14430,
+      "group": "ood",
+      "sha256": "9264a7d69493e34a7c2676db3a0cb51d7deb563a1361cf5a7d754144598d0905"
+    },
+    {
+      "file": "FI-Sod_ENF_Merged.csv",
+      "site": "FI-Sod_ENF",
+      "rows": 17543,
+      "valid_target_rows": 15302,
+      "lat": 67.36239,
+      "lon": 26.63859,
+      "veg_id": 8,
+      "epic_fraction": 0.3084421136635695,
+      "forcing_means": [
+        94.8941911873682,
+        1.2302932793706884,
+        2.3712611012939635,
+        0.06346081057971842,
+        9.036287029346623
+      ],
+      "valid_model_rows": 14448,
+      "group": "ood",
+      "sha256": "ad7ef18e6c6069dc9459cf99276f573e6117e384a5afc9f7161d6749e4b8754a"
+    },
+    {
+      "file": "CD-Ygb_MF_Merged.csv",
+      "site": "CD-Ygb_MF",
+      "rows": 43847,
+      "valid_target_rows": 34293,
+      "lat": 0.814444,
+      "lon": 24.502472,
+      "veg_id": 9,
+      "epic_fraction": 0.2840103085729925,
+      "forcing_means": [
+        181.65725259424818,
+        24.844944351951106,
+        1396.0233011722582,
+        0.22551175679065846,
+        11.646653201627583
+      ],
+      "valid_model_rows": 33971,
+      "group": "ood",
+      "sha256": "b3f5c1cb674ee6d79c496d5e94369d32a4aca9372c93dd478623add274e38d29"
+    },
+    {
+      "file": "KR-TwB_DBF_Merged.csv",
+      "site": "KR-TwB_DBF",
+      "rows": 8776,
+      "valid_target_rows": 7344,
+      "lat": 37.30406,
+      "lon": 127.31395,
+      "veg_id": 10,
+      "epic_fraction": 0.30059252506836825,
+      "forcing_means": [
+        161.6968474817685,
+        13.604256324065634,
+        6.725955617593437,
+        0.572784867821331,
+        20.72863121830889
+      ],
+      "valid_model_rows": 7296,
+      "group": "ood",
+      "sha256": "99510a93628f71ac39bfdb7c6ecfd1952300bfe9c2760bca3953672b1d65aeb5"
+    },
+    {
+      "file": "US-IAC_CRO_Merged.csv",
+      "site": "US-IAC_CRO",
+      "rows": 52602,
+      "valid_target_rows": 48029,
+      "lat": 41.9984,
+      "lon": -93.7016,
+      "veg_id": 11,
+      "epic_fraction": 0.2628036956769705,
+      "forcing_means": [
+        181.84293443215086,
+        7.998372286224859,
+        3.84363084103266,
+        0.3646273145507775,
+        266.07395389854
+      ],
+      "valid_model_rows": 21026,
+      "group": "ood",
+      "sha256": "98e586ee963c26fc09df21f19e39dcd86d4d5dcf70039e8aa2090dfb8243414c"
+    },
+    {
+      "file": "JP-Ynf_EBF_Merged.csv",
+      "site": "JP-Ynf_EBF",
+      "rows": 61360,
+      "valid_target_rows": 51162,
+      "lat": 26.751,
+      "lon": 128.21266,
+      "veg_id": 12,
+      "epic_fraction": 0.26985006518904825,
+      "forcing_means": [
+        156.62484699315513,
+        21.055567454367665,
+        4.360079636571056,
+        0.8565360169491524,
+        40.08860511734029
+      ],
+      "valid_model_rows": 51162,
+      "group": "ood",
+      "sha256": "099ed631912796bf62374c179b19fc10228403823b363172d31557269a6ce90e"
+    },
+    {
+      "file": "US-xSR_OSH_Merged.csv",
+      "site": "US-xSR_OSH",
+      "rows": 52601,
+      "valid_target_rows": 50665,
+      "lat": 31.9107,
+      "lon": -110.8355,
+      "veg_id": 0,
+      "epic_fraction": 0.2671241991597118,
+      "forcing_means": [
+        242.8988279880611,
+        20.431784386228397,
+        19.083244577099293,
+        0.032598543753921023,
+        2.7217432865474587
+      ],
+      "valid_model_rows": 44873,
+      "group": "ood",
+      "sha256": "4fb2b561e2fc403b34e22d339c0eeb5663c3a454b588245bc45bf5446ebd36dc"
+    },
+    {
+      "file": "AU-Wgt_GRA_Merged.csv",
+      "site": "AU-Wgt_GRA",
+      "rows": 17535,
+      "valid_target_rows": 10118,
+      "lat": -42.09139,
+      "lon": 147.07944,
+      "veg_id": 2,
+      "epic_fraction": 0.20593099515255203,
+      "forcing_means": [
+        163.89237701739378,
+        7.815646735101227,
+        3.6642258340461935,
+        0.06258745366410037,
+        34.69967934035731
+      ],
+      "valid_model_rows": 10091,
+      "group": "ood",
+      "sha256": "6edd5b0697707b75c191bfd2b9b514f2d20fe4043f0a7f1dbd24d6bcb13ea9e6"
+    },
+    {
+      "file": "AU-DaS_WSA_Merged.csv",
+      "site": "AU-DaS_WSA",
+      "rows": 87664,
+      "valid_target_rows": 87329,
+      "lat": -14.1592,
+      "lon": 131.3881,
+      "veg_id": 5,
+      "epic_fraction": 0.256536320496441,
+      "forcing_means": [
+        241.09628827112616,
+        26.963980408149293,
+        15.30238227778792,
+        0.12421264144916956,
+        5.4894956880817665
+      ],
+      "valid_model_rows": 87329,
+      "group": "ood",
+      "sha256": "e89ced65477fc9b6dd994feae4db4d9f49f3d47be087c85d591d9c3d43ca1a70"
+    },
+    {
+      "file": "UK-AMo_WET_Merged.csv",
+      "site": "UK-AMo_WET",
+      "rows": 78913,
+      "valid_target_rows": 77905,
+      "lat": 55.792545,
+      "lon": -3.2436917,
+      "veg_id": 7,
+      "epic_fraction": 0.28478197508648767,
+      "forcing_means": [
+        113.15674511170529,
+        7.932867822792189,
+        1.813341616717144,
+        0.10966253975897507,
+        86.3730273676782
+      ],
+      "valid_model_rows": 35425,
+      "group": "ood",
+      "sha256": "201e4e8d6c6caea0900fe76e7a90fc21f04445cd3a969a219e61c85d3e0377ad"
+    },
+    {
+      "file": "US-xBN_ENF_Merged.csv",
+      "site": "US-xBN_ENF",
+      "rows": 52599,
+      "valid_target_rows": 51628,
+      "lat": 65.154,
+      "lon": -147.5026,
+      "veg_id": 8,
+      "epic_fraction": 0.26926367421433867,
+      "forcing_means": [
+        100.23283123253296,
+        -1.8286497556987777,
+        3.0641955075191545,
+        0.05049518051673987,
+        0.7630825174825175
+      ],
+      "valid_model_rows": 715,
+      "group": "ood",
+      "sha256": "5365ddcf177530cae6c93d4536510f8ac1887beb38971981352ff007697492f6"
+    },
+    {
+      "file": "US-TLR_MF_Merged.csv",
+      "site": "US-TLR_MF",
+      "rows": 8779,
+      "valid_target_rows": 8191,
+      "lat": 35.9168,
+      "lon": -76.1463,
+      "veg_id": 9,
+      "epic_fraction": 0.3036792345369632,
+      "forcing_means": [
+        177.1143839845085,
+        17.792762444469755,
+        6.95207039526142,
+        8.94179291491058e-05,
+        14.081349582514735
+      ],
+      "valid_model_rows": 8144,
+      "group": "ood",
+      "sha256": "3125ab77315b49fa7399b8c07d9e55a730dcf60107d638e17c8d37470eba7093"
+    },
+    {
+      "file": "BJ-Bfg_DBF_Merged.csv",
+      "site": "BJ-Bfg_DBF",
+      "rows": 17544,
+      "valid_target_rows": 14525,
+      "lat": 9.791,
+      "lon": 1.718,
+      "veg_id": 10,
+      "epic_fraction": 0.28853169174646603,
+      "forcing_means": [
+        216.0795575410397,
+        25.93154645462836,
+        14.385701065891473,
+        0.14241450068399453,
+        9.053842310761514
+      ],
+      "valid_model_rows": 14134,
+      "group": "ood",
+      "sha256": "46abe3f1fd66bd36dc9882278fa5ef195f063b821c8276f1b34cfe4f30b81329"
+    },
+    {
+      "file": "AU-MvA_CRO_Merged.csv",
+      "site": "AU-MvA_CRO",
+      "rows": 17535,
+      "valid_target_rows": 9974,
+      "lat": -30.543,
+      "lon": 150.02,
+      "veg_id": 11,
+      "epic_fraction": 0.28674080410607355,
+      "forcing_means": [
+        219.6065614770459,
+        19.205760878243513,
+        11.756792871400057,
+        0.056729113202167086,
+        39.572030825022665
+      ],
+      "valid_model_rows": 9927,
+      "group": "ood",
+      "sha256": "2f66f3ac2c34054a3841852f7e163e49d17f85d7e9c24d801c2f8590d1576d50"
+    },
+    {
+      "file": "AU-Wrr_EBF_Merged.csv",
+      "site": "AU-Wrr_EBF",
+      "rows": 52599,
+      "valid_target_rows": 46090,
+      "lat": -43.09502,
+      "lon": 146.65452,
+      "veg_id": 12,
+      "epic_fraction": 0.23201962014486968,
+      "forcing_means": [
+        136.68175253331813,
+        10.77246364949904,
+        3.704525019487062,
+        0.14351523793228008,
+        28.832947370504527
+      ],
+      "valid_model_rows": 40913,
+      "group": "ood",
+      "sha256": "497339c1cf2fd2f71a5ea202277c465c33690e9505c52e4708cbe9568e575f96"
+    },
+    {
+      "file": "GL-Dsk_OSH_Merged.csv",
+      "site": "GL-Dsk_OSH",
+      "rows": 43845,
+      "valid_target_rows": 43845,
+      "lat": 69.25349,
+      "lon": -53.51413,
+      "veg_id": 0,
+      "epic_fraction": 0.3058273463336754,
+      "forcing_means": [
+        95.07564632227162,
+        -2.1129963279735433,
+        1.6165025658569965,
+        0.30269636218496976,
+        6.482477471320477
+      ],
+      "valid_model_rows": 20485,
+      "group": "ood",
+      "sha256": "f3143590e0819edfe95fcc5cf0933a7573dd0c0cf0b71732772f6c742137c04e"
+    },
+    {
+      "file": "NZ-ADd_GRA_Merged.csv",
+      "site": "NZ-ADd_GRA",
+      "rows": 43837,
+      "valid_target_rows": 41186,
+      "lat": -43.64405,
+      "lon": 172.35465,
+      "veg_id": 2,
+      "epic_fraction": 0.223464196911285,
+      "forcing_means": [
+        164.8786000296553,
+        11.664371546866802,
+        4.140669981978694,
+        0.08333975865136756,
+        20.804133620165782
+      ],
+      "valid_model_rows": 41040,
+      "group": "ood",
+      "sha256": "035e5aca6a5317a00700168bb363557828197e8ada761d3bf1d56fa093863323"
+    },
+    {
+      "file": "AU-How_WSA_Merged.csv",
+      "site": "AU-How_WSA",
+      "rows": 87664,
+      "valid_target_rows": 85328,
+      "lat": -12.4952,
+      "lon": 131.15005,
+      "veg_id": 5,
+      "epic_fraction": 0.255635152400073,
+      "forcing_means": [
+        234.61380178294397,
+        27.09236873745209,
+        12.661116895190727,
+        0.18967986858915858,
+        11.367799223724482
+      ],
+      "valid_model_rows": 85279,
+      "group": "ood",
+      "sha256": "cdebdc62f7531f6536f5898b50dc3a5891fc28acbd6cb8cb3858dc2589c77f26"
+    },
+    {
+      "file": "GL-ZaF_WET_Merged.csv",
+      "site": "GL-ZaF_WET",
+      "rows": 17544,
+      "valid_target_rows": 13039,
+      "lat": 74.48152,
+      "lon": -20.555773,
+      "veg_id": 7,
+      "epic_fraction": 0.3119015047879617,
+      "forcing_means": [
+        104.35185542065663,
+        -9.027946106931143,
+        1.1808349293205653,
+        0.08466307569539444,
+        39.71854085159103
+      ],
+      "valid_model_rows": 12657,
+      "group": "ood",
+      "sha256": "a243fbdbc5f2c21fb39f9aca580a68304aa7596a689b9b74dd2a669b47211c2e"
+    },
+    {
+      "file": "US-Prr_ENF_Merged.csv",
+      "site": "US-Prr_ENF",
+      "rows": 61369,
+      "valid_target_rows": 57148,
+      "lat": 65.1237,
+      "lon": -147.4876,
+      "veg_id": 8,
+      "epic_fraction": 0.26638856751780216,
+      "forcing_means": [
+        112.62612375955287,
+        -1.4609449314800633,
+        3.3014690478906292,
+        0.05251788362202415,
+        42.88804529159673
+      ],
+      "valid_model_rows": 57148,
+      "group": "ood",
+      "sha256": "4618cacfcb3ae95261ccf64f8b02f5e3781f45933403c998db876340ffe698b0"
+    },
+    {
+      "file": "CN-Mxn_MF_Merged.csv",
+      "site": "CN-Mxn_MF",
+      "rows": 35057,
+      "valid_target_rows": 15798,
+      "lat": 31.6948,
+      "lon": 103.8951,
+      "veg_id": 9,
+      "epic_fraction": 0.26351370624982173,
+      "forcing_means": [
+        109.04505582337336,
+        9.810779673103802,
+        2.7173604843540513,
+        0.0979362181589982,
+        13.65667794143588
+      ],
+      "valid_model_rows": 15460,
+      "group": "ood",
+      "sha256": "7a92663428b6376781f55309258c55f9eb775aad1607b75f39c5a437544b06e2"
+    },
+    {
+      "file": "CA-Cbo_DBF_Merged.csv",
+      "site": "CA-Cbo_DBF",
+      "rows": 78913,
+      "valid_target_rows": 78913,
+      "lat": 44.3184,
+      "lon": -79.9341,
+      "veg_id": 10,
+      "epic_fraction": 0.2729968446263607,
+      "forcing_means": [
+        147.7756152028183,
+        8.517001976860593,
+        3.9504372917009865,
+        0.40037989938286467,
+        12.174841303941715
+      ],
+      "valid_model_rows": 42824,
+      "group": "ood",
+      "sha256": "60cedd97d420372aaa577e8e9c5072758d87d08203234bc22cf25adb1c496d19"
+    },
+    {
+      "file": "SN-Nkr_CRO_Merged.csv",
+      "site": "SN-Nkr_CRO",
+      "rows": 61368,
+      "valid_target_rows": 60464,
+      "lat": 14.49581,
+      "lon": -16.45357,
+      "veg_id": 11,
+      "epic_fraction": 0.2781579976535002,
+      "forcing_means": [
+        287.1401752704993,
+        27.376863210468,
+        19.397090038782427,
+        0.06671633424586103,
+        5.104025893374032
+      ],
+      "valid_model_rows": 57003,
+      "group": "ood",
+      "sha256": "726aa66ce24910403558e7802eb2e825d28559c24a0b167b79820840463772ee"
+    },
+    {
+      "file": "CL-SDF_EBF_Merged.csv",
+      "site": "CL-SDF_EBF",
+      "rows": 52609,
+      "valid_target_rows": 49785,
+      "lat": -41.883,
+      "lon": -73.676,
+      "veg_id": 12,
+      "epic_fraction": 0.23283088444942882,
+      "forcing_means": [
+        164.20716671101903,
+        11.3138749263434,
+        2.465202902545192,
+        0.15165555323233668,
+        48.12848457340637
+      ],
+      "valid_model_rows": 44770,
+      "group": "ood",
+      "sha256": "352582387fa643b77aa8e00e44c6e201db3b51c2d5175b536b45be98cf0a8329"
+    },
+    {
+      "file": "US-Jo1_OSH_Merged.csv",
+      "site": "US-Jo1_OSH",
+      "rows": 61369,
+      "valid_target_rows": 56233,
+      "lat": 32.582,
+      "lon": -106.635,
+      "veg_id": 0,
+      "epic_fraction": 0.2662093239257606,
+      "forcing_means": [
+        236.91635347651095,
+        17.491568275513696,
+        16.240585922860078,
+        0.028591520148609235,
+        3.4711269925824673
+      ],
+      "valid_model_rows": 44019,
+      "group": "ood",
+      "sha256": "95d201f3bb445f0a2ce38bf39cfb5d52f51dcde7f977ddaa25d54ba899f0cbb7"
+    },
+    {
+      "file": "NZ-Cla_GRA_Merged.csv",
+      "site": "NZ-Cla_GRA",
+      "rows": 35053,
+      "valid_target_rows": 22473,
+      "lat": -43.78628,
+      "lon": 171.59558,
+      "veg_id": 2,
+      "epic_fraction": 0.23746897555130803,
+      "forcing_means": [
+        154.78499137021083,
+        10.471368185319374,
+        2.9287441303169484,
+        0.15441947907454429,
+        32.50601032263831
+      ],
+      "valid_model_rows": 22369,
+      "group": "ood",
+      "sha256": "6870904aa51490fe270561485757d26226eed989b45f066978dfef152da4c37a"
+    },
+    {
+      "file": "AU-Lit_WSA_Merged.csv",
+      "site": "AU-Lit_WSA",
+      "rows": 87664,
+      "valid_target_rows": 80517,
+      "lat": -13.17904,
+      "lon": 130.79455,
+      "veg_id": 5,
+      "epic_fraction": 0.2557834458842855,
+      "forcing_means": [
+        216.76597581675486,
+        26.39507944538237,
+        11.500448222759628,
+        0.1807901989414127,
+        8.986808714935643
+      ],
+      "valid_model_rows": 80494,
+      "group": "ood",
+      "sha256": "65e0063bcd7ea09144aaae9cc016a7f70e109a3bc5b82c38112873a46ef08395"
+    }
+  ],
+  "split_hash": "b50665afe62c84c68a223b55f59142c63fc0ac41aa398bb303c9c802cc7dc4af"
+}

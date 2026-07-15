@@ -21,6 +21,8 @@ data/*
 !data/README.md
 !data/REAL_DATA.md
 !data/real_data_manifest.json
+!data/blind_split_v1.json
+!data/development_split_v1.json
 outputs/*
 !outputs/README.md
 *.pth

@@ -28,6 +28,14 @@ def profile_inference(model, loader, device, output_dir, *, max_batch=256):
     batch = next(iter(loader))
     actual_batch = min(int(batch[0].size(0)), max_batch)
     inputs = _tensor_batch(batch, device, actual_batch)
+    daily_context = (
+        batch[5][:actual_batch].to(device) if len(batch) == 9 else None
+    )
+
+    def run_forward():
+        if daily_context is None:
+            return model(*inputs)
+        return model(*inputs, daily_context=daily_context)
     repeats = 10 if device.type == "cuda" else 2
     warmups = 3 if device.type == "cuda" else 1
     model.eval()
@@ -36,12 +44,12 @@ def profile_inference(model, loader, device, output_dir, *, max_batch=256):
         torch.cuda.reset_peak_memory_stats(device)
     with torch.no_grad():
         for _ in range(warmups):
-            model(*inputs)
+            run_forward()
         if device.type == "cuda":
             torch.cuda.synchronize(device)
         started = time.perf_counter()
         for _ in range(repeats):
-            model(*inputs)
+            run_forward()
         if device.type == "cuda":
             torch.cuda.synchronize(device)
     elapsed = time.perf_counter() - started

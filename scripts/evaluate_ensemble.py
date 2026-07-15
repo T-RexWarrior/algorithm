@@ -6,7 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
-from gpp_inversion.ensemble import ensemble_prediction_files
+from gpp_inversion.ensemble import ensemble_prediction_files, fit_nonnegative_oof_weights
 
 
 def main() -> None:
@@ -16,13 +16,19 @@ def main() -> None:
     parser.add_argument("--prefix", default="val")
     parser.add_argument("--high-target-threshold", type=float)
     parser.add_argument("--chunk-size", type=int, default=200_000)
+    parser.add_argument("--fit-oof-weights", action="store_true")
     args = parser.parse_args()
+    weights = (
+        fit_nonnegative_oof_weights(args.prediction_files)
+        if args.fit_oof_weights else None
+    )
     result = ensemble_prediction_files(
         args.prediction_files,
         args.output_dir,
         prefix=args.prefix,
         high_target_threshold=args.high_target_threshold,
         chunk_size=args.chunk_size,
+        weights=weights,
     )
     print(json.dumps(result, ensure_ascii=False, indent=2))
 

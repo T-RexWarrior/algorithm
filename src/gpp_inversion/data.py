@@ -12,6 +12,7 @@ import torch
 from torch.utils.data import Dataset, Sampler
 
 from .config import FeatureColumns, ScalingMethod, TimeFeatureMode, WindowConfig
+from .contracts import spherical_xyz
 
 
 @dataclass
@@ -135,8 +136,15 @@ class MultiStationWindowDataset(Dataset):
         return self.window.time_feature_dim
 
     def _load_station(self, path: Path) -> None:
+        derived_static = {"Coord_X", "Coord_Y", "Coord_Z"}
+        required_columns = [
+            column for column in self.features.required
+            if column not in derived_static
+        ]
+        if derived_static.intersection(self.features.static):
+            required_columns.extend(["Lat", "Long"])
         selected_columns = list(
-            dict.fromkeys([self.features.time, *self.features.required])
+            dict.fromkeys([self.features.time, *required_columns])
         )
         try:
             frame = pd.read_csv(
@@ -152,6 +160,13 @@ class MultiStationWindowDataset(Dataset):
         frame[self.features.time] = pd.to_datetime(
             frame[self.features.time], errors="coerce"
         )
+        if derived_static.intersection(self.features.static):
+            xyz = spherical_xyz(
+                frame["Lat"].to_numpy(dtype=np.float64),
+                frame["Long"].to_numpy(dtype=np.float64),
+            )
+            for index, column in enumerate(("Coord_X", "Coord_Y", "Coord_Z")):
+                frame[column] = xyz[:, index]
         clean_columns = [self.features.time, *self.features.required]
         frame = (
             frame.dropna(subset=clean_columns)
@@ -246,7 +261,7 @@ class MultiStationWindowDataset(Dataset):
     def raw_window_targets(self) -> np.ndarray:
         """Return unscaled targets at valid training-window endpoints."""
         values = []
-        length = self.window.seq_len
+        length = max(self.window.seq_len, self.window.context_days * 24)
         for targets, starts in zip(self.station_targets, self.window_starts):
             if starts.size:
                 values.append(targets[starts + length - 1])
@@ -303,7 +318,7 @@ class MultiStationWindowDataset(Dataset):
             ) / self.scaler.target_scale
 
     def _build_windows(self) -> None:
-        length = self.window.seq_len
+        length = max(self.window.seq_len, self.window.context_days * 24)
         if length < 1:
             raise ValueError("seq_len must be positive")
         counts: list[int] = []
@@ -338,11 +353,19 @@ class MultiStationWindowDataset(Dataset):
                     large_gaps.astype(np.int32), kernel, mode="valid"
                 ) == 0
             if self.window.max_span_hours is not None:
-                spans = (
-                    date_ns[length - 1 :] - date_ns[: -(length - 1)]
-                ) / 3_600_000_000_000.0
+                endpoint_dates = date_ns[length - 1 :]
+                main_starts = date_ns[
+                    length - self.window.seq_len :
+                    len(dates) - self.window.seq_len + 1
+                ]
+                spans = (endpoint_dates - main_starts) / 3_600_000_000_000.0
                 valid &= spans <= self.window.max_span_hours
             starts = starts[valid]
+            if self.window.endpoint_stride > 1:
+                endpoints = starts + length - 1
+                starts = starts[
+                    endpoints % self.window.endpoint_stride == self.window.endpoint_phase
+                ]
             self.window_starts.append(starts)
             counts.append(int(starts.size))
 
@@ -379,8 +402,10 @@ class MultiStationWindowDataset(Dataset):
             else int(self.cumulative_window_counts[station_index - 1])
         )
         local_index = index - previous_count
-        start = int(self.window_starts[station_index][local_index])
-        end = start + self.window.seq_len
+        history_start = int(self.window_starts[station_index][local_index])
+        history_length = max(self.window.seq_len, self.window.context_days * 24)
+        end = history_start + history_length
+        start = end - self.window.seq_len
         forcing = self.station_forcing[station_index][start:end]
         state = self.station_state[station_index][start:end]
         static = self.station_static[station_index][start:end]
@@ -410,16 +435,35 @@ class MultiStationWindowDataset(Dataset):
                     [time_features, relative / self.window.dt_clip_hours]
                 )
 
-        return (
+        values = (
             torch.as_tensor(forcing, dtype=torch.float32),
             torch.as_tensor(state, dtype=torch.float32),
             torch.as_tensor(time_features, dtype=torch.float32),
             torch.as_tensor(static, dtype=torch.float32),
             torch.as_tensor(land_cover, dtype=torch.long),
+        )
+        if self.window.context_days:
+            daily = self._daily_context(station_index, history_start, end)
+            values = (*values, torch.as_tensor(daily, dtype=torch.float32))
+        return (
+            *values,
             torch.as_tensor(target, dtype=torch.float32),
             str(self.station_dates[station_index][end - 1]),
             self.station_names[station_index],
         )
+
+    def _daily_context(self, station_index: int, start: int, end: int) -> np.ndarray:
+        indices = []
+        for name in self.window.daily_context_columns:
+            if name not in self.features.forcing:
+                raise ValueError(f"Daily context feature {name!r} is not a forcing column")
+            indices.append(self.features.forcing.index(name))
+        values = self.station_forcing[station_index][start:end, :][:, indices]
+        days = self.window.context_days
+        expected = days * 24
+        if values.shape[0] != expected:
+            raise ValueError("Daily context does not contain complete causal days")
+        return values.reshape(days, 24, len(indices)).mean(axis=1).astype(np.float32)
 
 
 class StationBalancedSampler(Sampler[int]):
@@ -460,6 +504,61 @@ class StationBalancedSampler(Sampler[int]):
         ).to(torch.long)
         global_indices = self.offsets[station_indices] + local_indices
         return iter(global_indices.tolist())
+
+
+class StationTargetBalancedSampler(Sampler[int]):
+    """Sample stations uniformly, then available endpoint target bins uniformly."""
+
+    def __init__(
+        self,
+        dataset: MultiStationWindowDataset,
+        *,
+        num_samples: int,
+        quantiles: tuple[float, float, float] = (0.5, 0.8, 0.95),
+        seed: int = 42,
+    ) -> None:
+        raw = dataset.raw_window_targets()
+        if not raw.size:
+            raise ValueError("Target-balanced sampling requires window targets")
+        thresholds_raw = np.quantile(raw, quantiles)
+        thresholds = (
+            (thresholds_raw - dataset.scaler.target_offset) / dataset.scaler.target_scale
+            if dataset.scaler.scale_target else thresholds_raw
+        )
+        offsets = np.concatenate(
+            [np.zeros(1, dtype=np.int64), dataset.cumulative_window_counts[:-1]]
+        )
+        self.groups: list[list[np.ndarray]] = []
+        self.active_stations: list[int] = []
+        history_length = max(dataset.window.seq_len, dataset.window.context_days * 24)
+        for station, starts in enumerate(dataset.window_starts):
+            if not starts.size:
+                continue
+            endpoint = starts + history_length - 1
+            targets = dataset.station_targets[station][endpoint]
+            bins = np.digitize(targets, thresholds, right=False)
+            station_groups = [
+                offsets[station] + np.flatnonzero(bins == value)
+                for value in range(4)
+            ]
+            self.groups.append(station_groups)
+            self.active_stations.append(station)
+        if not self.groups:
+            raise ValueError("No active stations for target-balanced sampling")
+        self.num_samples = int(num_samples)
+        self.rng = np.random.default_rng(seed)
+
+    def __len__(self) -> int:
+        return self.num_samples
+
+    def __iter__(self):
+        output = np.empty(self.num_samples, dtype=np.int64)
+        for index in range(self.num_samples):
+            station = int(self.rng.integers(len(self.groups)))
+            available = [group for group in self.groups[station] if group.size]
+            group = available[int(self.rng.integers(len(available)))]
+            output[index] = group[int(self.rng.integers(group.size))]
+        return iter(output.tolist())
 
 
 class BatchedWindowLoader:
@@ -538,6 +637,7 @@ def _dataset_get_batch(
     )
     batch_size = len(indices)
     length = self.window.seq_len
+    history_length = max(length, self.window.context_days * 24)
     forcing = np.empty(
         (batch_size, length, self.station_forcing[0].shape[1]), dtype=np.float32
     )
@@ -551,6 +651,13 @@ def _dataset_get_batch(
     target = np.empty(batch_size, dtype=np.float32)
     time_features = np.empty(
         (batch_size, length, self.time_feature_dim), dtype=np.float32
+    )
+    daily_context = (
+        np.empty(
+            (batch_size, self.window.context_days, len(self.window.daily_context_columns)),
+            dtype=np.float32,
+        )
+        if self.window.context_days else None
     )
     dates = [""] * batch_size if metadata == "full" else []
     if metadata == "full":
@@ -569,7 +676,9 @@ def _dataset_get_batch(
             else int(self.cumulative_window_counts[station_index - 1])
         )
         local_indices = indices[positions] - previous_count
-        starts = self.window_starts[station_index][local_indices]
+        history_starts = self.window_starts[station_index][local_indices]
+        endpoints = history_starts + history_length
+        starts = endpoints - length
         row_indices = starts[:, None] + steps[None, :]
         forcing[positions] = self.station_forcing[station_index][row_indices]
         state[positions] = self.station_state[station_index][row_indices]
@@ -610,8 +719,21 @@ def _dataset_get_batch(
                 )
         time_features[positions] = station_time
 
+        if daily_context is not None:
+            context_indices = np.asarray(
+                [self.features.forcing.index(name) for name in self.window.daily_context_columns],
+                dtype=np.int64,
+            )
+            context_steps = np.arange(history_length, dtype=np.int64)
+            context_rows = history_starts[:, None] + context_steps[None, :]
+            context_values = self.station_forcing[station_index][context_rows]
+            context_values = context_values[:, :, context_indices]
+            daily_context[positions] = context_values.reshape(
+                len(positions), self.window.context_days, 24, len(context_indices)
+            ).mean(axis=2)
+
         if metadata == "full":
-            end_rows = starts + length - 1
+            end_rows = endpoints - 1
             name = self.station_names[station_index]
             for position, end_row in zip(positions, end_rows):
                 dates[int(position)] = str(
@@ -625,8 +747,10 @@ def _dataset_get_batch(
         torch.from_numpy(time_features),
         torch.from_numpy(static),
         torch.from_numpy(land_cover),
-        torch.from_numpy(target),
     )
+    if daily_context is not None:
+        tensors = (*tensors, torch.from_numpy(daily_context))
+    tensors = (*tensors, torch.from_numpy(target))
     tensors = tuple(
         _pin_if_requested(tensor, pin_memory) for tensor in tensors
     )

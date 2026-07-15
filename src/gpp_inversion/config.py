@@ -22,6 +22,9 @@ class TimeFeatureMode(str, Enum):
 
 class ModelKind(str, Enum):
     TCN = "tcn"
+    TCN_OBSERVATION_AWARE = "tcn_observation_aware"
+    TCN_MULTISCALE = "tcn_multiscale"
+    HYBRID_LUE_TCN = "hybrid_lue_tcn"
     LSTM = "lstm"
     MAMBA = "mamba"
     NEURAL_CDE = "neural_cde"
@@ -35,6 +38,7 @@ class LossKind(str, Enum):
     MAE = "mae"
     HUBER = "huber"
     WEIGHTED_HUBER = "weighted_huber"
+    TAIL_AWARE = "tail_aware"
 
 
 @dataclass(frozen=True)
@@ -90,6 +94,12 @@ class WindowConfig:
     max_gap_hours: float | None = 1.0
     max_span_hours: float | None = 95.0
     dt_clip_hours: float = 240.0
+    endpoint_stride: int = 1
+    endpoint_phase: int = 0
+    context_days: int = 0
+    daily_context_columns: tuple[str, ...] = (
+        "SW_IN_F", "TA_F", "VPD_F", "P_F", "SWC_F_MDS_1"
+    )
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "WindowConfig":
@@ -100,7 +110,28 @@ class WindowConfig:
             max_gap_hours=value.get("max_gap_hours", 1.0),
             max_span_hours=value.get("max_span_hours", 95.0),
             dt_clip_hours=float(value.get("dt_clip_hours", 240.0)),
+            endpoint_stride=int(value.get("endpoint_stride", 1)),
+            endpoint_phase=int(value.get("endpoint_phase", 0)),
+            context_days=int(value.get("context_days", 0)),
+            daily_context_columns=tuple(
+                value.get(
+                    "daily_context_columns",
+                    ("SW_IN_F", "TA_F", "VPD_F", "P_F", "SWC_F_MDS_1"),
+                )
+            ),
         )
+
+    def __post_init__(self) -> None:
+        if self.seq_len < 1:
+            raise ValueError("seq_len must be positive")
+        if self.endpoint_stride < 1:
+            raise ValueError("endpoint_stride must be positive")
+        if not 0 <= self.endpoint_phase < self.endpoint_stride:
+            raise ValueError("endpoint_phase must be within endpoint_stride")
+        if self.context_days < 0:
+            raise ValueError("context_days cannot be negative")
+        if self.context_days and not self.daily_context_columns:
+            raise ValueError("daily_context_columns cannot be empty")
 
     @property
     def time_feature_dim(self) -> int:
@@ -147,6 +178,11 @@ class ModelConfig:
     modern_small_kernel: int = 3
     mixer_blocks: int = 2
     mixer_top_k: int = 3
+    satellite_mask_index: int = 0
+    no_observation_age_hours: float = 240.0
+    daily_context_features: int = 5
+    daily_context_hidden: int = 32
+    nonnegative_output: bool = False
 
     def __post_init__(self) -> None:
         if self.tcn_layers < 1:
@@ -174,6 +210,10 @@ class ModelConfig:
             raise ValueError("architecture block counts must be positive")
         if self.mixer_top_k < 1:
             raise ValueError("mixer_top_k must be positive")
+        if self.satellite_mask_index < 0:
+            raise ValueError("satellite_mask_index cannot be negative")
+        if self.no_observation_age_hours <= 0:
+            raise ValueError("no_observation_age_hours must be positive")
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "ModelConfig":
@@ -197,6 +237,12 @@ class TrainingConfig:
     weight_decay: float = 0.0
     deterministic: bool = True
     optimizer: str = "adam"
+    max_steps: int | None = None
+    warmup_steps: int = 0
+    eval_interval_steps: int = 1000
+    target_balanced: bool = False
+    samples_per_epoch: int | None = None
+    pretrained_checkpoint: str | None = None
 
     def __post_init__(self) -> None:
         if self.selection_metric not in {
@@ -213,6 +259,10 @@ class TrainingConfig:
             raise ValueError("patience must be positive")
         if self.optimizer not in {"adam", "adamw"}:
             raise ValueError("optimizer must be 'adam' or 'adamw'")
+        if self.max_steps is not None and self.max_steps < 1:
+            raise ValueError("max_steps must be positive")
+        if self.warmup_steps < 0 or self.eval_interval_steps < 1:
+            raise ValueError("Invalid step scheduler settings")
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "TrainingConfig":
@@ -256,6 +306,23 @@ class CrossValidationConfig:
 
 
 @dataclass(frozen=True)
+class SplitProtocolConfig:
+    name: str = "manual"
+    split_hash: str | None = None
+    blind_split_hash: str | None = None
+    legacy_test_sites: tuple[str, ...] = ()
+
+    @classmethod
+    def from_dict(cls, value: dict[str, Any]) -> "SplitProtocolConfig":
+        return cls(
+            name=str(value.get("name", "manual")),
+            split_hash=value.get("split_hash"),
+            blind_split_hash=value.get("blind_split_hash"),
+            legacy_test_sites=tuple(value.get("legacy_test_sites", ())),
+        )
+
+
+@dataclass(frozen=True)
 class ExperimentConfig:
     data_dir: Path
     output_dir: Path
@@ -274,6 +341,7 @@ class ExperimentConfig:
     cross_validation: CrossValidationConfig = field(
         default_factory=CrossValidationConfig
     )
+    split_protocol: SplitProtocolConfig = field(default_factory=SplitProtocolConfig)
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "ExperimentConfig":
@@ -294,6 +362,9 @@ class ExperimentConfig:
             evaluation=EvaluationConfig.from_dict(value.get("evaluation", {})),
             cross_validation=CrossValidationConfig.from_dict(
                 value.get("cross_validation", {})
+            ),
+            split_protocol=SplitProtocolConfig.from_dict(
+                value.get("split_protocol", {})
             ),
         )
 

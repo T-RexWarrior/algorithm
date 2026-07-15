@@ -20,6 +20,7 @@ from .data import (
     BatchedWindowLoader,
     MultiStationWindowDataset,
     StationBalancedSampler,
+    StationTargetBalancedSampler,
 )
 from .engine import evaluate_model, train_model
 from .experiments import build_model
@@ -124,14 +125,25 @@ def _run_training_split(
         high_target_threshold = float(np.quantile(train_targets, 0.9))
 
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        train_sampler = (
-            StationBalancedSampler(
+        samples_per_epoch = config.training.samples_per_epoch
+        if samples_per_epoch is None and config.training.max_steps is not None:
+            samples_per_epoch = (
+                config.training.eval_interval_steps * config.training.batch_size
+            )
+        if config.training.target_balanced:
+            train_sampler = StationTargetBalancedSampler(
                 train_dataset,
+                num_samples=int(samples_per_epoch or len(train_dataset)),
                 seed=config.training.seed,
             )
-            if config.training.station_balanced
-            else None
-        )
+        elif config.training.station_balanced:
+            train_sampler = StationBalancedSampler(
+                train_dataset,
+                num_samples=samples_per_epoch,
+                seed=config.training.seed,
+            )
+        else:
+            train_sampler = None
         if config.training.num_workers == 0:
             train_loader = BatchedWindowLoader(
                 train_dataset,
@@ -183,13 +195,48 @@ def _run_training_split(
                 if test_dataset is not None else None
             )
 
+        if config.model.kind.value == "tcn_multiscale":
+            if config.window.context_days != 30:
+                raise ValueError("tcn_multiscale requires window.context_days=30")
+            if len(config.window.daily_context_columns) != config.model.daily_context_features:
+                raise ValueError("daily context feature count does not match model config")
+        if config.model.kind.value == "hybrid_lue_tcn" and config.scale_target:
+            raise ValueError("hybrid_lue_tcn requires scale_target=false for physical units")
         model = build_model(
             config.model,
             config.features,
             seq_len=config.window.seq_len,
             time_feature_dim=train_dataset.time_feature_dim,
         ).to(device)
-        criterion = build_loss(config.loss, **config.loss_options)
+        loss_options = dict(config.loss_options)
+        if config.loss.value == "tail_aware" and not {"p50", "p80", "p95"}.issubset(loss_options):
+            raw_thresholds = np.quantile(train_targets, [0.5, 0.8, 0.95])
+            if train_dataset.scaler.scale_target:
+                raw_thresholds = (
+                    raw_thresholds - train_dataset.scaler.target_offset
+                ) / train_dataset.scaler.target_scale
+            loss_options.update(
+                p50=float(raw_thresholds[0]),
+                p80=float(raw_thresholds[1]),
+                p95=float(raw_thresholds[2]),
+            )
+        criterion = build_loss(config.loss, **loss_options).to(device)
+        if hasattr(model, "configure_scaling"):
+            model.configure_scaling(
+                train_dataset.scaler.forcing_offset,
+                train_dataset.scaler.forcing_scale,
+            )
+        if config.training.pretrained_checkpoint and not (
+            config.training.resume and (output_dir / "checkpoint_latest.pth").exists()
+        ):
+            pretrained = torch.load(
+                config.training.pretrained_checkpoint, map_location=device,
+                weights_only=False,
+            )
+            state_dict = pretrained.get("model_state_dict", pretrained)
+            missing, unexpected = model.load_state_dict(state_dict, strict=False)
+            if unexpected:
+                raise ValueError(f"Unexpected pretrained parameters: {unexpected}")
         optimizer_class = (
             torch.optim.AdamW
             if config.training.optimizer == "adamw"
@@ -215,6 +262,9 @@ def _run_training_split(
             config_hash=digest,
             selection_metric=config.training.selection_metric,
             amp=config.training.amp,
+            max_steps=config.training.max_steps,
+            warmup_steps=config.training.warmup_steps,
+            eval_interval_steps=config.training.eval_interval_steps,
         )
 
         architecture_profile, profile_path = profile_inference(

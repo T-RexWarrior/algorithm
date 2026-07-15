@@ -1,0 +1,82 @@
+{
+  "data_dir": "D:/实验五/全波段全变量DT",
+  "output_dir": "outputs/production_observation_aware_smoke",
+  "train_sites": ["AU-Cow_EBF"],
+  "val_sites": ["AU-Cpr_WSA"],
+  "test_sites": [],
+  "features": {
+    "forcing": ["SW_IN_F", "SW_IN_POT", "CO2_F_MDS", "P_F", "VPD_F", "TA_F", "TS_F_MDS_1", "SWC_F_MDS_1", "WS_F"],
+    "state": ["EPIC_Available_Mask", "Band317nm_Ref", "Band325nm_Ref", "Band340nm_Ref", "Band388nm_Ref", "Band443nm_Ref", "Band551nm_Ref", "Band680nm_Ref", "Band688nm_Ref", "Band764nm_Ref", "Band780nm_Ref", "Mean_SZA", "Mean_VZA", "Mean_RAA"],
+    "static": ["Coord_X", "Coord_Y", "Coord_Z"],
+    "target": "GPP_DT_VUT_REF",
+    "time": "date",
+    "land_cover": "Veg_ID"
+  },
+  "window": {
+    "seq_len": 96,
+    "time_features": "cyclic",
+    "require_regular": true,
+    "max_gap_hours": 1,
+    "max_span_hours": 95,
+    "endpoint_stride": 3,
+    "endpoint_phase": 0,
+    "context_days": 0
+  },
+  "scaling": "zscore",
+  "scale_target": true,
+  "model": {
+    "kind": "tcn_observation_aware",
+    "d_model": 8,
+    "nhead": 2,
+    "dropout": 0.0,
+    "dim_feedforward": 16,
+    "num_layers": 1,
+    "num_land_cover_classes": 13,
+    "land_cover_embedding_dim": 2,
+    "tcn_layers": 2,
+    "satellite_mask_index": 0,
+    "no_observation_age_hours": 240
+  },
+  "loss": "tail_aware",
+  "loss_options": {
+    "weights": [1.0, 1.0, 1.5, 2.5],
+    "underprediction_weight": 0.25
+  },
+  "training": {
+    "batch_size": 16,
+    "epochs": 2,
+    "learning_rate": 0.001,
+    "patience": 2,
+    "num_workers": 0,
+    "seed": 42,
+    "resume": false,
+    "selection_metric": "macro_rmse",
+    "station_balanced": false,
+    "target_balanced": true,
+    "samples_per_epoch": 32,
+    "max_steps": 2,
+    "warmup_steps": 1,
+    "eval_interval_steps": 1,
+    "amp": false,
+    "weight_decay": 0.0001,
+    "deterministic": true,
+    "optimizer": "adamw"
+  },
+  "evaluation": {
+    "save_predictions": false,
+    "save_plots": false,
+    "moving_average_window": 12,
+    "zoom_days": 30,
+    "minimum_target": 0,
+    "evaluate_test": false
+  },
+  "cross_validation": {
+    "enabled": false,
+    "n_splits": 5,
+    "seed": 42,
+    "evaluate_test_each_fold": false
+  },
+  "split_protocol": {
+    "name": "engineering_smoke_only"
+  }
+}

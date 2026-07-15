@@ -23,3 +23,11 @@
 交叉验证通过 `cross_validation` 控制。`enabled=true` 时，`train_sites` 与 `val_sites` 合并为开发站点池，按照每站 CSV 中 `features.land_cover` 列的主导类别做分层 K 折；模板的 `n_splits=5`。`test_sites` 不参与折叠，默认也不会在每折重复评估；如需该行为可设置 `evaluate_test_each_fold=true`。
 
 每个输出目录都有 `experiment_manifest.json`。配置哈希由完整解析后配置生成，因此修改模型、窗口、训练参数、站点或输出路径后都将得到新哈希；启用断点恢复时，哈希必须与检查点一致。
+
+## 全球生产候选配置
+
+- `production.example.json`：96 小时观测感知 TCN 的完整 12,000 步模板，需由锁定清单物化。
+- `production_observation_aware.json`：已写入当前开发/验证/盲测站点和清单哈希的生产配置。盲测只允许在最终决策时运行一次，默认 `evaluate_test=false`。
+- `production_smoke.example.json`：两个真实站点、两步优化的工程烟雾配置，只验证数据—模型—GPU—评估链路，结果不得用于模型比较。
+
+可选生产模型为 `tcn_observation_aware`、`tcn_multiscale` 和 `hybrid_lue_tcn`。长期记忆模型要求 `window.context_days=30`；LUE 混合头要求 `scale_target=false`。固定预算漏斗由 `scripts/run_production_suite.py` 执行，详细协议见 `docs/PRODUCTION_WORKFLOW.md`。

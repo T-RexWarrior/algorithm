@@ -88,10 +88,20 @@ def ensemble_prediction_files(
     prefix: str = "val",
     high_target_threshold: float | None = None,
     chunk_size: int = 200_000,
+    weights: list[float] | np.ndarray | None = None,
 ) -> dict:
     paths = [Path(path) for path in prediction_files]
     if len(paths) < 2:
         raise ValueError("At least two prediction files are required")
+    if weights is None:
+        weight_array = np.full(len(paths), 1.0 / len(paths), dtype=np.float64)
+    else:
+        weight_array = np.asarray(weights, dtype=np.float64)
+        if weight_array.shape != (len(paths),) or np.any(weight_array < 0) or not np.isfinite(weight_array).all():
+            raise ValueError("Ensemble weights must be finite, nonnegative and match sources")
+        if weight_array.sum() <= 0:
+            raise ValueError("At least one ensemble weight must be positive")
+        weight_array /= weight_array.sum()
     output_dir = Path(output_dir)
     evaluation_dir = output_dir / "evaluation"
     evaluation_dir.mkdir(parents=True, exist_ok=True)
@@ -136,7 +146,7 @@ def ensemble_prediction_files(
                     )
                 predictions.append(chunk["prediction"].to_numpy(dtype=np.float64))
             stacked = np.vstack(predictions)
-            prediction = stacked.mean(axis=0)
+            prediction = weight_array @ stacked
             prediction_std = stacked.std(axis=0, ddof=0)
             output = reference.copy()
             output["prediction"] = prediction
@@ -199,7 +209,8 @@ def ensemble_prediction_files(
     manifest = {
         "schema_version": 1,
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
-        "method": "equal_weight_mean",
+        "method": "equal_weight_mean" if weights is None else "nonnegative_sum_to_one",
+        "weights": weight_array.tolist(),
         "source_count": len(paths),
         "sources": [
             {
@@ -226,3 +237,52 @@ def ensemble_prediction_files(
     )
     manifest["manifest"] = str(manifest_path)
     return manifest
+
+
+def fit_nonnegative_oof_weights(
+    prediction_files,
+    *,
+    max_rows: int = 1_000_000,
+    chunk_size: int = 100_000,
+    seed: int = 42,
+) -> np.ndarray:
+    """Fit nonnegative sum-to-one weights on aligned OOF predictions."""
+    from sklearn.linear_model import LinearRegression
+
+    paths = [Path(path) for path in prediction_files]
+    if len(paths) < 2:
+        raise ValueError("At least two OOF files are required")
+    readers = [
+        pd.read_csv(path, usecols=["station", "date", "target", "prediction"], chunksize=chunk_size)
+        for path in paths
+    ]
+    rng = np.random.default_rng(seed)
+    x_parts, y_parts = [], []
+    remaining = max_rows
+    for chunks in zip_longest(*readers):
+        if any(chunk is None for chunk in chunks):
+            raise ValueError("OOF files contain different row counts")
+        reference = chunks[0].reset_index(drop=True)
+        predictions = []
+        for chunk in chunks:
+            chunk = chunk.reset_index(drop=True)
+            if not np.array_equal(reference[["station", "date"]].to_numpy(), chunk[["station", "date"]].to_numpy()):
+                raise ValueError("OOF prediction alignment mismatch")
+            if not np.allclose(reference["target"], chunk["target"], rtol=0, atol=1e-6):
+                raise ValueError("OOF target mismatch")
+            predictions.append(chunk["prediction"].to_numpy(dtype=np.float64))
+        take = min(remaining, len(reference))
+        if take <= 0:
+            break
+        indices = rng.choice(len(reference), size=take, replace=False)
+        x_parts.append(np.column_stack(predictions)[indices])
+        y_parts.append(reference["target"].to_numpy(dtype=np.float64)[indices])
+        remaining -= take
+    if not x_parts:
+        raise ValueError("No OOF rows available")
+    model = LinearRegression(positive=True, fit_intercept=False)
+    model.fit(np.vstack(x_parts), np.concatenate(y_parts))
+    weights = np.asarray(model.coef_, dtype=np.float64)
+    if weights.sum() <= 0:
+        return np.full(len(paths), 1.0 / len(paths))
+    return weights / weights.sum()
