@@ -129,17 +129,20 @@ def _run_epoch(
                 prediction, target, _, stations, _ = _forward(model, moved)
                 loss = criterion(prediction, target)
             if training:
+                optimizer_stepped = True
                 if grad_scaler is not None and amp_enabled:
+                    scale_before = grad_scaler.get_scale()
                     grad_scaler.scale(loss).backward()
                     grad_scaler.unscale_(optimizer)
                     torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
                     grad_scaler.step(optimizer)
                     grad_scaler.update()
+                    optimizer_stepped = grad_scaler.get_scale() >= scale_before
                 else:
                     loss.backward()
                     torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
                     optimizer.step()
-                if scheduler is not None:
+                if scheduler is not None and optimizer_stepped:
                     scheduler.step()
                 steps += 1
 
