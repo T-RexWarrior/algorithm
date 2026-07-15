@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import random
 from dataclasses import asdict, replace
@@ -55,8 +56,16 @@ def _run(config: ExperimentConfig) -> dict:
     existing = _completed(config.output_dir)
     if existing is not None:
         print(f"skip completed: {config.output_dir}")
-        return existing
-    return run_experiment(config)
+        result = existing
+    else:
+        result = run_experiment(config)
+    station_metrics = config.output_dir / "evaluation" / "val_metrics_by_station.csv"
+    if station_metrics.exists():
+        with station_metrics.open("r", encoding="utf-8-sig", newline="") as handle:
+            values = [float(row["rmse"]) for row in csv.DictReader(handle)]
+        if values:
+            result["comparison_macro_rmse"] = sum(values) / len(values)
+    return result
 
 
 def _training(base: ExperimentConfig, *, steps: int, seed: int):
@@ -101,7 +110,9 @@ def _age_config(base: ExperimentConfig, output: Path, name: str, *, steps: int, 
 
 
 def _score(result: dict) -> float:
-    return float(result["training"]["best_selection_score"])
+    return float(
+        result.get("comparison_macro_rmse", result["training"]["best_selection_score"])
+    )
 
 
 def _write_summary(path: Path, rows: list[dict]) -> None:
