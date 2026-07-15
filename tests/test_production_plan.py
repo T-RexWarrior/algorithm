@@ -105,6 +105,26 @@ def test_observation_age_ablation_variants_are_executable():
         assert torch.isfinite(output).all()
 
 
+def test_observation_aware_all_missing_token_supports_cuda_amp():
+    if not torch.cuda.is_available():
+        return
+    config = ModelConfig(
+        kind=ModelKind.TCN_OBSERVATION_AWARE, d_model=8, nhead=2,
+        num_layers=1, dim_feedforward=16, tcn_layers=2,
+        num_land_cover_classes=3, land_cover_embedding_dim=2, dropout=0.0,
+    )
+    model = build_model(config, FEATURES, seq_len=96, time_feature_dim=4).cuda().eval()
+    forcing = torch.randn(2, 96, len(FEATURES.forcing), device="cuda")
+    state = torch.zeros(2, 96, len(FEATURES.state), device="cuda")
+    time = torch.randn(2, 96, 4, device="cuda")
+    static = torch.randn(2, 96, len(FEATURES.static), device="cuda")
+    land_cover = torch.zeros(2, 96, dtype=torch.long, device="cuda")
+    with torch.no_grad(), torch.autocast("cuda", dtype=torch.float16):
+        prediction = model(forcing, state, time, static, land_cover)
+    assert prediction.dtype == torch.float16
+    assert torch.isfinite(prediction).all()
+
+
 def test_tail_loss_penalizes_high_underprediction_more():
     loss = TailAwareLoss(p50=1.0, p80=2.0, p95=3.0)
     low = loss(torch.tensor([0.0]), torch.tensor([1.0]))

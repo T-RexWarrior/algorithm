@@ -284,16 +284,22 @@ def train_model(
             amp=amp,
             station_metrics=True,
         )
+        target_rmse_scale = (
+            float(scaler.target_scale)
+            if scaler is not None and scaler.scale_target else 1.0
+        )
+        val_micro_rmse = val_stats.micro_rmse * target_rmse_scale
+        val_macro_rmse = val_stats.macro_rmse * target_rmse_scale
         scores = {
             "val_loss": val_stats.loss,
-            "micro_rmse": val_stats.micro_rmse,
-            "macro_rmse": val_stats.macro_rmse,
+            "micro_rmse": val_micro_rmse,
+            "macro_rmse": val_macro_rmse,
         }
         selection_score = scores[selection_metric]
         history["train_loss"].append(train_stats.loss)
         history["val_loss"].append(val_stats.loss)
-        history["val_micro_rmse"].append(val_stats.micro_rmse)
-        history["val_macro_rmse"].append(val_stats.macro_rmse)
+        history["val_micro_rmse"].append(val_micro_rmse)
+        history["val_macro_rmse"].append(val_macro_rmse)
         history["selection_score"].append(selection_score)
         history["global_step"].append(global_step)
         completed = epoch + 1
@@ -341,8 +347,8 @@ def train_model(
             f"epoch={epoch + 1}/{effective_epochs} step={global_step} "
             f"train_loss={train_stats.loss:.6f} "
             f"val_loss={val_stats.loss:.6f} "
-            f"micro_rmse={val_stats.micro_rmse:.6f} "
-            f"macro_rmse={val_stats.macro_rmse:.6f} "
+            f"micro_rmse={val_micro_rmse:.6f} "
+            f"macro_rmse={val_macro_rmse:.6f} "
             f"selected={selection_metric}:{selection_score:.6f} "
             f"best={best_selection_score:.6f}",
             flush=True,

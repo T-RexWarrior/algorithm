@@ -124,7 +124,9 @@ class ObservationAwareTCNGPP(nn.Module):
         if all_missing.any():
             state_memory = state_memory.clone()
             valid = valid.clone()
-            state_memory[all_missing, -1, :] = self.no_observation_token[0, 0]
+            state_memory[all_missing, -1, :] = self.no_observation_token[
+                0, 0
+            ].to(dtype=state_memory.dtype)
             valid[all_missing, -1] = True
         state_memory = self.state_encoder(
             state_memory, src_key_padding_mask=~valid
