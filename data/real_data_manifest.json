@@ -1,0 +1,3230 @@
+{
+  "manifest_version": 1,
+  "generated_utc": "2026-07-15T07:38:25.785626+00:00",
+  "data_dir": "D:\\实验五\\全波段全变量DT",
+  "file_pattern": "*.csv",
+  "file_count": 530,
+  "total_size_bytes": 7489379642,
+  "schema_consistent": true,
+  "schemas": [
+    {
+      "file_count": 530,
+      "columns": [
+        "date",
+        "SW_IN_F",
+        "SW_IN_POT",
+        "CO2_F_MDS",
+        "P_F",
+        "VPD_F",
+        "TA_F",
+        "TS_F_MDS_1",
+        "EPIC_Available_Mask",
+        "SWC_F_MDS_1",
+        "WS_F",
+        "Lat",
+        "Long",
+        "Veg",
+        "Coord_X",
+        "Coord_Y",
+        "Coord_Z",
+        "Veg_ID",
+        "Band317nm_Ref",
+        "Band325nm_Ref",
+        "Band340nm_Ref",
+        "Band388nm_Ref",
+        "Band443nm_Ref",
+        "Band551nm_Ref",
+        "Band680nm_Ref",
+        "Band688nm_Ref",
+        "Band764nm_Ref",
+        "Band780nm_Ref",
+        "Mean_SZA",
+        "Mean_VZA",
+        "Mean_RAA",
+        "GPP_DT_VUT_REF"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "name": "AR-CCa_CRO_Merged.csv",
+      "size_bytes": 11655875,
+      "modified_utc": "2026-07-01T13:12:42.404596+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AR-CCg_GRA_Merged.csv",
+      "size_bytes": 16581885,
+      "modified_utc": "2026-07-01T13:12:43.452221+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AR-TF1_WET_Merged.csv",
+      "size_bytes": 7071017,
+      "modified_utc": "2026-07-01T13:12:44.165095+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AR-TF2_WET_Merged.csv",
+      "size_bytes": 7111958,
+      "modified_utc": "2026-07-01T13:12:44.905840+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AT-Mmg_ENF_Merged.csv",
+      "size_bytes": 9577478,
+      "modified_utc": "2026-07-01T13:12:45.725116+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AT-Neu_GRA_Merged.csv",
+      "size_bytes": 11664454,
+      "modified_utc": "2026-07-01T13:12:46.347652+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AT-PsM_WET_Merged.csv",
+      "size_bytes": 9367362,
+      "modified_utc": "2026-07-01T13:12:46.966436+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AT-Zoe_MF_Merged.csv",
+      "size_bytes": 21444621,
+      "modified_utc": "2026-07-01T13:12:48.482787+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-ASM_SAV_Merged.csv",
+      "size_bytes": 23622386,
+      "modified_utc": "2026-07-01T13:12:49.625977+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Boy_EBF_Merged.csv",
+      "size_bytes": 21635209,
+      "modified_utc": "2026-07-01T13:12:51.229217+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Cow_EBF_Merged.csv",
+      "size_bytes": 23946371,
+      "modified_utc": "2026-07-01T13:12:52.647471+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Cpr_WSA_Merged.csv",
+      "size_bytes": 23947059,
+      "modified_utc": "2026-07-01T13:12:54.582937+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Ctr_EBF_Merged.csv",
+      "size_bytes": 7281217,
+      "modified_utc": "2026-07-01T13:12:55.277196+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Cum_EBF_Merged.csv",
+      "size_bytes": 23870859,
+      "modified_utc": "2026-07-01T13:12:56.829812+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-DaS_WSA_Merged.csv",
+      "size_bytes": 24023187,
+      "modified_utc": "2026-07-01T13:12:58.631326+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Dry_WSA_Merged.csv",
+      "size_bytes": 23573650,
+      "modified_utc": "2026-07-01T13:13:00.625374+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Fle_WSA_Merged.csv",
+      "size_bytes": 9587136,
+      "modified_utc": "2026-07-01T13:13:01.364540+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Gin_EBF_Merged.csv",
+      "size_bytes": 23936239,
+      "modified_utc": "2026-07-01T13:13:03.000105+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-GWW_EBF_Merged.csv",
+      "size_bytes": 23749157,
+      "modified_utc": "2026-07-01T13:13:04.797799+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-How_WSA_Merged.csv",
+      "size_bytes": 23672636,
+      "modified_utc": "2026-07-01T13:13:06.257529+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Lit_WSA_Merged.csv",
+      "size_bytes": 23958278,
+      "modified_utc": "2026-07-01T13:13:07.632482+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Lon_GRA_Merged.csv",
+      "size_bytes": 16653471,
+      "modified_utc": "2026-07-01T13:13:08.367623+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-MvA_CRO_Merged.csv",
+      "size_bytes": 4681871,
+      "modified_utc": "2026-07-01T13:13:08.651228+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-MvB_CRO_Merged.csv",
+      "size_bytes": 2388113,
+      "modified_utc": "2026-07-01T13:13:09.345620+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Rgf_CVM_Merged.csv",
+      "size_bytes": 23980207,
+      "modified_utc": "2026-07-01T13:13:10.733957+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Rig_GRA_Merged.csv",
+      "size_bytes": 4725449,
+      "modified_utc": "2026-07-01T13:13:11.458972+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Rob_EBF_Merged.csv",
+      "size_bytes": 24191876,
+      "modified_utc": "2026-07-01T13:13:12.676061+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Sam_GRA_Merged.csv",
+      "size_bytes": 4851781,
+      "modified_utc": "2026-07-01T13:13:13.178035+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Sil_GRA_Merged.csv",
+      "size_bytes": 14151432,
+      "modified_utc": "2026-07-01T13:13:13.796176+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Sno_EBF_Merged.csv",
+      "size_bytes": 4651302,
+      "modified_utc": "2026-07-01T13:13:14.574924+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Stp_GRA_Merged.csv",
+      "size_bytes": 23573811,
+      "modified_utc": "2026-07-01T13:13:15.698652+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-TTE_SAV_Merged.csv",
+      "size_bytes": 23714210,
+      "modified_utc": "2026-07-01T13:13:16.689752+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Tum_EBF_Merged.csv",
+      "size_bytes": 16002354,
+      "modified_utc": "2026-07-01T13:13:17.403993+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Wel_GRA_Merged.csv",
+      "size_bytes": 4595619,
+      "modified_utc": "2026-07-01T13:13:17.721312+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Wgt_GRA_Merged.csv",
+      "size_bytes": 4540934,
+      "modified_utc": "2026-07-01T13:13:18.286325+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Whr_EBF_Merged.csv",
+      "size_bytes": 23450233,
+      "modified_utc": "2026-07-01T13:13:19.554666+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Wom_EBF_Merged.csv",
+      "size_bytes": 24090452,
+      "modified_utc": "2026-07-01T13:13:20.599103+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Wrr_EBF_Merged.csv",
+      "size_bytes": 14092863,
+      "modified_utc": "2026-07-01T13:13:21.113096+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Ya1_GRA_Merged.csv",
+      "size_bytes": 7049828,
+      "modified_utc": "2026-07-01T13:13:21.442999+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Ya2_GRA_Merged.csv",
+      "size_bytes": 7050511,
+      "modified_utc": "2026-07-01T13:13:21.825974+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "AU-Ync_GRA_Merged.csv",
+      "size_bytes": 23444395,
+      "modified_utc": "2026-07-01T13:13:22.874073+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "BE-Bra_ENF_Merged.csv",
+      "size_bytes": 21672391,
+      "modified_utc": "2026-07-01T13:13:23.947114+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "BE-Dor_GRA_Merged.csv",
+      "size_bytes": 21822643,
+      "modified_utc": "2026-07-01T13:13:25.267756+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "BE-Lon_CRO_Merged.csv",
+      "size_bytes": 22007058,
+      "modified_utc": "2026-07-01T13:13:26.170216+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "BE-Maa_CSH_Merged.csv",
+      "size_bytes": 21452567,
+      "modified_utc": "2026-07-01T13:13:27.018415+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "BE-Vie_MF_Merged.csv",
+      "size_bytes": 21721508,
+      "modified_utc": "2026-07-01T13:13:27.983689+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "BJ-Bfg_DBF_Merged.csv",
+      "size_bytes": 4737808,
+      "modified_utc": "2026-07-01T13:13:28.328498+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "BJ-Db1_CRO_Merged.csv",
+      "size_bytes": 7244905,
+      "modified_utc": "2026-07-01T13:13:28.799240+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "BJ-Nhu_SAV_Merged.csv",
+      "size_bytes": 4666090,
+      "modified_utc": "2026-07-01T13:13:29.111902+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "BR-ITA_EBF_Merged.csv",
+      "size_bytes": 11996454,
+      "modified_utc": "2026-07-01T13:13:29.926743+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "BR-Ma2_EBF_Merged.csv",
+      "size_bytes": 2356631,
+      "modified_utc": "2026-07-01T13:13:30.223113+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "BR-Ma3_CVM_Merged.csv",
+      "size_bytes": 7097299,
+      "modified_utc": "2026-07-01T13:13:30.707639+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "BR-Npw_WSA_Merged.csv",
+      "size_bytes": 4759779,
+      "modified_utc": "2026-07-01T13:13:30.957639+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "BR-SM1_CRO_Merged.csv",
+      "size_bytes": 2408528,
+      "modified_utc": "2026-07-01T13:13:31.273847+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-ARB_WET_Merged.csv",
+      "size_bytes": 21480304,
+      "modified_utc": "2026-07-01T13:13:32.348883+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-ARF_WET_Merged.csv",
+      "size_bytes": 21391986,
+      "modified_utc": "2026-07-01T13:13:33.520307+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-Cbo_DBF_Merged.csv",
+      "size_bytes": 21386795,
+      "modified_utc": "2026-07-01T13:13:34.767981+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-CF3_WET_Merged.csv",
+      "size_bytes": 9534864,
+      "modified_utc": "2026-07-01T13:13:35.613742+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-DB2_WET_Merged.csv",
+      "size_bytes": 14256595,
+      "modified_utc": "2026-07-01T13:13:36.867820+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-DBB_WET_Merged.csv",
+      "size_bytes": 21927682,
+      "modified_utc": "2026-07-01T13:13:38.390204+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-DSM_WET_Merged.csv",
+      "size_bytes": 9669277,
+      "modified_utc": "2026-07-01T13:13:39.149854+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-KLP_WET_Merged.csv",
+      "size_bytes": 11906231,
+      "modified_utc": "2026-07-01T13:13:40.353736+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-LP1_ENF_Merged.csv",
+      "size_bytes": 21665233,
+      "modified_utc": "2026-07-01T13:13:41.905965+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-Mer_WET_Merged.csv",
+      "size_bytes": 11966150,
+      "modified_utc": "2026-07-01T13:13:42.764734+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-Mtk_GRA_Merged.csv",
+      "size_bytes": 2361737,
+      "modified_utc": "2026-07-01T13:13:43.247482+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-PB1_WET_Merged.csv",
+      "size_bytes": 21281780,
+      "modified_utc": "2026-07-01T13:13:44.460790+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-PB2_WET_Merged.csv",
+      "size_bytes": 19084376,
+      "modified_utc": "2026-07-01T13:13:45.562309+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-RBM_WET_Merged.csv",
+      "size_bytes": 7305708,
+      "modified_utc": "2026-07-01T13:13:46.071234+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-SCB_WET_Merged.csv",
+      "size_bytes": 9549645,
+      "modified_utc": "2026-07-01T13:13:46.729224+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-SCC_ENF_Merged.csv",
+      "size_bytes": 21049331,
+      "modified_utc": "2026-07-01T13:13:48.018787+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-TP1_ENF_Merged.csv",
+      "size_bytes": 18976020,
+      "modified_utc": "2026-07-01T13:13:49.163262+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-TP3_ENF_Merged.csv",
+      "size_bytes": 19064930,
+      "modified_utc": "2026-07-01T13:13:50.208728+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-TP4_ENF_Merged.csv",
+      "size_bytes": 19075783,
+      "modified_utc": "2026-07-01T13:13:51.191457+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CA-TPD_DBF_Merged.csv",
+      "size_bytes": 19208962,
+      "modified_utc": "2026-07-01T13:13:52.106740+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CD-Ygb_MF_Merged.csv",
+      "size_bytes": 12122616,
+      "modified_utc": "2026-07-01T13:13:53.029109+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CH-Aws_GRA_Merged.csv",
+      "size_bytes": 21858946,
+      "modified_utc": "2026-07-01T13:13:54.036896+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CH-Cha_GRA_Merged.csv",
+      "size_bytes": 21528950,
+      "modified_utc": "2026-07-01T13:13:55.194181+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CH-Crs_GRA_Merged.csv",
+      "size_bytes": 2400346,
+      "modified_utc": "2026-07-01T13:13:55.648817+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CH-Dav_ENF_Merged.csv",
+      "size_bytes": 21208287,
+      "modified_utc": "2026-07-01T13:13:56.780800+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CH-For_CRO_Merged.csv",
+      "size_bytes": 2449120,
+      "modified_utc": "2026-07-01T13:13:57.366376+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CH-Fru_GRA_Merged.csv",
+      "size_bytes": 22065626,
+      "modified_utc": "2026-07-01T13:13:59.012053+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CH-Lae_MF_Merged.csv",
+      "size_bytes": 21709355,
+      "modified_utc": "2026-07-01T13:13:59.898268+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CH-Oe2_CRO_Merged.csv",
+      "size_bytes": 21971026,
+      "modified_utc": "2026-07-01T13:14:01.344195+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CH-Rtb_GRA_Merged.csv",
+      "size_bytes": 16433600,
+      "modified_utc": "2026-07-01T13:14:02.297872+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CH-Tnk_CRO_Merged.csv",
+      "size_bytes": 2470331,
+      "modified_utc": "2026-07-01T13:14:03.192516+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CL-SDF_EBF_Merged.csv",
+      "size_bytes": 14203183,
+      "modified_utc": "2026-07-01T13:14:03.885993+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CL-SDP_WET_Merged.csv",
+      "size_bytes": 14194791,
+      "modified_utc": "2026-07-01T13:14:04.650872+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Aro_GRA_Merged.csv",
+      "size_bytes": 22099965,
+      "modified_utc": "2026-07-01T13:14:06.051303+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Ash_EBF_Merged.csv",
+      "size_bytes": 9651472,
+      "modified_utc": "2026-07-01T13:14:06.770885+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-BeO_MF_Merged.csv",
+      "size_bytes": 11940718,
+      "modified_utc": "2026-07-01T13:14:07.379303+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Dan_GRA_Merged.csv",
+      "size_bytes": 12144816,
+      "modified_utc": "2026-07-01T13:14:08.164511+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-DaW_WET_Merged.csv",
+      "size_bytes": 9317086,
+      "modified_utc": "2026-07-01T13:14:08.676669+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Din_EBF_Merged.csv",
+      "size_bytes": 12049307,
+      "modified_utc": "2026-07-01T13:14:09.431377+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Dmn_CRO_Merged.csv",
+      "size_bytes": 22127538,
+      "modified_utc": "2026-07-01T13:14:10.456754+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Dsh_GRA_Merged.csv",
+      "size_bytes": 22063354,
+      "modified_utc": "2026-07-01T13:14:11.718577+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Du2_GRA_Merged.csv",
+      "size_bytes": 9504487,
+      "modified_utc": "2026-07-01T13:14:12.381197+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Dzo_EBF_Merged.csv",
+      "size_bytes": 11857749,
+      "modified_utc": "2026-07-01T13:14:12.962404+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Erg_GRA_Merged.csv",
+      "size_bytes": 9554839,
+      "modified_utc": "2026-07-01T13:14:13.597217+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-GuT_GRA_Merged.csv",
+      "size_bytes": 4798343,
+      "modified_utc": "2026-07-01T13:14:13.944860+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Ha2_OSH_Merged.csv",
+      "size_bytes": 9532441,
+      "modified_utc": "2026-07-01T13:14:14.556888+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-HaW_WET_Merged.csv",
+      "size_bytes": 7158304,
+      "modified_utc": "2026-07-01T13:14:15.063784+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-HeD_BSV_Merged.csv",
+      "size_bytes": 14372256,
+      "modified_utc": "2026-07-01T13:14:15.740051+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-HeM_DBF_Merged.csv",
+      "size_bytes": 22137905,
+      "modified_utc": "2026-07-01T13:14:17.042546+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Huz_BSV_Merged.csv",
+      "size_bytes": 22380472,
+      "modified_utc": "2026-07-01T13:14:18.034913+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Jng_GRA_Merged.csv",
+      "size_bytes": 16973939,
+      "modified_utc": "2026-07-01T13:14:19.184385+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Jzh_CRO_Merged.csv",
+      "size_bytes": 2468770,
+      "modified_utc": "2026-07-01T13:14:19.895021+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Lch_CRO_Merged.csv",
+      "size_bytes": 12055265,
+      "modified_utc": "2026-07-01T13:14:20.805165+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Mxn_MF_Merged.csv",
+      "size_bytes": 9612879,
+      "modified_utc": "2026-07-01T13:14:21.466590+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Nmn_CRO_Merged.csv",
+      "size_bytes": 9659682,
+      "modified_utc": "2026-07-01T13:14:22.295563+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Qng_DNF_Merged.csv",
+      "size_bytes": 7379286,
+      "modified_utc": "2026-07-01T13:14:22.794188+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Sb1_DNF_Merged.csv",
+      "size_bytes": 12110552,
+      "modified_utc": "2026-07-01T13:14:23.330067+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Sb2_ENF_Merged.csv",
+      "size_bytes": 12184216,
+      "modified_utc": "2026-07-01T13:14:23.917471+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Sdq_OSH_Merged.csv",
+      "size_bytes": 22057171,
+      "modified_utc": "2026-07-01T13:14:24.941341+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Xi2_GRA_Merged.csv",
+      "size_bytes": 11615922,
+      "modified_utc": "2026-07-01T13:14:25.585657+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Yan_OSH_Merged.csv",
+      "size_bytes": 7298736,
+      "modified_utc": "2026-07-01T13:14:26.087659+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-YaS_OSH_Merged.csv",
+      "size_bytes": 11999115,
+      "modified_utc": "2026-07-01T13:14:26.806162+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-You_GRA_Merged.csv",
+      "size_bytes": 22151429,
+      "modified_utc": "2026-07-01T13:14:28.194604+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Yuc_CRO_Merged.csv",
+      "size_bytes": 12100161,
+      "modified_utc": "2026-07-01T13:14:28.946429+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CN-Zha_WET_Merged.csv",
+      "size_bytes": 21849808,
+      "modified_utc": "2026-07-01T13:14:30.150243+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CR-AqC_EBF_Merged.csv",
+      "size_bytes": 2429269,
+      "modified_utc": "2026-07-01T13:14:30.310416+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CR-Fsc_CRO_Merged.csv",
+      "size_bytes": 7357175,
+      "modified_utc": "2026-07-01T13:14:30.891878+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CZ-BK1_ENF_Merged.csv",
+      "size_bytes": 21925402,
+      "modified_utc": "2026-07-01T13:14:31.647693+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CZ-KrP_CRO_Merged.csv",
+      "size_bytes": 19609659,
+      "modified_utc": "2026-07-01T13:14:32.860155+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CZ-LnG_GRA_Merged.csv",
+      "size_bytes": 14729775,
+      "modified_utc": "2026-07-01T13:14:33.613044+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CZ-Lnz_DBF_Merged.csv",
+      "size_bytes": 22052231,
+      "modified_utc": "2026-07-01T13:14:34.795844+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CZ-RAJ_ENF_Merged.csv",
+      "size_bytes": 21965242,
+      "modified_utc": "2026-07-01T13:14:35.646264+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CZ-Stn_DBF_Merged.csv",
+      "size_bytes": 21994528,
+      "modified_utc": "2026-07-01T13:14:36.609081+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "CZ-wet_WET_Merged.csv",
+      "size_bytes": 21605170,
+      "modified_utc": "2026-07-01T13:14:37.720365+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Akm_WET_Merged.csv",
+      "size_bytes": 21155913,
+      "modified_utc": "2026-07-01T13:14:38.727170+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Amv_WET_Merged.csv",
+      "size_bytes": 4932050,
+      "modified_utc": "2026-07-01T13:14:39.261559+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Brs_CRO_Merged.csv",
+      "size_bytes": 4873211,
+      "modified_utc": "2026-07-01T13:14:40.176816+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Etn_DBF_Merged.csv",
+      "size_bytes": 2416354,
+      "modified_utc": "2026-07-01T13:14:40.396847+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Fen_GRA_Merged.csv",
+      "size_bytes": 4736388,
+      "modified_utc": "2026-07-01T13:14:40.836548+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Geb_CRO_Merged.csv",
+      "size_bytes": 12222387,
+      "modified_utc": "2026-07-01T13:14:41.405945+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Gri_GRA_Merged.csv",
+      "size_bytes": 21770868,
+      "modified_utc": "2026-07-01T13:14:42.411785+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-GsB_GRA_Merged.csv",
+      "size_bytes": 22024597,
+      "modified_utc": "2026-07-01T13:14:43.721332+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Gwg_GRA_Merged.csv",
+      "size_bytes": 4764246,
+      "modified_utc": "2026-07-01T13:14:44.386131+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Hai_DBF_Merged.csv",
+      "size_bytes": 22111591,
+      "modified_utc": "2026-07-01T13:14:45.772952+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Har_ENF_Merged.csv",
+      "size_bytes": 12035694,
+      "modified_utc": "2026-07-01T13:14:46.515275+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-HoH_DBF_Merged.csv",
+      "size_bytes": 21561453,
+      "modified_utc": "2026-07-01T13:14:48.188167+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Hte_WET_Merged.csv",
+      "size_bytes": 7291594,
+      "modified_utc": "2026-07-01T13:14:48.685049+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Hzd_DBF_Merged.csv",
+      "size_bytes": 7287918,
+      "modified_utc": "2026-07-01T13:14:49.327506+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Kli_CRO_Merged.csv",
+      "size_bytes": 16358632,
+      "modified_utc": "2026-07-01T13:14:50.035717+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Lnf_DBF_Merged.csv",
+      "size_bytes": 21860093,
+      "modified_utc": "2026-07-01T13:14:51.278564+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Msr_ENF_Merged.csv",
+      "size_bytes": 12288927,
+      "modified_utc": "2026-07-01T13:14:52.161180+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Obe_ENF_Merged.csv",
+      "size_bytes": 21434498,
+      "modified_utc": "2026-07-01T13:14:53.408431+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Rns_CRO_Merged.csv",
+      "size_bytes": 9963716,
+      "modified_utc": "2026-07-01T13:14:53.943113+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-RuC_OSH_Merged.csv",
+      "size_bytes": 21608508,
+      "modified_utc": "2026-07-01T13:14:55.250668+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-RuM_CRO_Merged.csv",
+      "size_bytes": 9864336,
+      "modified_utc": "2026-07-01T13:14:55.907048+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-RuR_GRA_Merged.csv",
+      "size_bytes": 22270291,
+      "modified_utc": "2026-07-01T13:14:57.503289+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-RuS_CRO_Merged.csv",
+      "size_bytes": 22227959,
+      "modified_utc": "2026-07-01T13:14:58.998170+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-RuW_ENF_Merged.csv",
+      "size_bytes": 22044575,
+      "modified_utc": "2026-07-01T13:15:00.574754+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-SbM_WET_Merged.csv",
+      "size_bytes": 4986331,
+      "modified_utc": "2026-07-01T13:15:01.015339+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-SfS_WET_Merged.csv",
+      "size_bytes": 11752416,
+      "modified_utc": "2026-07-01T13:15:01.824768+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Tha_ENF_Merged.csv",
+      "size_bytes": 21458029,
+      "modified_utc": "2026-07-01T13:15:03.317349+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DE-Zrk_WET_Merged.csv",
+      "size_bytes": 17109838,
+      "modified_utc": "2026-07-01T13:15:04.357044+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DK-RCW_DBF_Merged.csv",
+      "size_bytes": 4847392,
+      "modified_utc": "2026-07-01T13:15:05.571537+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "DK-Sor_DBF_Merged.csv",
+      "size_bytes": 21544769,
+      "modified_utc": "2026-07-01T13:15:06.562295+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "EE-Pts_WET_Merged.csv",
+      "size_bytes": 7298314,
+      "modified_utc": "2026-07-01T13:15:07.098812+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "EE-Rng_WET_Merged.csv",
+      "size_bytes": 4768032,
+      "modified_utc": "2026-07-01T13:15:07.653339+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "EE-Stg_ENF_Merged.csv",
+      "size_bytes": 21899568,
+      "modified_utc": "2026-07-01T13:15:09.450969+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-Abr_SAV_Merged.csv",
+      "size_bytes": 12119046,
+      "modified_utc": "2026-07-01T13:15:10.337027+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-Agu_OSH_Merged.csv",
+      "size_bytes": 22316367,
+      "modified_utc": "2026-07-01T13:15:11.607713+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-Amo_OSH_Merged.csv",
+      "size_bytes": 9675987,
+      "modified_utc": "2026-07-01T13:15:12.434791+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-Cnd_WSA_Merged.csv",
+      "size_bytes": 14682292,
+      "modified_utc": "2026-07-01T13:15:13.533298+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-Crg_CSH_Merged.csv",
+      "size_bytes": 9646481,
+      "modified_utc": "2026-07-01T13:15:17.339269+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-Dnn_OSH_Merged.csv",
+      "size_bytes": 2406067,
+      "modified_utc": "2026-07-01T13:15:18.099348+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-FtD_WET_Merged.csv",
+      "size_bytes": 9781188,
+      "modified_utc": "2026-07-01T13:15:19.309084+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-Gdn_SAV_Merged.csv",
+      "size_bytes": 14604191,
+      "modified_utc": "2026-07-01T13:15:20.459753+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-HdD_SAV_Merged.csv",
+      "size_bytes": 2504004,
+      "modified_utc": "2026-07-01T13:15:21.020963+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-HeB_ENF_Merged.csv",
+      "size_bytes": 14652689,
+      "modified_utc": "2026-07-01T13:15:22.140195+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-Hen_ENF_Merged.csv",
+      "size_bytes": 14715294,
+      "modified_utc": "2026-07-01T13:15:22.944810+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-LJu_OSH_Merged.csv",
+      "size_bytes": 22414547,
+      "modified_utc": "2026-07-01T13:15:24.301328+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-LM1_SAV_Merged.csv",
+      "size_bytes": 22029625,
+      "modified_utc": "2026-07-01T13:15:25.938876+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-LM2_SAV_Merged.csv",
+      "size_bytes": 22107081,
+      "modified_utc": "2026-07-01T13:15:27.468568+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-LMa_SAV_Merged.csv",
+      "size_bytes": 12226129,
+      "modified_utc": "2026-07-01T13:15:28.355531+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-Mcd_EBF_Merged.csv",
+      "size_bytes": 16734902,
+      "modified_utc": "2026-07-01T13:15:29.360850+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-MtB_OSH_Merged.csv",
+      "size_bytes": 9905920,
+      "modified_utc": "2026-07-01T13:15:29.848910+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-MtN_CSH_Merged.csv",
+      "size_bytes": 2453168,
+      "modified_utc": "2026-07-01T13:15:30.119473+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-Mzn_EBF_Merged.csv",
+      "size_bytes": 4966405,
+      "modified_utc": "2026-07-01T13:15:30.655170+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-Pdu_WET_Merged.csv",
+      "size_bytes": 4951444,
+      "modified_utc": "2026-07-01T13:15:31.115629+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-Pzb_GRA_Merged.csv",
+      "size_bytes": 12306108,
+      "modified_utc": "2026-07-01T13:15:31.725761+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-Srn_EBF_Merged.csv",
+      "size_bytes": 4899168,
+      "modified_utc": "2026-07-01T13:15:32.285991+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-TzM_DBF_Merged.csv",
+      "size_bytes": 12357758,
+      "modified_utc": "2026-07-01T13:15:33.151287+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-VDA_GRA_Merged.csv",
+      "size_bytes": 7231548,
+      "modified_utc": "2026-07-01T13:15:33.677402+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ES-Yst_ENF_Merged.csv",
+      "size_bytes": 14728291,
+      "modified_utc": "2026-07-01T13:15:34.531011+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FI-Hyy_ENF_Merged.csv",
+      "size_bytes": 21617546,
+      "modified_utc": "2026-07-01T13:15:35.849988+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FI-Ken_ENF_Merged.csv",
+      "size_bytes": 16564618,
+      "modified_utc": "2026-07-01T13:15:36.749781+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FI-Let_ENF_Merged.csv",
+      "size_bytes": 21512355,
+      "modified_utc": "2026-07-01T13:15:38.029715+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FI-Nsv_CVM_Merged.csv",
+      "size_bytes": 9606683,
+      "modified_utc": "2026-07-01T13:15:38.574843+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FI-Sii_WET_Merged.csv",
+      "size_bytes": 16777787,
+      "modified_utc": "2026-07-01T13:15:39.756761+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FI-Sod_ENF_Merged.csv",
+      "size_bytes": 4827384,
+      "modified_utc": "2026-07-01T13:15:40.197999+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FI-Var_ENF_Merged.csv",
+      "size_bytes": 21839298,
+      "modified_utc": "2026-07-01T13:15:41.029671+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-Aur_CRO_Merged.csv",
+      "size_bytes": 21935319,
+      "modified_utc": "2026-07-01T13:15:42.027003+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-Bil_ENF_Merged.csv",
+      "size_bytes": 21489664,
+      "modified_utc": "2026-07-01T13:15:43.257921+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-CLt_GRA_Merged.csv",
+      "size_bytes": 14293641,
+      "modified_utc": "2026-07-01T13:15:43.939426+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-EM2_CRO_Merged.csv",
+      "size_bytes": 19150213,
+      "modified_utc": "2026-07-01T13:15:44.824586+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-FBn_ENF_Merged.csv",
+      "size_bytes": 21210956,
+      "modified_utc": "2026-07-01T13:15:46.013659+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-Fon_DBF_Merged.csv",
+      "size_bytes": 14231080,
+      "modified_utc": "2026-07-01T13:15:47.085817+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-Gri_CRO_Merged.csv",
+      "size_bytes": 21757370,
+      "modified_utc": "2026-07-01T13:15:48.557137+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-Hes_DBF_Merged.csv",
+      "size_bytes": 21737876,
+      "modified_utc": "2026-07-01T13:15:49.723334+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-Lam_CRO_Merged.csv",
+      "size_bytes": 9709771,
+      "modified_utc": "2026-07-01T13:15:50.439974+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-LGt_WET_Merged.csv",
+      "size_bytes": 19631320,
+      "modified_utc": "2026-07-01T13:15:51.362730+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-Lqu_GRA_Merged.csv",
+      "size_bytes": 7071199,
+      "modified_utc": "2026-07-01T13:15:52.067330+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-Lus_GRA_Merged.csv",
+      "size_bytes": 7183978,
+      "modified_utc": "2026-07-01T13:15:52.895753+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-Mej_GRA_Merged.csv",
+      "size_bytes": 14538200,
+      "modified_utc": "2026-07-01T13:15:53.822859+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-Nzn_GRA_Merged.csv",
+      "size_bytes": 21902083,
+      "modified_utc": "2026-07-01T13:15:55.418013+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-Pue_EBF_Merged.csv",
+      "size_bytes": 20777704,
+      "modified_utc": "2026-07-01T13:15:56.565007+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "FR-Tou_GRA_Merged.csv",
+      "size_bytes": 16933453,
+      "modified_utc": "2026-07-01T13:15:57.544916+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "GF-Guy_EBF_Merged.csv",
+      "size_bytes": 18785581,
+      "modified_utc": "2026-07-01T13:15:58.873725+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "GL-Dsk_OSH_Merged.csv",
+      "size_bytes": 12038855,
+      "modified_utc": "2026-07-01T13:15:59.993239+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "GL-NuF_WET_Merged.csv",
+      "size_bytes": 14583297,
+      "modified_utc": "2026-07-01T13:16:00.964619+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "GL-ZaF_WET_Merged.csv",
+      "size_bytes": 4906954,
+      "modified_utc": "2026-07-01T13:16:01.498143+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "GL-ZaH_GRA_Merged.csv",
+      "size_bytes": 12405439,
+      "modified_utc": "2026-07-01T13:16:02.208264+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ID-JOP_EBF_Merged.csv",
+      "size_bytes": 21881031,
+      "modified_utc": "2026-07-01T13:16:03.389996+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ID-PaB_OSH_Merged.csv",
+      "size_bytes": 2322863,
+      "modified_utc": "2026-07-01T13:16:03.566056+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ID-PaD_EBF_Merged.csv",
+      "size_bytes": 4743127,
+      "modified_utc": "2026-07-01T13:16:03.962821+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ID-Pag_EBF_Merged.csv",
+      "size_bytes": 6986198,
+      "modified_utc": "2026-07-01T13:16:04.721589+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IE-Cra_WET_Merged.csv",
+      "size_bytes": 12411973,
+      "modified_utc": "2026-07-01T13:16:05.733679+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IE-Gwr_CRO_Merged.csv",
+      "size_bytes": 2379578,
+      "modified_utc": "2026-07-01T13:16:06.264846+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IL-RmH_EBF_Merged.csv",
+      "size_bytes": 11990369,
+      "modified_utc": "2026-07-01T13:16:06.936408+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IL-Yat_ENF_Merged.csv",
+      "size_bytes": 21789600,
+      "modified_utc": "2026-07-01T13:16:08.626224+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-Arz_OSH_Merged.csv",
+      "size_bytes": 21329365,
+      "modified_utc": "2026-07-01T13:16:09.980397+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-BCi_CRO_Merged.csv",
+      "size_bytes": 21953495,
+      "modified_utc": "2026-07-01T13:16:11.276891+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-BFt_DBF_Merged.csv",
+      "size_bytes": 14447001,
+      "modified_utc": "2026-07-01T13:16:12.220953+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-BsB_DBF_Merged.csv",
+      "size_bytes": 9878088,
+      "modified_utc": "2026-07-01T13:16:12.800514+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-Cp2_MF_Merged.csv",
+      "size_bytes": 20983287,
+      "modified_utc": "2026-07-01T13:16:14.126941+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-Lav_ENF_Merged.csv",
+      "size_bytes": 11895283,
+      "modified_utc": "2026-07-01T13:16:14.759657+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-Lsn_OSH_Merged.csv",
+      "size_bytes": 21631226,
+      "modified_utc": "2026-07-01T13:16:16.102631+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-MBo_GRA_Merged.csv",
+      "size_bytes": 21532533,
+      "modified_utc": "2026-07-01T13:16:17.189281+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-NiG_GRA_Merged.csv",
+      "size_bytes": 12309547,
+      "modified_utc": "2026-07-01T13:16:17.787710+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-Niv_GRA_Merged.csv",
+      "size_bytes": 14215973,
+      "modified_utc": "2026-07-01T13:16:18.400214+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-Noe_CSH_Merged.csv",
+      "size_bytes": 7264375,
+      "modified_utc": "2026-07-01T13:16:18.733498+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-Ren_ENF_Merged.csv",
+      "size_bytes": 21716194,
+      "modified_utc": "2026-07-01T13:16:19.838558+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-SR2_ENF_Merged.csv",
+      "size_bytes": 21538970,
+      "modified_utc": "2026-07-01T13:16:20.781580+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-Tor_GRA_Merged.csv",
+      "size_bytes": 21786752,
+      "modified_utc": "2026-07-01T13:16:22.013846+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "IT-TrF_DNF_Merged.csv",
+      "size_bytes": 21442865,
+      "modified_utc": "2026-07-01T13:16:23.144205+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "JP-Api_DBF_Merged.csv",
+      "size_bytes": 16551040,
+      "modified_utc": "2026-07-01T13:16:23.807214+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "JP-BBY_WET_Merged.csv",
+      "size_bytes": 12161568,
+      "modified_utc": "2026-07-01T13:16:24.918521+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "JP-Fhk_DNF_Merged.csv",
+      "size_bytes": 18963778,
+      "modified_utc": "2026-07-01T13:16:26.051876+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "JP-Fjy_ENF_Merged.csv",
+      "size_bytes": 14533787,
+      "modified_utc": "2026-07-01T13:16:27.024313+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "JP-Fmt_MF_Merged.csv",
+      "size_bytes": 19341399,
+      "modified_utc": "2026-07-01T13:16:28.107868+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "JP-Khw_ENF_Merged.csv",
+      "size_bytes": 14571876,
+      "modified_utc": "2026-07-01T13:16:29.055175+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "JP-Shn_MF_Merged.csv",
+      "size_bytes": 11722789,
+      "modified_utc": "2026-07-01T13:16:30.041821+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "JP-Spp_DBF_Merged.csv",
+      "size_bytes": 7340334,
+      "modified_utc": "2026-07-01T13:16:30.706697+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "JP-Srk_DBF_Merged.csv",
+      "size_bytes": 2416120,
+      "modified_utc": "2026-07-01T13:16:30.847757+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "JP-Tak_DBF_Merged.csv",
+      "size_bytes": 13991517,
+      "modified_utc": "2026-07-01T13:16:31.524040+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "JP-Tef_DNF_Merged.csv",
+      "size_bytes": 19387720,
+      "modified_utc": "2026-07-01T13:16:32.378129+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "JP-Tmd_GRA_Merged.csv",
+      "size_bytes": 18902044,
+      "modified_utc": "2026-07-01T13:16:33.377182+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "JP-Yms_DBF_Merged.csv",
+      "size_bytes": 19552682,
+      "modified_utc": "2026-07-01T13:16:34.250142+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "JP-Ynf_EBF_Merged.csv",
+      "size_bytes": 17070397,
+      "modified_utc": "2026-07-01T13:16:35.297109+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KE-Aq2_CRO_Merged.csv",
+      "size_bytes": 7311095,
+      "modified_utc": "2026-07-01T13:16:35.846669+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KE-Chk_WSA_Merged.csv",
+      "size_bytes": 7174914,
+      "modified_utc": "2026-07-01T13:16:36.479025+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KE-Kpt_GRA_Merged.csv",
+      "size_bytes": 16532341,
+      "modified_utc": "2026-07-01T13:16:37.401247+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KE-Mkt_CRO_Merged.csv",
+      "size_bytes": 14637304,
+      "modified_utc": "2026-07-01T13:16:38.253058+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-AdC_ENF_Merged.csv",
+      "size_bytes": 7349319,
+      "modified_utc": "2026-07-01T13:16:38.907706+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-CmF_CRO_Merged.csv",
+      "size_bytes": 9627176,
+      "modified_utc": "2026-07-01T13:16:39.549194+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-CRK_CRO_Merged.csv",
+      "size_bytes": 14509126,
+      "modified_utc": "2026-07-01T13:16:40.386298+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-HcM_MF_Merged.csv",
+      "size_bytes": 7334549,
+      "modified_utc": "2026-07-01T13:16:40.800298+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-Hnm_CRO_Merged.csv",
+      "size_bytes": 9695274,
+      "modified_utc": "2026-07-01T13:16:41.338582+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-HPK_CRO_Merged.csv",
+      "size_bytes": 7264089,
+      "modified_utc": "2026-07-01T13:16:42.075486+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-JjM_MF_Merged.csv",
+      "size_bytes": 7355798,
+      "modified_utc": "2026-07-01T13:16:42.640092+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-Kw1_ENF_Merged.csv",
+      "size_bytes": 12027434,
+      "modified_utc": "2026-07-01T13:16:43.619288+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-Kw2_DBF_Merged.csv",
+      "size_bytes": 11920365,
+      "modified_utc": "2026-07-01T13:16:44.568105+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-Nj1_CRO_Merged.csv",
+      "size_bytes": 4906702,
+      "modified_utc": "2026-07-01T13:16:44.929150+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-Nj2_CRO_Merged.csv",
+      "size_bytes": 4888775,
+      "modified_utc": "2026-07-01T13:16:45.383743+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-PcD_DBF_Merged.csv",
+      "size_bytes": 7404221,
+      "modified_utc": "2026-07-01T13:16:46.252596+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-ScC_ENF_Merged.csv",
+      "size_bytes": 7361737,
+      "modified_utc": "2026-07-01T13:16:46.757785+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-SmM_MF_Merged.csv",
+      "size_bytes": 14236383,
+      "modified_utc": "2026-07-01T13:16:47.669685+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-TwB_DBF_Merged.csv",
+      "size_bytes": 2470009,
+      "modified_utc": "2026-07-01T13:16:48.167562+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-TwC_ENF_Merged.csv",
+      "size_bytes": 2443526,
+      "modified_utc": "2026-07-01T13:16:48.507209+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "KR-WdE_EBF_Merged.csv",
+      "size_bytes": 7376012,
+      "modified_utc": "2026-07-01T13:16:49.177640+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "MN-Hst_GRA_Merged.csv",
+      "size_bytes": 12051159,
+      "modified_utc": "2026-07-01T13:16:49.803188+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "MN-Nkh_GRA_Merged.csv",
+      "size_bytes": 12099036,
+      "modified_utc": "2026-07-01T13:16:50.465832+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "MX-Aog_DBF_Merged.csv",
+      "size_bytes": 7223650,
+      "modified_utc": "2026-07-01T13:16:51.419403+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "MY-LHP_EBF_Merged.csv",
+      "size_bytes": 9464663,
+      "modified_utc": "2026-07-01T13:16:52.118945+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "NL-Loo_ENF_Merged.csv",
+      "size_bytes": 21627579,
+      "modified_utc": "2026-07-01T13:16:53.537301+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "NL-Vkp_GRA_Merged.csv",
+      "size_bytes": 22062929,
+      "modified_utc": "2026-07-01T13:16:54.857072+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "NO-Fns_SNO_Merged.csv",
+      "size_bytes": 19356514,
+      "modified_utc": "2026-07-01T13:16:55.729120+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "NO-Hur_ENF_Merged.csv",
+      "size_bytes": 4665587,
+      "modified_utc": "2026-07-01T13:16:56.203294+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "NZ-ADd_GRA_Merged.csv",
+      "size_bytes": 11860294,
+      "modified_utc": "2026-07-01T13:16:56.837746+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "NZ-ADw_GRA_Merged.csv",
+      "size_bytes": 16704978,
+      "modified_utc": "2026-07-01T13:16:57.839651+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "NZ-Cla_GRA_Merged.csv",
+      "size_bytes": 9367944,
+      "modified_utc": "2026-07-01T13:16:58.460118+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "NZ-Lau_GRA_Merged.csv",
+      "size_bytes": 16558745,
+      "modified_utc": "2026-07-01T13:16:59.539994+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "PR-xGU_EBF_Merged.csv",
+      "size_bytes": 14640524,
+      "modified_utc": "2026-07-01T13:17:00.649080+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "PR-xLA_GRA_Merged.csv",
+      "size_bytes": 14369594,
+      "modified_utc": "2026-07-01T13:17:01.781974+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "RU-Ch2_WET_Merged.csv",
+      "size_bytes": 14481296,
+      "modified_utc": "2026-07-01T13:17:02.711406+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "RU-Che_WET_Merged.csv",
+      "size_bytes": 14350360,
+      "modified_utc": "2026-07-01T13:17:03.499464+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "RU-Ege_DNF_Merged.csv",
+      "size_bytes": 7243804,
+      "modified_utc": "2026-07-01T13:17:03.975456+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "RU-Fy2_ENF_Merged.csv",
+      "size_bytes": 21826802,
+      "modified_utc": "2026-07-01T13:17:05.049204+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "RU-Fy3_OSH_Merged.csv",
+      "size_bytes": 7285923,
+      "modified_utc": "2026-07-01T13:17:05.494783+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "RU-Fy4_WET_Merged.csv",
+      "size_bytes": 11818621,
+      "modified_utc": "2026-07-01T13:17:06.312075+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "RU-Fyo_ENF_Merged.csv",
+      "size_bytes": 22078070,
+      "modified_utc": "2026-07-01T13:17:07.912847+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "SE-Deg_WET_Merged.csv",
+      "size_bytes": 14158413,
+      "modified_utc": "2026-07-01T13:17:08.939719+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "SE-Htm_ENF_Merged.csv",
+      "size_bytes": 16435537,
+      "modified_utc": "2026-07-01T13:17:10.088799+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "SE-Nor_ENF_Merged.csv",
+      "size_bytes": 16395594,
+      "modified_utc": "2026-07-01T13:17:11.073895+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "SE-Ros_ENF_Merged.csv",
+      "size_bytes": 11932710,
+      "modified_utc": "2026-07-01T13:17:11.779854+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "SE-St1_WET_Merged.csv",
+      "size_bytes": 9555330,
+      "modified_utc": "2026-07-01T13:17:12.471479+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "SE-Sto_WET_Merged.csv",
+      "size_bytes": 7296485,
+      "modified_utc": "2026-07-01T13:17:13.211655+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "SE-Svb_ENF_Merged.csv",
+      "size_bytes": 20751924,
+      "modified_utc": "2026-07-01T13:17:14.299072+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "SN-Dhr_GRA_Merged.csv",
+      "size_bytes": 17317780,
+      "modified_utc": "2026-07-01T13:17:15.476514+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "SN-Nkr_CRO_Merged.csv",
+      "size_bytes": 17315926,
+      "modified_utc": "2026-07-01T13:17:16.533520+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "TH-Mae_DBF_Merged.csv",
+      "size_bytes": 2402271,
+      "modified_utc": "2026-07-01T13:17:17.240147+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "UK-Ags_GRA_Merged.csv",
+      "size_bytes": 4824663,
+      "modified_utc": "2026-07-01T13:17:17.730927+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "UK-AMo_WET_Merged.csv",
+      "size_bytes": 22036591,
+      "modified_utc": "2026-07-01T13:17:19.032303+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "UK-BnB_GRA_Merged.csv",
+      "size_bytes": 9828910,
+      "modified_utc": "2026-07-01T13:17:19.854112+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "UK-CCr_GRA_Merged.csv",
+      "size_bytes": 7415368,
+      "modified_utc": "2026-07-01T13:17:20.618450+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "UK-Cvn_GRA_Merged.csv",
+      "size_bytes": 4854960,
+      "modified_utc": "2026-07-01T13:17:21.364017+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "UK-GaB_GRA_Merged.csv",
+      "size_bytes": 7294409,
+      "modified_utc": "2026-07-01T13:17:21.992422+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "UK-Gnn_GRA_Merged.csv",
+      "size_bytes": 7324744,
+      "modified_utc": "2026-07-01T13:17:22.715986+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "UK-Gwr_GRA_Merged.csv",
+      "size_bytes": 7467289,
+      "modified_utc": "2026-07-01T13:17:23.598563+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "UK-HgF_GRA_Merged.csv",
+      "size_bytes": 4973258,
+      "modified_utc": "2026-07-01T13:17:24.288325+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "UK-HpF_CRO_Merged.csv",
+      "size_bytes": 4789807,
+      "modified_utc": "2026-07-01T13:17:24.965530+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-A03_BSV_Merged.csv",
+      "size_bytes": 14791043,
+      "modified_utc": "2026-07-01T13:17:26.088522+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-A10_BSV_Merged.csv",
+      "size_bytes": 17453211,
+      "modified_utc": "2026-07-01T13:17:27.230042+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-A32_GRA_Merged.csv",
+      "size_bytes": 4733582,
+      "modified_utc": "2026-07-01T13:17:28.228312+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-A37_CVM_Merged.csv",
+      "size_bytes": 2455312,
+      "modified_utc": "2026-07-01T13:17:29.076592+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-A39_CRO_Merged.csv",
+      "size_bytes": 2472912,
+      "modified_utc": "2026-07-01T13:17:29.311716+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-A74_CRO_Merged.csv",
+      "size_bytes": 4831164,
+      "modified_utc": "2026-07-01T13:17:29.613076+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-ADR_BSV_Merged.csv",
+      "size_bytes": 4883505,
+      "modified_utc": "2026-07-01T13:17:30.196291+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Akn_MF_Merged.csv",
+      "size_bytes": 16644426,
+      "modified_utc": "2026-07-01T13:17:31.379002+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-ALQ_WET_Merged.csv",
+      "size_bytes": 23828029,
+      "modified_utc": "2026-07-01T13:17:32.842238+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-ARM_CRO_Merged.csv",
+      "size_bytes": 23427204,
+      "modified_utc": "2026-07-01T13:17:33.769933+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-ASH_DBF_Merged.csv",
+      "size_bytes": 2351838,
+      "modified_utc": "2026-07-01T13:17:33.927970+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-ASM_DBF_Merged.csv",
+      "size_bytes": 2346010,
+      "modified_utc": "2026-07-01T13:17:34.134403+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Aud_GRA_Merged.csv",
+      "size_bytes": 21298997,
+      "modified_utc": "2026-07-01T13:17:35.303753+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Bar_DBF_Merged.csv",
+      "size_bytes": 19475114,
+      "modified_utc": "2026-07-01T13:17:36.284960+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Bi1_CRO_Merged.csv",
+      "size_bytes": 21864731,
+      "modified_utc": "2026-07-01T13:17:37.232908+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Bi2_CRO_Merged.csv",
+      "size_bytes": 21620479,
+      "modified_utc": "2026-07-01T13:17:38.492051+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-BZB_WET_Merged.csv",
+      "size_bytes": 24252006,
+      "modified_utc": "2026-07-01T13:17:40.022305+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-BZF_WET_Merged.csv",
+      "size_bytes": 24164395,
+      "modified_utc": "2026-07-01T13:17:41.437630+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-BZo_WET_Merged.csv",
+      "size_bytes": 19121423,
+      "modified_utc": "2026-07-01T13:17:42.227522+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-CAK_GRA_Merged.csv",
+      "size_bytes": 4526851,
+      "modified_utc": "2026-07-01T13:17:42.853354+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-CdM_WSA_Merged.csv",
+      "size_bytes": 14423095,
+      "modified_utc": "2026-07-01T13:17:44.002033+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-CGG_GRA_Merged.csv",
+      "size_bytes": 14278884,
+      "modified_utc": "2026-07-01T13:17:44.962908+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-ChR_DBF_Merged.csv",
+      "size_bytes": 9387341,
+      "modified_utc": "2026-07-01T13:17:45.821231+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-CMW_DBF_Merged.csv",
+      "size_bytes": 14415430,
+      "modified_utc": "2026-07-01T13:17:46.526525+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-CRK_ENF_Merged.csv",
+      "size_bytes": 9490740,
+      "modified_utc": "2026-07-01T13:17:47.175797+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Cst_ENF_Merged.csv",
+      "size_bytes": 4713049,
+      "modified_utc": "2026-07-01T13:17:47.851871+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Cwt_DBF_Merged.csv",
+      "size_bytes": 21177309,
+      "modified_utc": "2026-07-01T13:17:49.042527+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-DFC_CRO_Merged.csv",
+      "size_bytes": 16815117,
+      "modified_utc": "2026-07-01T13:17:50.174545+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Dmg_WET_Merged.csv",
+      "size_bytes": 11933730,
+      "modified_utc": "2026-07-01T13:17:51.145824+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-DPW_WET_Merged.csv",
+      "size_bytes": 2390121,
+      "modified_utc": "2026-07-01T13:17:51.823674+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-DS3_CRO_Merged.csv",
+      "size_bytes": 11879062,
+      "modified_utc": "2026-07-01T13:17:52.464822+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-EA4_MF_Merged.csv",
+      "size_bytes": 11909054,
+      "modified_utc": "2026-07-01T13:17:53.197515+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-EDN_WET_Merged.csv",
+      "size_bytes": 16660442,
+      "modified_utc": "2026-07-01T13:17:54.480510+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-EKH_WET_Merged.csv",
+      "size_bytes": 7304655,
+      "modified_utc": "2026-07-01T13:17:55.294639+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-EKN_WET_Merged.csv",
+      "size_bytes": 4876875,
+      "modified_utc": "2026-07-01T13:17:55.627988+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-EKP_WET_Merged.csv",
+      "size_bytes": 7315193,
+      "modified_utc": "2026-07-01T13:17:56.099221+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Elm_WET_Merged.csv",
+      "size_bytes": 21501713,
+      "modified_utc": "2026-07-01T13:17:57.503179+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-EML_OSH_Merged.csv",
+      "size_bytes": 19565072,
+      "modified_utc": "2026-07-01T13:17:58.303107+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Esm_WET_Merged.csv",
+      "size_bytes": 21112006,
+      "modified_utc": "2026-07-01T13:17:59.984657+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Fo1_WET_Merged.csv",
+      "size_bytes": 22084100,
+      "modified_utc": "2026-07-01T13:18:01.268688+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Fo2_WET_Merged.csv",
+      "size_bytes": 4883528,
+      "modified_utc": "2026-07-01T13:18:01.835768+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-GLE_ENF_Merged.csv",
+      "size_bytes": 12034077,
+      "modified_utc": "2026-07-01T13:18:02.595588+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Ha1_DBF_Merged.csv",
+      "size_bytes": 22417576,
+      "modified_utc": "2026-07-01T13:18:04.169049+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-HB1_WET_Merged.csv",
+      "size_bytes": 16826742,
+      "modified_utc": "2026-07-01T13:18:05.241669+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-HB2_ENF_Merged.csv",
+      "size_bytes": 16759045,
+      "modified_utc": "2026-07-01T13:18:05.992934+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-HB3_ENF_Merged.csv",
+      "size_bytes": 13902598,
+      "modified_utc": "2026-07-01T13:18:07.089228+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-HB4_WET_Merged.csv",
+      "size_bytes": 12198699,
+      "modified_utc": "2026-07-01T13:18:08.306829+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-HBK_DBF_Merged.csv",
+      "size_bytes": 21333021,
+      "modified_utc": "2026-07-01T13:18:09.754983+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Hn2_GRA_Merged.csv",
+      "size_bytes": 7317808,
+      "modified_utc": "2026-07-01T13:18:10.543649+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Ho2_ENF_Merged.csv",
+      "size_bytes": 23393899,
+      "modified_utc": "2026-07-01T13:18:12.082374+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Ho3_ENF_Merged.csv",
+      "size_bytes": 14096799,
+      "modified_utc": "2026-07-01T13:18:12.795785+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-HRA_CRO_Merged.csv",
+      "size_bytes": 21950640,
+      "modified_utc": "2026-07-01T13:18:14.528702+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-HRC_CRO_Merged.csv",
+      "size_bytes": 21936416,
+      "modified_utc": "2026-07-01T13:18:15.408641+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Hsm_WET_Merged.csv",
+      "size_bytes": 11769698,
+      "modified_utc": "2026-07-01T13:18:16.559169+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-HWB_CVM_Merged.csv",
+      "size_bytes": 7288756,
+      "modified_utc": "2026-07-01T13:18:16.983310+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-IAB_CRO_Merged.csv",
+      "size_bytes": 14195104,
+      "modified_utc": "2026-07-01T13:18:17.613032+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-IAC_CRO_Merged.csv",
+      "size_bytes": 14195887,
+      "modified_utc": "2026-07-01T13:18:18.395144+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-IAM_CRO_Merged.csv",
+      "size_bytes": 14489067,
+      "modified_utc": "2026-07-01T13:18:19.146215+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-ICh_OSH_Merged.csv",
+      "size_bytes": 24106628,
+      "modified_utc": "2026-07-01T13:18:20.842783+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-ICs_WET_Merged.csv",
+      "size_bytes": 24102241,
+      "modified_utc": "2026-07-01T13:18:22.430520+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-ICt_OSH_Merged.csv",
+      "size_bytes": 23992996,
+      "modified_utc": "2026-07-01T13:18:24.028314+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Jo1_OSH_Merged.csv",
+      "size_bytes": 16823208,
+      "modified_utc": "2026-07-01T13:18:25.467704+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Jo2_OSH_Merged.csv",
+      "size_bytes": 11972652,
+      "modified_utc": "2026-07-01T13:18:26.620428+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-KFS_GRA_Merged.csv",
+      "size_bytes": 9495639,
+      "modified_utc": "2026-07-01T13:18:27.188445+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Kon_GRA_Merged.csv",
+      "size_bytes": 9399185,
+      "modified_utc": "2026-07-01T13:18:27.762766+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-KPL_WET_Merged.csv",
+      "size_bytes": 9783253,
+      "modified_utc": "2026-07-01T13:18:28.806960+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-LA2_WET_Merged.csv",
+      "size_bytes": 18392886,
+      "modified_utc": "2026-07-01T13:18:30.435158+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Los_WET_Merged.csv",
+      "size_bytes": 23284324,
+      "modified_utc": "2026-07-01T13:18:32.031955+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-MBP_WET_Merged.csv",
+      "size_bytes": 21687002,
+      "modified_utc": "2026-07-01T13:18:33.437859+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Me6_ENF_Merged.csv",
+      "size_bytes": 23961412,
+      "modified_utc": "2026-07-01T13:18:34.739654+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-MEF_ENF_Merged.csv",
+      "size_bytes": 4746053,
+      "modified_utc": "2026-07-01T13:18:35.292385+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-MMS_DBF_Merged.csv",
+      "size_bytes": 18481304,
+      "modified_utc": "2026-07-01T13:18:36.543715+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-MN1_CRO_Merged.csv",
+      "size_bytes": 19448228,
+      "modified_utc": "2026-07-01T13:18:37.625782+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-MN2_CRO_Merged.csv",
+      "size_bytes": 19422147,
+      "modified_utc": "2026-07-01T13:18:39.008969+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-MN3_CRO_Merged.csv",
+      "size_bytes": 12217573,
+      "modified_utc": "2026-07-01T13:18:39.927444+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Mo1_CRO_Merged.csv",
+      "size_bytes": 22027946,
+      "modified_utc": "2026-07-01T13:18:41.473770+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Mo2_GRA_Merged.csv",
+      "size_bytes": 16831332,
+      "modified_utc": "2026-07-01T13:18:42.492873+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Mo3_CRO_Merged.csv",
+      "size_bytes": 19486420,
+      "modified_utc": "2026-07-01T13:18:43.791492+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-MOz_DBF_Merged.csv",
+      "size_bytes": 14372955,
+      "modified_utc": "2026-07-01T13:18:44.734859+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Mpj_WSA_Merged.csv",
+      "size_bytes": 23887747,
+      "modified_utc": "2026-07-01T13:18:46.278291+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-MtB_ENF_Merged.csv",
+      "size_bytes": 21579369,
+      "modified_utc": "2026-07-01T13:18:47.533360+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Myb_WET_Merged.csv",
+      "size_bytes": 23807372,
+      "modified_utc": "2026-07-01T13:18:49.149526+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-MZA_WET_Merged.csv",
+      "size_bytes": 4611644,
+      "modified_utc": "2026-07-01T13:18:49.847656+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-NC2_ENF_Merged.csv",
+      "size_bytes": 23836450,
+      "modified_utc": "2026-07-01T13:18:51.356548+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-NC3_ENF_Merged.csv",
+      "size_bytes": 14306762,
+      "modified_utc": "2026-07-01T13:18:52.318446+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-NC4_WET_Merged.csv",
+      "size_bytes": 23791334,
+      "modified_utc": "2026-07-01T13:18:53.853971+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Ne1_CRO_Merged.csv",
+      "size_bytes": 20573345,
+      "modified_utc": "2026-07-01T13:18:54.718207+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Ne2_CRO_Merged.csv",
+      "size_bytes": 20591487,
+      "modified_utc": "2026-07-01T13:18:55.794184+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Ne3_CRO_Merged.csv",
+      "size_bytes": 20453854,
+      "modified_utc": "2026-07-01T13:18:56.919543+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-NGB_SNO_Merged.csv",
+      "size_bytes": 19587836,
+      "modified_utc": "2026-07-01T13:18:57.757874+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-NR1_ENF_Merged.csv",
+      "size_bytes": 23095704,
+      "modified_utc": "2026-07-01T13:18:59.135157+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-NR3_GRA_Merged.csv",
+      "size_bytes": 22046074,
+      "modified_utc": "2026-07-01T13:19:00.252796+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-NSa_CRO_Merged.csv",
+      "size_bytes": 7019710,
+      "modified_utc": "2026-07-01T13:19:00.727005+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-NSb_CRO_Merged.csv",
+      "size_bytes": 7044810,
+      "modified_utc": "2026-07-01T13:19:01.263743+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-ONA_GRA_Merged.csv",
+      "size_bytes": 16805761,
+      "modified_utc": "2026-07-01T13:19:01.960684+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-OWC_WET_Merged.csv",
+      "size_bytes": 23810138,
+      "modified_utc": "2026-07-01T13:19:03.207407+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Prr_ENF_Merged.csv",
+      "size_bytes": 17028960,
+      "modified_utc": "2026-07-01T13:19:03.874780+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-PSH_DBF_Merged.csv",
+      "size_bytes": 2346662,
+      "modified_utc": "2026-07-01T13:19:04.490954+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-PSL_DBF_Merged.csv",
+      "size_bytes": 2333908,
+      "modified_utc": "2026-07-01T13:19:04.871765+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-RC1_CRO_Merged.csv",
+      "size_bytes": 2445532,
+      "modified_utc": "2026-07-01T13:19:05.357852+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-RC2_CRO_Merged.csv",
+      "size_bytes": 2401183,
+      "modified_utc": "2026-07-01T13:19:05.764289+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-RC3_CRO_Merged.csv",
+      "size_bytes": 2413046,
+      "modified_utc": "2026-07-01T13:19:06.240619+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-RC4_CRO_Merged.csv",
+      "size_bytes": 2422718,
+      "modified_utc": "2026-07-01T13:19:06.635387+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-RGA_CRO_Merged.csv",
+      "size_bytes": 9770935,
+      "modified_utc": "2026-07-01T13:19:07.361684+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-RGB_CRO_Merged.csv",
+      "size_bytes": 9817558,
+      "modified_utc": "2026-07-01T13:19:07.993980+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-RGF_CRO_Merged.csv",
+      "size_bytes": 4896034,
+      "modified_utc": "2026-07-01T13:19:08.495970+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-RGo_CRO_Merged.csv",
+      "size_bytes": 9753413,
+      "modified_utc": "2026-07-01T13:19:09.061818+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-RGW_CRO_Merged.csv",
+      "size_bytes": 7392145,
+      "modified_utc": "2026-07-01T13:19:09.765839+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Rls_CSH_Merged.csv",
+      "size_bytes": 19371168,
+      "modified_utc": "2026-07-01T13:19:10.779435+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Rms_CSH_Merged.csv",
+      "size_bytes": 18961197,
+      "modified_utc": "2026-07-01T13:19:11.747711+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Ro1_CRO_Merged.csv",
+      "size_bytes": 2453611,
+      "modified_utc": "2026-07-01T13:19:12.159590+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Ro2_CRO_Merged.csv",
+      "size_bytes": 2430616,
+      "modified_utc": "2026-07-01T13:19:12.610490+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Ro4_GRA_Merged.csv",
+      "size_bytes": 24138554,
+      "modified_utc": "2026-07-01T13:19:13.792639+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Ro5_CRO_Merged.csv",
+      "size_bytes": 19396164,
+      "modified_utc": "2026-07-01T13:19:14.895937+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Ro6_CRO_Merged.csv",
+      "size_bytes": 19449723,
+      "modified_utc": "2026-07-01T13:19:15.728275+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Rpf_DBF_Merged.csv",
+      "size_bytes": 21824655,
+      "modified_utc": "2026-07-01T13:19:16.520601+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-RRC_WET_Merged.csv",
+      "size_bytes": 7427855,
+      "modified_utc": "2026-07-01T13:19:16.754118+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Rwf_CSH_Merged.csv",
+      "size_bytes": 18813157,
+      "modified_utc": "2026-07-01T13:19:17.490857+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Rws_OSH_Merged.csv",
+      "size_bytes": 19205453,
+      "modified_utc": "2026-07-01T13:19:18.285140+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-SD1_CRO_Merged.csv",
+      "size_bytes": 7021429,
+      "modified_utc": "2026-07-01T13:19:18.626241+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-SD2_CRO_Merged.csv",
+      "size_bytes": 6976238,
+      "modified_utc": "2026-07-01T13:19:18.892573+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Seg_GRA_Merged.csv",
+      "size_bytes": 23956294,
+      "modified_utc": "2026-07-01T13:19:20.026451+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Ses_OSH_Merged.csv",
+      "size_bytes": 23695531,
+      "modified_utc": "2026-07-01T13:19:21.095975+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Slt_DBF_Merged.csv",
+      "size_bytes": 16540124,
+      "modified_utc": "2026-07-01T13:19:21.867404+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Sne_GRA_Merged.csv",
+      "size_bytes": 11912607,
+      "modified_utc": "2026-07-01T13:19:22.342925+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-SP1_ENF_Merged.csv",
+      "size_bytes": 11997313,
+      "modified_utc": "2026-07-01T13:19:22.937471+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-SRG_GRA_Merged.csv",
+      "size_bytes": 24036029,
+      "modified_utc": "2026-07-01T13:19:23.934257+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-SRM_WSA_Merged.csv",
+      "size_bytes": 23959107,
+      "modified_utc": "2026-07-01T13:19:24.879774+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Srr_WET_Merged.csv",
+      "size_bytes": 4853341,
+      "modified_utc": "2026-07-01T13:19:25.261832+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-SRS_WSA_Merged.csv",
+      "size_bytes": 7248412,
+      "modified_utc": "2026-07-01T13:19:25.656487+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-SSH_DBF_Merged.csv",
+      "size_bytes": 14199493,
+      "modified_utc": "2026-07-01T13:19:26.236986+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-StJ_WET_Merged.csv",
+      "size_bytes": 11473395,
+      "modified_utc": "2026-07-01T13:19:26.725555+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Syv_MF_Merged.csv",
+      "size_bytes": 24064728,
+      "modified_utc": "2026-07-01T13:19:27.629999+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-TKs_CSH_Merged.csv",
+      "size_bytes": 19164753,
+      "modified_utc": "2026-07-01T13:19:28.389826+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-TLR_MF_Merged.csv",
+      "size_bytes": 2431378,
+      "modified_utc": "2026-07-01T13:19:28.501402+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Ton_WSA_Merged.csv",
+      "size_bytes": 23871263,
+      "modified_utc": "2026-07-01T13:19:29.413735+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Tw1_WET_Merged.csv",
+      "size_bytes": 19207329,
+      "modified_utc": "2026-07-01T13:19:30.390873+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Tw3_CRO_Merged.csv",
+      "size_bytes": 7269300,
+      "modified_utc": "2026-07-01T13:19:30.752755+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Tw4_WET_Merged.csv",
+      "size_bytes": 21770484,
+      "modified_utc": "2026-07-01T13:19:31.635092+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Twt_CRO_Merged.csv",
+      "size_bytes": 4785482,
+      "modified_utc": "2026-07-01T13:19:31.929978+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Uaf_ENF_Merged.csv",
+      "size_bytes": 24216678,
+      "modified_utc": "2026-07-01T13:19:32.871689+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UC1_CVM_Merged.csv",
+      "size_bytes": 14403787,
+      "modified_utc": "2026-07-01T13:19:33.444508+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UC2_CVM_Merged.csv",
+      "size_bytes": 14468496,
+      "modified_utc": "2026-07-01T13:19:34.123134+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UiA_CRO_Merged.csv",
+      "size_bytes": 21911074,
+      "modified_utc": "2026-07-01T13:19:35.017207+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UiB_CRO_Merged.csv",
+      "size_bytes": 21402044,
+      "modified_utc": "2026-07-01T13:19:36.072594+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UiC_CRO_Merged.csv",
+      "size_bytes": 21361388,
+      "modified_utc": "2026-07-01T13:19:36.938937+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UiD_GRA_Merged.csv",
+      "size_bytes": 20684932,
+      "modified_utc": "2026-07-01T13:19:37.715418+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UiE_CRO_Merged.csv",
+      "size_bytes": 16802048,
+      "modified_utc": "2026-07-01T13:19:38.492689+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UMd_DBF_Merged.csv",
+      "size_bytes": 23867333,
+      "modified_utc": "2026-07-01T13:19:39.531070+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UTD_CRO_Merged.csv",
+      "size_bytes": 4873232,
+      "modified_utc": "2026-07-01T13:19:39.754648+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UTE_CRO_Merged.csv",
+      "size_bytes": 4662717,
+      "modified_utc": "2026-07-01T13:19:40.122233+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UTJ_CRO_Merged.csv",
+      "size_bytes": 4643132,
+      "modified_utc": "2026-07-01T13:19:40.325856+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UTL_CRO_Merged.csv",
+      "size_bytes": 4580857,
+      "modified_utc": "2026-07-01T13:19:40.531903+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UTM_WET_Merged.csv",
+      "size_bytes": 7252396,
+      "modified_utc": "2026-07-01T13:19:41.137151+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UTP_WET_Merged.csv",
+      "size_bytes": 2389468,
+      "modified_utc": "2026-07-01T13:19:41.339945+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UTV_CRO_Merged.csv",
+      "size_bytes": 7072830,
+      "modified_utc": "2026-07-01T13:19:41.637613+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-UTW_CRO_Merged.csv",
+      "size_bytes": 9940318,
+      "modified_utc": "2026-07-01T13:19:42.217208+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Var_GRA_Merged.csv",
+      "size_bytes": 24091223,
+      "modified_utc": "2026-07-01T13:19:43.531660+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Vcm_ENF_Merged.csv",
+      "size_bytes": 23892544,
+      "modified_utc": "2026-07-01T13:19:44.825853+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Vcp_ENF_Merged.csv",
+      "size_bytes": 23872312,
+      "modified_utc": "2026-07-01T13:19:46.103822+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-VT1_CRO_Merged.csv",
+      "size_bytes": 6995719,
+      "modified_utc": "2026-07-01T13:19:46.562602+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-VT2_CRO_Merged.csv",
+      "size_bytes": 6934802,
+      "modified_utc": "2026-07-01T13:19:46.910393+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-WCr_DBF_Merged.csv",
+      "size_bytes": 23810161,
+      "modified_utc": "2026-07-01T13:19:48.283141+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Whs_OSH_Merged.csv",
+      "size_bytes": 24115947,
+      "modified_utc": "2026-07-01T13:19:49.476592+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Wjs_SAV_Merged.csv",
+      "size_bytes": 23779971,
+      "modified_utc": "2026-07-01T13:19:50.611816+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-Wkg_GRA_Merged.csv",
+      "size_bytes": 23876809,
+      "modified_utc": "2026-07-01T13:19:52.078245+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-WT1_CRO_Merged.csv",
+      "size_bytes": 4871516,
+      "modified_utc": "2026-07-01T13:19:52.410353+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xAB_ENF_Merged.csv",
+      "size_bytes": 14403257,
+      "modified_utc": "2026-07-01T13:19:53.044078+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xAE_GRA_Merged.csv",
+      "size_bytes": 14615264,
+      "modified_utc": "2026-07-01T13:19:53.893049+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xBA_WET_Merged.csv",
+      "size_bytes": 14475052,
+      "modified_utc": "2026-07-01T13:19:54.727585+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xBL_DBF_Merged.csv",
+      "size_bytes": 14577385,
+      "modified_utc": "2026-07-01T13:19:55.468631+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xBN_ENF_Merged.csv",
+      "size_bytes": 14305836,
+      "modified_utc": "2026-07-01T13:19:56.036799+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xBR_DBF_Merged.csv",
+      "size_bytes": 14665947,
+      "modified_utc": "2026-07-01T13:19:56.921654+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xCL_GRA_Merged.csv",
+      "size_bytes": 14382383,
+      "modified_utc": "2026-07-01T13:19:57.663224+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xCP_GRA_Merged.csv",
+      "size_bytes": 14592291,
+      "modified_utc": "2026-07-01T13:19:58.341173+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xDC_GRA_Merged.csv",
+      "size_bytes": 14539035,
+      "modified_utc": "2026-07-01T13:19:59.021943+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xDJ_ENF_Merged.csv",
+      "size_bytes": 14676739,
+      "modified_utc": "2026-07-01T13:20:00.193190+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xDL_MF_Merged.csv",
+      "size_bytes": 14487907,
+      "modified_utc": "2026-07-01T13:20:00.869778+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xDS_CVM_Merged.csv",
+      "size_bytes": 14368975,
+      "modified_utc": "2026-07-01T13:20:01.643375+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xGR_DBF_Merged.csv",
+      "size_bytes": 14472978,
+      "modified_utc": "2026-07-01T13:20:02.286642+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xHE_OSH_Merged.csv",
+      "size_bytes": 14165995,
+      "modified_utc": "2026-07-01T13:20:02.959352+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xJE_ENF_Merged.csv",
+      "size_bytes": 14507334,
+      "modified_utc": "2026-07-01T13:20:03.769813+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xJR_OSH_Merged.csv",
+      "size_bytes": 14651527,
+      "modified_utc": "2026-07-01T13:20:04.310679+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xKZ_GRA_Merged.csv",
+      "size_bytes": 14611776,
+      "modified_utc": "2026-07-01T13:20:05.051797+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xLE_DBF_Merged.csv",
+      "size_bytes": 14198443,
+      "modified_utc": "2026-07-01T13:20:05.738102+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xMB_OSH_Merged.csv",
+      "size_bytes": 14559486,
+      "modified_utc": "2026-07-01T13:20:06.335828+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xML_DBF_Merged.csv",
+      "size_bytes": 14540798,
+      "modified_utc": "2026-07-01T13:20:07.031123+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xNG_GRA_Merged.csv",
+      "size_bytes": 14567185,
+      "modified_utc": "2026-07-01T13:20:07.499352+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xNQ_OSH_Merged.csv",
+      "size_bytes": 14550812,
+      "modified_utc": "2026-07-01T13:20:08.005018+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xNW_ENF_Merged.csv",
+      "size_bytes": 14605360,
+      "modified_utc": "2026-07-01T13:20:08.698604+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xPU_EBF_Merged.csv",
+      "size_bytes": 14434097,
+      "modified_utc": "2026-07-01T13:20:09.159334+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xRM_ENF_Merged.csv",
+      "size_bytes": 14564540,
+      "modified_utc": "2026-07-01T13:20:09.634793+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xRN_DBF_Merged.csv",
+      "size_bytes": 14378335,
+      "modified_utc": "2026-07-01T13:20:10.142935+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xSB_ENF_Merged.csv",
+      "size_bytes": 14483039,
+      "modified_utc": "2026-07-01T13:20:10.692330+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xSC_DBF_Merged.csv",
+      "size_bytes": 14593445,
+      "modified_utc": "2026-07-01T13:20:11.196519+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xSE_DBF_Merged.csv",
+      "size_bytes": 14453622,
+      "modified_utc": "2026-07-01T13:20:11.761601+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xSJ_SAV_Merged.csv",
+      "size_bytes": 14487185,
+      "modified_utc": "2026-07-01T13:20:12.266929+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xSL_CRO_Merged.csv",
+      "size_bytes": 14678430,
+      "modified_utc": "2026-07-01T13:20:13.119411+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xSP_ENF_Merged.csv",
+      "size_bytes": 14537175,
+      "modified_utc": "2026-07-01T13:20:14.014523+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xSR_OSH_Merged.csv",
+      "size_bytes": 14450846,
+      "modified_utc": "2026-07-01T13:20:14.899616+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xST_DBF_Merged.csv",
+      "size_bytes": 14629834,
+      "modified_utc": "2026-07-01T13:20:15.779889+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xTE_ENF_Merged.csv",
+      "size_bytes": 14470664,
+      "modified_utc": "2026-07-01T13:20:16.547744+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xTL_WET_Merged.csv",
+      "size_bytes": 14578444,
+      "modified_utc": "2026-07-01T13:20:17.487840+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xTR_DBF_Merged.csv",
+      "size_bytes": 14572840,
+      "modified_utc": "2026-07-01T13:20:18.314896+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xUK_DBF_Merged.csv",
+      "size_bytes": 14489499,
+      "modified_utc": "2026-07-01T13:20:19.388927+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xUN_MF_Merged.csv",
+      "size_bytes": 14381061,
+      "modified_utc": "2026-07-01T13:20:20.336026+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xWD_GRA_Merged.csv",
+      "size_bytes": 14535754,
+      "modified_utc": "2026-07-01T13:20:21.094626+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xWR_ENF_Merged.csv",
+      "size_bytes": 14481680,
+      "modified_utc": "2026-07-01T13:20:21.763777+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-xYE_ENF_Merged.csv",
+      "size_bytes": 14576237,
+      "modified_utc": "2026-07-01T13:20:22.434935+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-YK1_WET_Merged.csv",
+      "size_bytes": 16733593,
+      "modified_utc": "2026-07-01T13:20:23.202509+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-YK2_WET_Merged.csv",
+      "size_bytes": 16558237,
+      "modified_utc": "2026-07-01T13:20:24.213114+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "US-ZF2_CRO_Merged.csv",
+      "size_bytes": 4464814,
+      "modified_utc": "2026-07-01T13:20:24.554585+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ZA-BfK_OSH_Merged.csv",
+      "size_bytes": 12300170,
+      "modified_utc": "2026-07-01T13:20:25.420462+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ZA-BfS_OSH_Merged.csv",
+      "size_bytes": 12251140,
+      "modified_utc": "2026-07-01T13:20:26.178105+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ZA-Jks_GRA_Merged.csv",
+      "size_bytes": 2437433,
+      "modified_utc": "2026-07-01T13:20:26.334089+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ZA-Spk_GRA_Merged.csv",
+      "size_bytes": 4915389,
+      "modified_utc": "2026-07-01T13:20:26.652332+00:00",
+      "column_count": 32
+    },
+    {
+      "name": "ZA-Uby_GRA_Merged.csv",
+      "size_bytes": 4851849,
+      "modified_utc": "2026-07-01T13:20:26.984500+00:00",
+      "column_count": 32
+    }
+  ]
+}

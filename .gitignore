@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments and IDE state
+.venv/
+venv/
+.idea/
+.vscode/
+.ipynb_checkpoints/
+
+# Local configuration and secrets
+.env
+.env.*
+
+# Data and generated artifacts
+data/*
+!data/README.md
+!data/REAL_DATA.md
+!data/real_data_manifest.json
+outputs/*
+!outputs/README.md
+*.pth
+*.pt
+*.ckpt
+*.npz
+
+# Packaging
+build/
+dist/
+*.egg-info/
+
+# Local test scratch directories
+pytest-cache-files-*/
+tests/tmp*/

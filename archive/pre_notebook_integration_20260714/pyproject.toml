@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gpp-station-inversion"
+version = "0.1.0"
+description = "Station-scale GPP time-series inversion experiments"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "matplotlib>=3.6",
+    "numpy>=1.23",
+    "pandas>=1.5",
+    "scikit-learn>=1.2",
+    "torch>=2.0",
+]
+
+[project.optional-dependencies]
+explainability = ["shap>=0.44"]
+notebook = ["jupyterlab>=4"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

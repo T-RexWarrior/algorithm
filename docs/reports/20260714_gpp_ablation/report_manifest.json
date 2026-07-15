@@ -1,0 +1,19 @@
+{
+  "created_at": "2026-07-14T16:47:21.169711+08:00",
+  "test_set_locked": true,
+  "recommended_default": "baseline",
+  "robustly_beneficial_changes": [],
+  "conditional_candidate": "lag_only",
+  "sources": {
+    "screening": "D:\\全局反演\\gpp_ablation_results\\screening_deterministic_seed42_e3_b1024\\suite_summary.json",
+    "seed7": "D:\\全局反演\\gpp_ablation_results\\confirmation_seed7_e3_b1024\\suite_summary.json",
+    "seed2026": "D:\\全局反演\\gpp_ablation_results\\confirmation_seed2026_e3_b1024\\suite_summary.json",
+    "legacy": "D:\\全局反演\\gpp_ablation_results\\legacy\\legacy_val_summary.json"
+  },
+  "outputs": [
+    "D:\\全局反演\\gpp_ablation_results\\final_report\\GPP模型消融实验报告.md",
+    "D:\\全局反演\\gpp_ablation_results\\final_report\\model_ablation_screening_seed42.csv",
+    "D:\\全局反演\\gpp_ablation_results\\final_report\\lag_multiseed_confirmation.csv",
+    "D:\\全局反演\\gpp_ablation_results\\final_report\\station_paired_comparison_seed42.csv"
+  ]
+}

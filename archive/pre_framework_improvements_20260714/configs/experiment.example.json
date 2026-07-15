@@ -1,0 +1,79 @@
+{
+  "data_dir": "D:/path/to/station_csvs",
+  "output_dir": "D:/path/to/outputs/experiment_name",
+  "train_sites": ["TRAIN_SITE_ID"],
+  "val_sites": ["VAL_SITE_ID"],
+  "test_sites": ["TEST_SITE_ID"],
+  "features": {
+    "forcing": [
+      "SW_IN_F",
+      "SW_IN_POT",
+      "CO2_F_MDS",
+      "P_F",
+      "VPD_F",
+      "TA_F",
+      "TS_F_MDS_1",
+      "SWC_F_MDS_1",
+      "WS_F"
+    ],
+    "state": [
+      "EPIC_Available_Mask",
+      "Band317nm_Ref",
+      "Band325nm_Ref",
+      "Band340nm_Ref",
+      "Band388nm_Ref",
+      "Band443nm_Ref",
+      "Band551nm_Ref",
+      "Band680nm_Ref",
+      "Band688nm_Ref",
+      "Band764nm_Ref",
+      "Band780nm_Ref",
+      "Mean_SZA",
+      "Mean_VZA",
+      "Mean_RAA"
+    ],
+    "static": ["Lat", "Long"],
+    "target": "GPP_DT_VUT_REF",
+    "time": "date",
+    "land_cover": "Veg_ID"
+  },
+  "window": {
+    "seq_len": 96,
+    "time_features": "irregular",
+    "require_regular": false,
+    "max_gap_hours": 6,
+    "max_span_hours": 168,
+    "dt_clip_hours": 240
+  },
+  "scaling": "zscore",
+  "scale_target": true,
+  "model": {
+    "kind": "mamba",
+    "d_model": 64,
+    "nhead": 4,
+    "dropout": 0.1,
+    "dim_feedforward": 128,
+    "num_layers": 2,
+    "num_mamba_layers": 4,
+    "mamba_d_state": 16,
+    "mamba_d_conv": 4,
+    "mamba_expand": 2,
+    "use_native_mamba": null,
+    "cde_layers": 1,
+    "cde_vector_field_dim": 128,
+    "increment_scale": 1.0,
+    "num_land_cover_classes": 13,
+    "land_cover_embedding_dim": 8
+  },
+  "loss": "mse",
+  "loss_options": {},
+  "training": {
+    "batch_size": 64,
+    "epochs": 100,
+    "learning_rate": 0.001,
+    "patience": 10,
+    "num_workers": 0,
+    "seed": 42,
+    "resume": true
+  }
+}
