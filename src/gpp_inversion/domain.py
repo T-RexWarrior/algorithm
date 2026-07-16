@@ -70,6 +70,48 @@ class EraStressTransform:
         return output
 
 
+@dataclass(frozen=True)
+class EraCalibrationTransform:
+    """Deterministically map ERA forcing back toward the tower distribution.
+
+    The mapping is fitted on training-site forcing pairs only and never reads GPP.
+    It is intended for the D4 inference-calibration control, not for training.
+    """
+
+    features: dict[str, dict]
+    source_hash: str
+
+    @classmethod
+    def load(cls, path: str | Path) -> "EraCalibrationTransform":
+        payload = json.loads(Path(path).read_text(encoding="utf-8"))
+        if payload.get("uses_target", True):
+            raise ValueError("ERA calibration manifest must explicitly declare uses_target=false")
+        if payload.get("direction") != "era_to_tower":
+            raise ValueError("ERA calibration manifest must use direction=era_to_tower")
+        return cls(dict(payload["features"]), str(payload["source_sha256"]))
+
+    def apply(self, values: np.ndarray, columns) -> np.ndarray:
+        output = np.asarray(values, dtype=np.float32).copy()
+        for index, name in enumerate(columns):
+            if name not in self.features:
+                raise ValueError(f"ERA calibration manifest missing feature {name}")
+            spec = self.features[name]
+            raw = output[:, index].astype(np.float64)
+            if name in PRECIPITATION:
+                transformed = np.expm1(
+                    float(spec["slope"]) * np.log1p(np.maximum(raw, 0.0))
+                    + float(spec["intercept"])
+                )
+                transformed = np.where(raw > 0.0, np.maximum(0.0, transformed), 0.0)
+            else:
+                transformed = float(spec["slope"]) * raw + float(spec["intercept"])
+                if name in RADIATION:
+                    transformed = np.where(raw <= 1.0, 0.0, transformed)
+            lower, upper = BOUNDS.get(name, (-np.inf, np.inf))
+            output[:, index] = np.clip(transformed, lower, upper).astype(np.float32)
+        return output
+
+
 def fit_era_stress_manifest(pair_csv: str | Path, output: str | Path) -> Path:
     path = Path(pair_csv)
     frame = pd.read_csv(path)
@@ -114,6 +156,55 @@ def fit_era_stress_manifest(pair_csv: str | Path, output: str | Path) -> Path:
     payload = {
         "version": 1, "uses_target": False, "screening_only": True,
         "source": str(path.resolve()), "source_sha256": digest,
+        "features": features,
+    }
+    output = Path(output)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    return output
+
+
+def fit_era_calibration_manifest(pair_csv: str | Path, output: str | Path) -> Path:
+    """Fit the target-blind D4 ERA-to-tower inference calibration."""
+    path = Path(pair_csv)
+    frame = pd.read_csv(path)
+    required = {"station", "split", "feature", "tower", "era"}
+    if not required.issubset(frame.columns):
+        raise ValueError(f"Pair CSV missing columns: {sorted(required - set(frame.columns))}")
+    train = frame[frame["split"] == "train"].copy()
+    if train.empty:
+        raise ValueError("Pair CSV has no training-site rows")
+    features = {}
+    for name, group in train.groupby("feature"):
+        era = pd.to_numeric(group["era"], errors="coerce").to_numpy(dtype=float)
+        tower = pd.to_numeric(group["tower"], errors="coerce").to_numpy(dtype=float)
+        valid = np.isfinite(era) & np.isfinite(tower)
+        era, tower = era[valid], tower[valid]
+        if name in RADIATION:
+            fit = (era > 1.0) | (tower > 1.0)
+        else:
+            fit = np.ones(era.shape, dtype=bool)
+        if name in PRECIPITATION:
+            fit_x = np.log1p(np.maximum(era[fit], 0.0))
+            fit_y = np.log1p(np.maximum(tower[fit], 0.0))
+        else:
+            fit_x, fit_y = era[fit], tower[fit]
+        if fit_x.size < 20:
+            raise ValueError(f"Insufficient ERA pairs for {name}: {fit_x.size}")
+        model = HuberRegressor(epsilon=1.35, max_iter=500).fit(fit_x[:, None], fit_y)
+        features[str(name)] = {
+            "count": int(fit_x.size),
+            "slope": float(model.coef_[0]),
+            "intercept": float(model.intercept_),
+        }
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    payload = {
+        "version": 1,
+        "uses_target": False,
+        "screening_only": True,
+        "direction": "era_to_tower",
+        "source": str(path.resolve()),
+        "source_sha256": digest,
         "features": features,
     }
     output = Path(output)

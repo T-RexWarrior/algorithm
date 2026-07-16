@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import replace
 from pathlib import Path
+import json
 import tempfile
 
 import numpy as np
@@ -12,7 +13,12 @@ from gpp_inversion.blind import StationDescriptor, _previous_sites, select_blind
 from gpp_inversion.config import DomainConfig, FeatureColumns, ModelConfig, ModelKind, WindowConfig
 from gpp_inversion.contracts import ModelBatch, observation_metadata, spherical_xyz
 from gpp_inversion.data import MultiStationWindowDataset
-from gpp_inversion.domain import EraStressTransform, fit_era_stress_manifest
+from gpp_inversion.domain import (
+    EraCalibrationTransform,
+    EraStressTransform,
+    fit_era_calibration_manifest,
+    fit_era_stress_manifest,
+)
 from gpp_inversion.domain_evaluation import compare_on_common_rows
 from gpp_inversion.ensemble import fit_nonnegative_oof_weights
 from gpp_inversion.experiments import build_model
@@ -253,6 +259,36 @@ def test_era_stress_transform_is_target_blind_and_deterministic():
         values = np.full((20, len(FEATURES.forcing)), 5.0, dtype=np.float32)
         first = transform.apply(values, FEATURES.forcing, station="SITE", seed=42)
         second = transform.apply(values, FEATURES.forcing, station="SITE", seed=42)
+        np.testing.assert_array_equal(first, second)
+        assert np.isfinite(first).all()
+
+
+def test_era_calibration_is_train_only_target_blind_and_deterministic():
+    with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as directory:
+        pair_path = Path(directory) / "pairs.csv"
+        rows = []
+        for feature in FEATURES.forcing:
+            for index in range(80):
+                era = float(index + 1)
+                rows.append({
+                    "station": "TRAIN", "split": "train", "feature": feature,
+                    "tower": era * 2.0 + 3.0, "era": era,
+                })
+            rows.append({
+                "station": "VAL", "split": "val", "feature": feature,
+                "tower": -99999.0, "era": 1.0,
+            })
+        pd.DataFrame(rows).to_csv(pair_path, index=False)
+        manifest_path = fit_era_calibration_manifest(
+            pair_path, Path(directory) / "calibration.json"
+        )
+        payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+        assert payload["uses_target"] is False
+        assert payload["direction"] == "era_to_tower"
+        transform = EraCalibrationTransform.load(manifest_path)
+        values = np.full((20, len(FEATURES.forcing)), 5.0, dtype=np.float32)
+        first = transform.apply(values, FEATURES.forcing)
+        second = transform.apply(values, FEATURES.forcing)
         np.testing.assert_array_equal(first, second)
         assert np.isfinite(first).all()
 

@@ -18,6 +18,7 @@ def main() -> None:
     parser.add_argument("--stress-manifest", required=True)
     parser.add_argument("--modis-manifest", required=True)
     parser.add_argument("--exact-era-dir", required=True)
+    parser.add_argument("--calibrated-era-dir")
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
     config = ExperimentConfig.from_json(args.config)
@@ -38,6 +39,11 @@ def main() -> None:
             Path(args.exact_era_dir),
         ),
     }
+    if args.calibrated_era_dir:
+        domains["calibrated_era_modis"] = (
+            DomainConfig(land_cover_mode="modis", land_cover_manifest=modis),
+            Path(args.calibrated_era_dir),
+        )
     frames: dict[str, pd.DataFrame] = {}
     for name, (domain, data_dir) in domains.items():
         frames[name] = evaluate_checkpoint_domain(
