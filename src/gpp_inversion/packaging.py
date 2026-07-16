@@ -85,8 +85,54 @@ def export_model_package(
         traced = torch.jit.script(model)
         input_arity = 6 if config.model.kind is ModelKind.TCN_MULTISCALE else 5
     else:
-        traced = torch.jit.trace(model, inputs, strict=False)
+        # Transformer fast paths can produce textually different but
+        # numerically equivalent graphs across the trace sanity re-run.
+        # Validate numerical parity explicitly below instead.
+        traced = torch.jit.trace(
+            model, inputs, strict=False, check_trace=False
+        )
         input_arity = 5
+    generator = torch.Generator().manual_seed(42)
+    validation_batch = 3
+    validation_inputs = (
+        torch.randn(
+            validation_batch, 96, len(config.features.forcing), generator=generator
+        ),
+        torch.randn(
+            validation_batch, 96, config.features.state_dimension, generator=generator
+        ),
+        torch.randn(
+            validation_batch, 96, config.window.time_feature_dim, generator=generator
+        ),
+        torch.randn(
+            validation_batch, 96, len(config.features.static), generator=generator
+        ),
+        torch.randint(
+            0,
+            config.model.num_land_cover_classes or 1,
+            (validation_batch, 96),
+            generator=generator,
+        ),
+    )
+    if input_arity == 6:
+        validation_inputs = (
+            *validation_inputs,
+            torch.randn(
+                validation_batch,
+                config.window.context_days,
+                config.model.daily_context_features,
+                generator=generator,
+            ),
+        )
+    with torch.inference_mode():
+        expected = model(*validation_inputs)
+        actual = traced(*validation_inputs)
+    fp32_max_abs_difference = float((expected - actual).abs().max())
+    if fp32_max_abs_difference > 1e-4:
+        raise ValueError(
+            "TorchScript FP32 parity failed: "
+            f"max_abs_difference={fp32_max_abs_difference}"
+        )
     scripted_path = destination / "model_scripted.pt"
     # LibTorch's Windows filename overload can mis-handle non-ASCII paths.
     # A Python file handle preserves Unicode package destinations.
@@ -137,6 +183,7 @@ def export_model_package(
         "daily_context_columns": list(config.window.daily_context_columns),
         "daily_context_features": config.model.daily_context_features,
         "input_arity": input_arity,
+        "fp32_max_abs_difference": fp32_max_abs_difference,
         "observation_features": {
             "endpoint_age": config.model.use_endpoint_observation_age,
             "observation_count": config.model.use_observation_count,
