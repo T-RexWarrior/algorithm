@@ -9,6 +9,7 @@ from pathlib import Path
 
 import yaml
 
+from gpp_inversion.contracts import sha256_file
 from gpp_inversion.packaging import export_model_package
 
 
@@ -30,7 +31,11 @@ def _run(command: list[str], *, cwd: Path) -> None:
 def _export_package(experiment: Path, destination: Path, split_hash: str) -> Path:
     manifest = destination / "model_package.json"
     if manifest.exists():
-        return manifest
+        payload = json.loads(manifest.read_text(encoding="utf-8"))
+        if payload.get("files", {}).get("checkpoint.pth") == sha256_file(
+            experiment / "checkpoint_best.pth"
+        ):
+            return manifest
     return export_model_package(
         experiment / "resolved_config.json",
         experiment / "checkpoint_best.pth",
@@ -123,7 +128,7 @@ def main() -> None:
     completion = args.root / "postformal" / "oof_ensemble" / "oof_summary.json"
     _wait(completion, args.wait_hours)
 
-    reference = args.root / "architecture_full" / "reference" / "seed_42"
+    reference = args.root / "age_full" / "tcn_baseline" / "seed_42"
     candidate = args.root / "pretraining_full" / "seed_42" / "supervised"
     config_payload = json.loads((reference / "resolved_config.json").read_text(encoding="utf-8"))
     split_hash = str(config_payload["split_protocol"]["split_hash"])

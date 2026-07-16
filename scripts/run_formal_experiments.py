@@ -138,6 +138,24 @@ def _best_age(root: Path) -> str:
     return min(age, key=lambda row: row["score"])["name"]
 
 
+def _promoted_age(root: Path) -> str:
+    """Return an age backbone only after the necessary 1% macro gate."""
+    path = root / "age_full_summary.json"
+    if not path.exists():
+        raise ValueError("age_full must complete before later stages")
+    rows = json.loads(path.read_text(encoding="utf-8"))
+    grouped: dict[str, list[float]] = {}
+    for row in rows:
+        grouped.setdefault(row["name"], []).append(float(row["score"]))
+    baseline = sum(grouped["tcn_baseline"]) / len(grouped["tcn_baseline"])
+    eligible = {
+        name: sum(values) / len(values)
+        for name, values in grouped.items()
+        if name in AGE_VARIANTS and sum(values) / len(values) <= baseline * 0.99
+    }
+    return min(eligible, key=eligible.get) if eligible else "tcn_baseline"
+
+
 def run_age_full(base: ExperimentConfig, root: Path) -> list[dict]:
     best = _best_age(root)
     rows = []
@@ -151,6 +169,13 @@ def run_age_full(base: ExperimentConfig, root: Path) -> list[dict]:
 
 
 def _winning_age_config(base: ExperimentConfig, root: Path, output: Path, *, steps: int, seed: int):
+    return _age_config(base, output, _promoted_age(root), steps=steps, seed=seed)
+
+
+def _pretraining_age_config(
+    base: ExperimentConfig, root: Path, output: Path, *, steps: int, seed: int
+):
+    """Keep the best observation-aware age variant as a pretraining candidate."""
     return _age_config(base, output, _best_age(root), steps=steps, seed=seed)
 
 
@@ -240,7 +265,8 @@ def _grouped_mean(path: Path) -> dict[str, float]:
 
 def _final_candidates(root: Path) -> list[str]:
     architecture = _grouped_mean(root / "architecture_full_summary.json")
-    reference = architecture["reference"]
+    age = _grouped_mean(root / "age_full_summary.json")
+    reference = age["tcn_baseline"]
     eligible = {
         name: score for name, score in architecture.items()
         if name != "reference" and score <= reference * 0.99
@@ -261,8 +287,8 @@ def _final_candidate_config(
     base: ExperimentConfig, root: Path, name: str, output: Path, *, seed: int
 ) -> ExperimentConfig:
     if name == "masked_pretraining":
-        config = _architecture_config(
-            base, root, "reference", output, steps=12000, seed=seed
+        config = _pretraining_age_config(
+            base, root, output, steps=12000, seed=seed
         )
         return replace(
             config,
@@ -271,6 +297,10 @@ def _final_candidate_config(
                 pretrained_checkpoint=None,
                 pretraining_steps=3000,
             ),
+        )
+    if name == "reference":
+        return _age_config(
+            base, output, "tcn_baseline", steps=12000, seed=seed
         )
     return _architecture_config(base, root, name, output, steps=12000, seed=seed)
 
@@ -333,7 +363,7 @@ def _ensure_pretraining(
 
 def run_pretraining_proxy(base: ExperimentConfig, root: Path) -> list[dict]:
     output = root / "pretraining_proxy" / "supervised"
-    config = _winning_age_config(base, root, output, steps=3000, seed=42)
+    config = _pretraining_age_config(base, root, output, steps=3000, seed=42)
     checkpoint = _ensure_pretraining(
         config, root / "pretraining_proxy" / "encoder", steps=3000, seed=42
     )
@@ -357,7 +387,7 @@ def run_pretraining_full(base: ExperimentConfig, root: Path) -> list[dict]:
     rows = []
     for seed in (42, 7, 2026):
         output = root / "pretraining_full" / f"seed_{seed}" / "supervised"
-        config = _winning_age_config(base, root, output, steps=12000, seed=seed)
+        config = _pretraining_age_config(base, root, output, steps=12000, seed=seed)
         checkpoint = _ensure_pretraining(
             config, root / "pretraining_full" / f"seed_{seed}" / "encoder",
             steps=3000, seed=seed,
@@ -383,27 +413,28 @@ def _mapped_sites(base: ExperimentConfig, mapping_path: Path):
 def run_domain_proxy(
     base: ExperimentConfig, root: Path,
     stress_manifest: Path, modis_manifest: Path,
+    *, directory: str = "domain_proxy", summary_name: str = "domain_proxy_summary.json",
 ) -> list[dict]:
     train_sites, val_sites = _mapped_sites(base, modis_manifest)
-    reference = _winning_age_config(base, root, root / "domain_proxy" / "d0_tower_tower", steps=3000, seed=42)
+    reference = _winning_age_config(base, root, root / directory / "d0_tower_tower", steps=3000, seed=42)
     reference = replace(reference, train_sites=train_sites, val_sites=val_sites)
     configs = {
         "d0_tower_tower": reference,
         "d1_tower_modis": replace(
-            reference, output_dir=root / "domain_proxy" / "d1_tower_modis",
+            reference, output_dir=root / directory / "d1_tower_modis",
             domain=DomainConfig(
                 land_cover_mode="modis", land_cover_manifest=str(modis_manifest), seed=42
             ),
         ),
         "d2_era_stress_modis": replace(
-            reference, output_dir=root / "domain_proxy" / "d2_era_stress_modis",
+            reference, output_dir=root / directory / "d2_era_stress_modis",
             domain=DomainConfig(
                 forcing_mode="era_stress", forcing_manifest=str(stress_manifest),
                 land_cover_mode="modis", land_cover_manifest=str(modis_manifest), seed=42,
             ),
         ),
         "d3_mixed_modis": replace(
-            reference, output_dir=root / "domain_proxy" / "d3_mixed_modis",
+            reference, output_dir=root / directory / "d3_mixed_modis",
             domain=DomainConfig(
                 forcing_mode="mixed", forcing_manifest=str(stress_manifest), mixed_probability=0.5,
                 land_cover_mode="modis", land_cover_manifest=str(modis_manifest), seed=42,
@@ -414,7 +445,7 @@ def run_domain_proxy(
     for name, config in configs.items():
         result = _run(config)
         rows.append({"name": name, "seed": 42, "steps": 3000, "score": _score(result)})
-        _write_summary(root / "domain_proxy_summary.json", rows)
+        _write_summary(root / summary_name, rows)
     return rows
 
 
@@ -446,8 +477,8 @@ def _domain_config(
     return replace(config, domain=domain)
 
 
-def _domain_survivors(root: Path) -> list[str]:
-    rows = json.loads((root / "domain_proxy_summary.json").read_text(encoding="utf-8"))
+def _domain_survivors(root: Path, summary_name: str = "domain_proxy_summary.json") -> list[str]:
+    rows = json.loads((root / summary_name).read_text(encoding="utf-8"))
     reference = next(row["score"] for row in rows if row["name"] == "d0_tower_tower")
     return [
         row["name"] for row in rows
@@ -457,18 +488,21 @@ def _domain_survivors(root: Path) -> list[str]:
 
 def run_domain_full(
     base: ExperimentConfig, root: Path, stress_manifest: Path, modis_manifest: Path,
+    *, directory: str = "domain_full",
+    proxy_summary_name: str = "domain_proxy_summary.json",
+    summary_name: str = "domain_full_summary.json",
 ) -> list[dict]:
     rows = []
-    for name in _domain_survivors(root):
+    for name in _domain_survivors(root, proxy_summary_name):
         for seed in (42, 7, 2026):
-            output = root / "domain_full" / name / f"seed_{seed}"
+            output = root / directory / name / f"seed_{seed}"
             config = _domain_config(
                 base, root, name, output, steps=12000, seed=seed,
                 stress_manifest=stress_manifest, modis_manifest=modis_manifest,
             )
             result = _run(config)
             rows.append({"name": name, "seed": seed, "steps": 12000, "score": _score(result)})
-            _write_summary(root / "domain_full_summary.json", rows)
+            _write_summary(root / summary_name, rows)
     return rows
 
 
@@ -481,6 +515,7 @@ def main() -> None:
         choices=[
             "age_proxy", "age_full", "architecture_proxy", "architecture_full",
             "pretraining_proxy", "pretraining_full", "domain_proxy", "domain_full",
+            "domain_corrected_proxy", "domain_corrected_full",
             "final_cv",
         ],
     )
@@ -509,10 +544,32 @@ def main() -> None:
     else:
         if not args.stress_manifest or not args.modis_manifest:
             parser.error("domain stages require --stress-manifest and --modis-manifest")
-        if args.stage == "domain_proxy":
-            run_domain_proxy(base, root, Path(args.stress_manifest), Path(args.modis_manifest))
+        if args.stage in {"domain_proxy", "domain_corrected_proxy"}:
+            corrected = args.stage == "domain_corrected_proxy"
+            if corrected:
+                run_domain_proxy(
+                    base, root, Path(args.stress_manifest), Path(args.modis_manifest),
+                    directory="domain_corrected_proxy",
+                    summary_name="domain_corrected_proxy_summary.json",
+                )
+            else:
+                run_domain_proxy(
+                    base, root, Path(args.stress_manifest), Path(args.modis_manifest)
+                )
         else:
-            run_domain_full(base, root, Path(args.stress_manifest), Path(args.modis_manifest))
+            corrected = args.stage == "domain_corrected_full"
+            run_domain_full(
+                base, root, Path(args.stress_manifest), Path(args.modis_manifest),
+                directory="domain_corrected_full" if corrected else "domain_full",
+                proxy_summary_name=(
+                    "domain_corrected_proxy_summary.json" if corrected
+                    else "domain_proxy_summary.json"
+                ),
+                summary_name=(
+                    "domain_corrected_full_summary.json" if corrected
+                    else "domain_full_summary.json"
+                ),
+            )
 
 
 if __name__ == "__main__":

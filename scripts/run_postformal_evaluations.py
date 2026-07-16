@@ -183,13 +183,29 @@ def main() -> None:
     project = Path(__file__).resolve().parents[1]
     _wait_for_final_cv(args.root, expected=6, wait_hours=args.wait_hours)
 
+    formal = project / "scripts" / "run_formal_experiments.py"
+    base_config = project / "configs" / "production_observation_aware.json"
+    domain_extra = [
+        "--stress-manifest", str(args.stress_manifest),
+        "--modis-manifest", str(args.modis_manifest),
+    ]
+    for stage in ("domain_corrected_proxy", "domain_corrected_full"):
+        subprocess.run(
+            [
+                sys.executable, str(formal), str(base_config),
+                "--root", str(args.root), "--stage", stage, *domain_extra,
+            ],
+            cwd=project,
+            check=True,
+        )
+
     evaluations = args.root / "postformal" / "deployment"
     experiments: dict[str, Path] = {}
     for name in ("d0_tower_tower", "d1_tower_modis", "d2_era_stress_modis", "d3_mixed_modis"):
-        experiments[f"domain_proxy/{name}"] = args.root / "domain_proxy" / name
+        experiments[f"domain_corrected_proxy/{name}"] = args.root / "domain_corrected_proxy" / name
     for seed in (42, 7, 2026):
         experiments[f"reference/seed_{seed}"] = (
-            args.root / "architecture_full" / "reference" / f"seed_{seed}"
+            args.root / "age_full" / "tcn_baseline" / f"seed_{seed}"
         )
         experiments[f"masked_pretraining/seed_{seed}"] = (
             args.root / "pretraining_full" / f"seed_{seed}" / "supervised"
@@ -206,13 +222,13 @@ def main() -> None:
         )
 
     paired = {}
-    proxy_base = evaluations / "domain_proxy" / "d0_tower_tower"
+    proxy_base = evaluations / "domain_corrected_proxy" / "d0_tower_tower"
     for candidate in ("d1_tower_modis", "d2_era_stress_modis", "d3_mixed_modis"):
         for domain in DOMAINS:
-            key = f"domain_proxy/{candidate}/{domain}"
+            key = f"domain_corrected_proxy/{candidate}/{domain}"
             paired[key] = _paired_report(
                 _prediction(proxy_base, domain),
-                _prediction(evaluations / "domain_proxy" / candidate, domain),
+                _prediction(evaluations / "domain_corrected_proxy" / candidate, domain),
                 args.root / "postformal" / "promotion" / f"{candidate}__{domain}.json",
             )
     for seed in (42, 7, 2026):
