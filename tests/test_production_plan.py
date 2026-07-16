@@ -7,10 +7,18 @@ import tempfile
 
 import numpy as np
 import pandas as pd
+import pytest
 import torch
 
 from gpp_inversion.blind import StationDescriptor, _previous_sites, select_blind_stations
-from gpp_inversion.config import DomainConfig, FeatureColumns, ModelConfig, ModelKind, WindowConfig
+from gpp_inversion.config import (
+    DomainConfig,
+    FeatureColumns,
+    ModelConfig,
+    ModelKind,
+    TrainingConfig,
+    WindowConfig,
+)
 from gpp_inversion.contracts import ModelBatch, observation_metadata, spherical_xyz
 from gpp_inversion.data import MultiStationWindowDataset
 from gpp_inversion.domain import (
@@ -25,6 +33,7 @@ from gpp_inversion.experiments import build_model
 from gpp_inversion.losses import TailAwareLoss
 from gpp_inversion.pretraining import KnowledgeGuidedPretrainer
 from gpp_inversion.promotion import evaluate_promotion
+from gpp_inversion.splits import spatial_climate_site_folds
 
 
 FEATURES = FeatureColumns(
@@ -435,3 +444,31 @@ def test_domain_comparison_uses_only_common_station_hours():
     assert report["common_stations"] == 2
     assert report["domains"]["baseline"]["micro"]["rmse"] == 0.0
     assert report["domains"]["shorter"]["micro"]["rmse"] == 1.0
+
+
+def test_spatial_climate_folds_are_target_free_disjoint_and_exhaustive():
+    sites = [f"S{index:02d}" for index in range(25)]
+    descriptors = np.column_stack(
+        [
+            np.repeat(np.arange(5), 5),
+            np.tile(np.arange(5), 5),
+            np.linspace(-2.0, 2.0, 25),
+        ]
+    )
+    folds = list(
+        spatial_climate_site_folds(sites, descriptors, n_splits=5, seed=42)
+    )
+    assert len(folds) == 5
+    validation = []
+    for train, val in folds:
+        assert not set(train) & set(val)
+        assert set(train) | set(val) == set(sites)
+        validation.extend(val)
+    assert sorted(validation) == sorted(sites)
+
+
+def test_training_config_supports_fold_local_pretraining_without_checkpoint():
+    training = TrainingConfig(pretraining_steps=3000, pretrained_checkpoint=None)
+    assert training.pretraining_steps == 3000
+    with pytest.raises(ValueError, match="cannot be negative"):
+        TrainingConfig(pretraining_steps=-1)

@@ -246,6 +246,7 @@ class TrainingConfig:
     target_balanced: bool = False
     samples_per_epoch: int | None = None
     pretrained_checkpoint: str | None = None
+    pretraining_steps: int = 0
 
     def __post_init__(self) -> None:
         if self.selection_metric not in {
@@ -266,6 +267,8 @@ class TrainingConfig:
             raise ValueError("max_steps must be positive")
         if self.warmup_steps < 0 or self.eval_interval_steps < 1:
             raise ValueError("Invalid step scheduler settings")
+        if self.pretraining_steps < 0:
+            raise ValueError("pretraining_steps cannot be negative")
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "TrainingConfig":

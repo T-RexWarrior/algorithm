@@ -420,7 +420,7 @@ class PipelineTest(unittest.TestCase):
                 scaling=ScalingMethod.ZSCORE,
                 scale_target=True,
                 model=ModelConfig(
-                    kind=ModelKind.TCN,
+                    kind=ModelKind.TCN_OBSERVATION_AWARE,
                     d_model=8,
                     nhead=2,
                     dim_feedforward=16,
@@ -437,6 +437,7 @@ class PipelineTest(unittest.TestCase):
                     patience=1,
                     seed=7,
                     resume=False,
+                    pretraining_steps=1,
                 ),
                 evaluation=EvaluationConfig(
                     save_predictions=True,
@@ -478,7 +479,7 @@ class PipelineTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "configuration hash"):
                 run_experiment(mismatched_config)
 
-    def test_stratified_cross_validation_pipeline(self):
+    def test_spatial_climate_cross_validation_pipeline(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             stations = (
@@ -507,7 +508,7 @@ class PipelineTest(unittest.TestCase):
                 scaling=ScalingMethod.ZSCORE,
                 scale_target=True,
                 model=ModelConfig(
-                    kind=ModelKind.TCN,
+                    kind=ModelKind.TCN_OBSERVATION_AWARE,
                     d_model=8,
                     nhead=2,
                     dim_feedforward=16,
@@ -524,6 +525,7 @@ class PipelineTest(unittest.TestCase):
                     patience=1,
                     seed=7,
                     resume=False,
+                    pretraining_steps=1,
                 ),
                 evaluation=EvaluationConfig(
                     save_predictions=True,
@@ -537,7 +539,11 @@ class PipelineTest(unittest.TestCase):
                 ),
             )
             result = run_experiment(config)
-            self.assertEqual(result["mode"], "stratified_kfold")
+            self.assertEqual(result["mode"], "spatial_climate_kfold")
+            for fold in ("fold_01", "fold_02"):
+                self.assertTrue(
+                    (output_dir / fold / "pretraining" / "pretraining_manifest.json").exists()
+                )
             self.assertEqual(len(result["folds"]), 2)
             self.assertEqual(result["validation_summary"]["folds"], 2)
             self.assertTrue((output_dir / "cross_validation_summary.json").exists())

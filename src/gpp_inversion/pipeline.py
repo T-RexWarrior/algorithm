@@ -1,4 +1,4 @@
-"""End-to-end holdout and stratified cross-validation orchestration."""
+"""End-to-end holdout and spatial/climate cross-validation orchestration."""
 
 from __future__ import annotations
 
@@ -30,12 +30,14 @@ from .provenance import (
     finalize_experiment_manifest,
     write_experiment_manifest,
 )
+from .pretraining import pretrain_model
 from .reporting import save_evaluation_artifacts
 from .splits import (
     FileSplits,
     infer_site_land_cover_labels,
+    infer_site_spatial_climate_features,
     split_files_by_sites,
-    stratified_site_folds,
+    spatial_climate_site_folds,
     validate_site_splits,
 )
 
@@ -233,9 +235,22 @@ def _run_training_split(
                 train_dataset.scaler.forcing_offset,
                 train_dataset.scaler.forcing_scale,
             )
-        if config.training.pretrained_checkpoint and not (
+        has_resume_checkpoint = (
             config.training.resume and (output_dir / "checkpoint_latest.pth").exists()
-        ):
+        )
+        if config.training.pretraining_steps and not has_resume_checkpoint:
+            if config.training.pretrained_checkpoint:
+                raise ValueError(
+                    "Use either fold-local pretraining_steps or pretrained_checkpoint, not both"
+                )
+            pretrain_model(
+                model,
+                train_loader,
+                device,
+                output_dir / "pretraining",
+                max_steps=config.training.pretraining_steps,
+            )
+        if config.training.pretrained_checkpoint and not has_resume_checkpoint:
             pretrained = torch.load(
                 config.training.pretrained_checkpoint, map_location=device,
                 weights_only=False,
@@ -395,10 +410,27 @@ def _run_cross_validation(config: ExperimentConfig, all_files: list[Path]) -> di
     labels = infer_site_land_cover_labels(
         all_files, development_sites, config.features.land_cover
     )
+    preferred_climate = ("SW_IN_F", "TA_F", "VPD_F", "P_F", "SWC_F_MDS_1")
+    climate_columns = tuple(
+        name for name in preferred_climate if name in config.features.forcing
+    ) or tuple(config.features.forcing[:5])
+    coordinate_columns = (
+        ("Lat", "Long")
+        if {"Lat", "Long"}.issubset(config.features.static)
+        else tuple(config.features.static[:2])
+    )
+    if len(coordinate_columns) != 2:
+        raise ValueError("Spatial/climate folds require two coordinate features")
+    descriptors = infer_site_spatial_climate_features(
+        all_files,
+        development_sites,
+        climate_columns=climate_columns,
+        coordinate_columns=coordinate_columns,
+    )
     folds = tuple(
-        stratified_site_folds(
+        spatial_climate_site_folds(
             development_sites,
-            labels,
+            descriptors,
             n_splits=config.cross_validation.n_splits,
             seed=config.cross_validation.seed,
         )
@@ -412,8 +444,11 @@ def _run_cross_validation(config: ExperimentConfig, all_files: list[Path]) -> di
         (*pool.train, *pool.test),
         config.output_dir,
         extra={
-            "mode": "stratified_kfold",
+            "mode": "spatial_climate_kfold",
             "n_splits": config.cross_validation.n_splits,
+            "fold_land_cover_labels": {
+                site: int(label) for site, label in zip(development_sites, labels)
+            },
         },
     )
     try:
@@ -433,7 +468,7 @@ def _run_cross_validation(config: ExperimentConfig, all_files: list[Path]) -> di
                 files,
                 fold_dir,
                 manifest_extra={
-                    "mode": "stratified_kfold",
+                    "mode": "spatial_climate_kfold",
                     "fold": fold_number,
                     "n_splits": config.cross_validation.n_splits,
                     "train_sites": train_sites,
@@ -456,7 +491,7 @@ def _run_cross_validation(config: ExperimentConfig, all_files: list[Path]) -> di
             if result["test_metrics"] is not None
         ]
         result = {
-            "mode": "stratified_kfold",
+            "mode": "spatial_climate_kfold",
             "config_hash": root_manifest["config_hash"],
             "n_splits": config.cross_validation.n_splits,
             "folds": fold_results,

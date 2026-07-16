@@ -226,21 +226,61 @@ def run_architecture_full(base: ExperimentConfig, root: Path) -> list[dict]:
     return rows
 
 
-def _final_architectures(root: Path) -> list[str]:
-    rows = json.loads((root / "architecture_full_summary.json").read_text(encoding="utf-8"))
+def _grouped_mean(path: Path) -> dict[str, float]:
+    rows = json.loads(path.read_text(encoding="utf-8"))
     grouped: dict[str, list[float]] = {}
     for row in rows:
+        if row.get("status") == "eliminated_at_proxy":
+            continue
         grouped.setdefault(row["name"], []).append(float(row["score"]))
-    ranked = sorted(grouped, key=lambda name: sum(grouped[name]) / len(grouped[name]))
-    return ranked[:2]
+    return {
+        name: float(sum(values) / len(values)) for name, values in grouped.items()
+    }
+
+
+def _final_candidates(root: Path) -> list[str]:
+    architecture = _grouped_mean(root / "architecture_full_summary.json")
+    reference = architecture["reference"]
+    eligible = {
+        name: score for name, score in architecture.items()
+        if name != "reference" and score <= reference * 0.99
+    }
+    pretraining_path = root / "pretraining_full_summary.json"
+    if pretraining_path.exists():
+        pretraining = _grouped_mean(pretraining_path)
+        score = pretraining.get("masked_pretraining")
+        if score is not None and score <= reference * 0.99:
+            eligible["masked_pretraining"] = score
+    # The baseline is mandatory. At most one genuinely promoted candidate is
+    # carried into the expensive five-fold/three-seed confirmation.
+    selected = min(eligible, key=eligible.get) if eligible else None
+    return ["reference", *([selected] if selected else [])]
+
+
+def _final_candidate_config(
+    base: ExperimentConfig, root: Path, name: str, output: Path, *, seed: int
+) -> ExperimentConfig:
+    if name == "masked_pretraining":
+        config = _architecture_config(
+            base, root, "reference", output, steps=12000, seed=seed
+        )
+        return replace(
+            config,
+            training=replace(
+                config.training,
+                pretrained_checkpoint=None,
+                pretraining_steps=3000,
+            ),
+        )
+    return _architecture_config(base, root, name, output, steps=12000, seed=seed)
 
 
 def run_final_cv(base: ExperimentConfig, root: Path) -> list[dict]:
     rows = []
-    for name in _final_architectures(root):
+    for name in _final_candidates(root):
         for seed in (42, 7, 2026):
             output = root / "final_cv" / name / f"seed_{seed}"
-            config = _architecture_config(base, root, name, output, steps=12000, seed=seed)
+            config = _final_candidate_config(base, root, name, output, seed=seed)
             config = replace(
                 config,
                 cross_validation=replace(
