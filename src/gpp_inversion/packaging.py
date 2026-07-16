@@ -119,8 +119,9 @@ def export_model_package(
     contract = contract_from_config(config)
     contract.save(destination / "feature_contract.json")
     try:
+        repository = Path(__file__).resolve().parents[2]
         commit = subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], cwd=Path(config_path).resolve().parent,
+            ["git", "rev-parse", "HEAD"], cwd=repository,
             text=True, stderr=subprocess.DEVNULL,
         ).strip()
     except (OSError, subprocess.SubprocessError):
