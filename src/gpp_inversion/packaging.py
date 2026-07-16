@@ -88,7 +88,10 @@ def export_model_package(
         traced = torch.jit.trace(model, inputs, strict=False)
         input_arity = 5
     scripted_path = destination / "model_scripted.pt"
-    traced.save(str(scripted_path))
+    # LibTorch's Windows filename overload can mis-handle non-ASCII paths.
+    # A Python file handle preserves Unicode package destinations.
+    with scripted_path.open("wb") as handle:
+        torch.jit.save(traced, handle)
     checkpoint_copy = destination / "checkpoint.pth"
     scaler_copy = destination / "scaler.npz"
     shutil.copy2(checkpoint_path, checkpoint_copy)
