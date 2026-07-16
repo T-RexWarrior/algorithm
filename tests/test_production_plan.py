@@ -125,6 +125,33 @@ def test_observation_aware_all_missing_token_supports_cuda_amp():
     assert torch.isfinite(prediction).all()
 
 
+def test_hybrid_scaling_buffers_follow_cuda_model():
+    if not torch.cuda.is_available():
+        return
+    config = ModelConfig(
+        kind=ModelKind.HYBRID_LUE_TCN, d_model=8, nhead=2,
+        num_layers=1, dim_feedforward=16, tcn_layers=2,
+        num_land_cover_classes=3, land_cover_embedding_dim=2, dropout=0.0,
+    )
+    model = build_model(config, FEATURES, seq_len=96, time_feature_dim=4).cuda().eval()
+    model.indices = (0, 1, 2, 3)
+    model.configure_scaling(
+        np.zeros(len(FEATURES.forcing), dtype=np.float32),
+        np.ones(len(FEATURES.forcing), dtype=np.float32),
+    )
+    assert model.forcing_offset.device.type == "cuda"
+    inputs = (
+        torch.randn(2, 96, len(FEATURES.forcing), device="cuda"),
+        torch.zeros(2, 96, len(FEATURES.state), device="cuda"),
+        torch.randn(2, 96, 4, device="cuda"),
+        torch.randn(2, 96, len(FEATURES.static), device="cuda"),
+        torch.zeros(2, 96, dtype=torch.long, device="cuda"),
+    )
+    with torch.no_grad(), torch.autocast("cuda", dtype=torch.float16):
+        prediction = model(*inputs)
+    assert torch.isfinite(prediction).all()
+
+
 def test_tail_loss_penalizes_high_underprediction_more():
     loss = TailAwareLoss(p50=1.0, p80=2.0, p95=3.0)
     low = loss(torch.tensor([0.0]), torch.tensor([1.0]))

@@ -209,8 +209,13 @@ class HybridLUETCNGPP(ObservationAwareTCNGPP):
         self.register_buffer("forcing_scale", torch.ones(1, 1, 1), persistent=True)
 
     def configure_scaling(self, offset, scale) -> None:
-        offset = torch.as_tensor(offset, dtype=torch.float32).view(1, 1, -1)
-        scale = torch.as_tensor(scale, dtype=torch.float32).view(1, 1, -1)
+        device = self.forcing_offset.device
+        offset = torch.as_tensor(
+            offset, dtype=torch.float32, device=device
+        ).view(1, 1, -1)
+        scale = torch.as_tensor(
+            scale, dtype=torch.float32, device=device
+        ).view(1, 1, -1)
         self.forcing_offset = offset
         self.forcing_scale = scale
 
