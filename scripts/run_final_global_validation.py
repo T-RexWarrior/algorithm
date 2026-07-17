@@ -32,13 +32,19 @@ def _export_package(experiment: Path, destination: Path, split_hash: str) -> Pat
     manifest = destination / "model_package.json"
     if manifest.exists():
         payload = json.loads(manifest.read_text(encoding="utf-8"))
+        current_commit = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=Path(__file__).resolve().parents[1],
+            text=True,
+        ).strip()
         checkpoint_matches = payload.get("files", {}).get(
             "checkpoint.pth"
         ) == sha256_file(experiment / "checkpoint_best.pth")
         # Packages exported before explicit TorchScript parity validation must
         # be rebuilt before an expensive global run.
         parity_checked = payload.get("fp32_max_abs_difference") is not None
-        if checkpoint_matches and parity_checked:
+        code_matches = payload.get("code_commit") == current_commit
+        if checkpoint_matches and parity_checked and code_matches:
             return manifest
     return export_model_package(
         experiment / "resolved_config.json",
