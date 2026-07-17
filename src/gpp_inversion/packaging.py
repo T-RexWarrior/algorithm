@@ -76,22 +76,21 @@ def export_model_package(
         torch.zeros(batch, 96, len(config.features.static)),
         torch.zeros(batch, 96, dtype=torch.long),
     )
-    production_kinds = {
-        ModelKind.TCN_OBSERVATION_AWARE,
-        ModelKind.TCN_MULTISCALE,
-        ModelKind.HYBRID_LUE_TCN,
-    }
-    if config.model.kind in production_kinds:
-        traced = torch.jit.script(model)
-        input_arity = 6 if config.model.kind is ModelKind.TCN_MULTISCALE else 5
-    else:
-        # Transformer fast paths can produce textually different but
-        # numerically equivalent graphs across the trace sanity re-run.
-        # Validate numerical parity explicitly below instead.
-        traced = torch.jit.trace(
-            model, inputs, strict=False, check_trace=False
+    input_arity = 6 if config.model.kind is ModelKind.TCN_MULTISCALE else 5
+    if input_arity == 6:
+        inputs = (
+            *inputs,
+            torch.zeros(
+                batch,
+                config.window.context_days,
+                config.model.daily_context_features,
+            ),
         )
-        input_arity = 5
+    # Scripted TransformerEncoder packages can hang or terminate the Windows
+    # CUDA process even though their CPU outputs are correct. Tracing uses the
+    # portable operator path; all data-dependent mask operations remain tensor
+    # operations, and parity is verified below for observed and missing states.
+    traced = torch.jit.trace(model, inputs, strict=False, check_trace=False)
     generator = torch.Generator().manual_seed(42)
     validation_batch = 3
     validation_inputs = (
@@ -124,10 +123,17 @@ def export_model_package(
                 generator=generator,
             ),
         )
+    all_missing_inputs = list(validation_inputs)
+    all_missing_state = all_missing_inputs[1].clone()
+    all_missing_state[:, :, config.model.satellite_mask_index] = 0
+    all_missing_inputs[1] = all_missing_state
     with torch.inference_mode():
-        expected = model(*validation_inputs)
-        actual = traced(*validation_inputs)
-    fp32_max_abs_difference = float((expected - actual).abs().max())
+        differences = []
+        for parity_inputs in (validation_inputs, tuple(all_missing_inputs)):
+            expected = model(*parity_inputs)
+            actual = traced(*parity_inputs)
+            differences.append(float((expected - actual).abs().max()))
+    fp32_max_abs_difference = max(differences)
     if fp32_max_abs_difference > 1e-4:
         raise ValueError(
             "TorchScript FP32 parity failed: "

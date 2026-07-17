@@ -13,8 +13,9 @@ from .models import TemporalConvNet
 
 def _causal_observation_metadata(mask: torch.Tensor, no_observation_age: float):
     valid = mask > 0
-    steps = mask.size(1)
-    positions = torch.arange(steps, device=mask.device).view(1, -1)
+    # Derive positions from the input so traced packages remain device-agnostic
+    # when moved from the CPU export host to CUDA production inference.
+    positions = torch.ones_like(mask, dtype=torch.long).cumsum(dim=1) - 1
     observed_positions = torch.where(valid, positions, torch.full_like(positions, -1))
     last = torch.cummax(observed_positions, dim=1).values
     age = positions - last
@@ -107,11 +108,10 @@ class ObservationAwareTCNGPP(nn.Module):
         state_inputs = [x_state, time_x]
         if self.use_token_recency:
             steps = x_state.size(1)
-            recency = torch.arange(
-                steps - 1, -1, -1, device=x_state.device, dtype=x_state.dtype
-            ).view(1, steps, 1)
+            forward_positions = torch.ones_like(x_state[:, :, :1]).cumsum(dim=1)
+            recency = forward_positions[:, -1:, :] - forward_positions
             recency = torch.log1p(recency) / math.log1p(max(1, steps - 1))
-            state_inputs.append(recency.expand(x_state.size(0), -1, -1))
+            state_inputs.append(recency)
         return self.state_projector(torch.cat(state_inputs, dim=-1))
 
     def encode(self, x_forcing, x_state, time_x, x_static, x_lc):
@@ -124,9 +124,14 @@ class ObservationAwareTCNGPP(nn.Module):
         if all_missing.any():
             state_memory = state_memory.clone()
             valid = valid.clone()
-            state_memory[all_missing, -1, :] = self.no_observation_token[
-                0, 0
-            ].to(dtype=state_memory.dtype)
+            # Express the learned token as a one-input linear projection. This
+            # preserves its exact value while allowing CUDA autocast to produce
+            # the same dtype as the projected state in traced packages.
+            token = F.linear(
+                torch.ones_like(state_memory[:, -1:, :1]),
+                self.no_observation_token[0].transpose(0, 1),
+            )
+            state_memory[all_missing, -1, :] = token[all_missing, 0, :]
             valid[all_missing, -1] = True
         state_memory = self.state_encoder(
             state_memory, src_key_padding_mask=~valid
