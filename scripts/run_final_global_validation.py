@@ -32,9 +32,13 @@ def _export_package(experiment: Path, destination: Path, split_hash: str) -> Pat
     manifest = destination / "model_package.json"
     if manifest.exists():
         payload = json.loads(manifest.read_text(encoding="utf-8"))
-        if payload.get("files", {}).get("checkpoint.pth") == sha256_file(
-            experiment / "checkpoint_best.pth"
-        ):
+        checkpoint_matches = payload.get("files", {}).get(
+            "checkpoint.pth"
+        ) == sha256_file(experiment / "checkpoint_best.pth")
+        # Packages exported before explicit TorchScript parity validation must
+        # be rebuilt before an expensive global run.
+        parity_checked = payload.get("fp32_max_abs_difference") is not None
+        if checkpoint_matches and parity_checked:
             return manifest
     return export_model_package(
         experiment / "resolved_config.json",
@@ -53,6 +57,7 @@ def _write_global_config(
     package: Path,
     output: Path,
     diagnostic_points: int | None,
+    batch_size: int,
 ) -> Path:
     payload = json.loads(json.dumps(base))
     payload["project"].update(
@@ -79,7 +84,7 @@ def _write_global_config(
         grid_resolution_degrees=0.1,
         grid_tile_rows=128,
         grid_tile_cols=256,
-        batch_size=4096,
+        batch_size=batch_size,
         inference_precision="fp16",
     )
     processing.pop("diagnostic_sample_points", None)
@@ -147,6 +152,16 @@ def main() -> None:
     reports = {"blind_test_opened": False, "runs": {}}
     for mode, points in (("diagnostic_100k", 100_000), ("full_global", None)):
         for model_name, package in packages.items():
+            package_manifest = json.loads(
+                (package / "model_package.json").read_text(encoding="utf-8")
+            )
+            # The sparse-state Transformer requires more activation memory
+            # than the plain TCN. A 4096 batch can terminate the Windows CUDA
+            # child process before Python can raise an OOM, so use the largest
+            # repeatedly stable production batch for this model family.
+            batch_size = (
+                4096 if package_manifest.get("model_kind") == "tcn" else 1024
+            )
             output = args.root / "global_validation" / mode / model_name
             config = _write_global_config(
                 base,
@@ -155,6 +170,7 @@ def main() -> None:
                 package=package,
                 output=output,
                 diagnostic_points=points,
+                batch_size=batch_size,
             )
             reports["runs"][f"{mode}/{model_name}"] = _global_run(
                 args.global_repo, config, output
